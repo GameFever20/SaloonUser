@@ -1,0 +1,117 @@
+{
+  "project_info": {
+    "project_number": "941960172302",
+    "firebase_url": "https://saloon-7b98a.firebaseio.com",
+    "project_id": "saloon-7b98a",
+    "storage_bucket": "saloon-7b98a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:941960172302:android:a25973788b0be6c7",
+        "android_client_info": {
+          "package_name": "app.admin.saloon.craftystudio.saloonadmin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "941960172302-rncvb17niek8tvufvni329r2rreimcs2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtOJCaooFbo2PO7BfKIrJ1pUJl7BcB6WY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:941960172302:android:3c34a2ebd3b9dc83",
+        "android_client_info": {
+          "package_name": "app.owner.saloon.craftystudio.saloonowner"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "941960172302-iiek7c6s8h10192tipqeictni5ks0080.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "app.owner.saloon.craftystudio.saloonowner",
+            "certificate_hash": "34c65added53d7d8a8bcf517aef3b154b1aed67f"
+          }
+        },
+        {
+          "client_id": "941960172302-rncvb17niek8tvufvni329r2rreimcs2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtOJCaooFbo2PO7BfKIrJ1pUJl7BcB6WY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "941960172302-rncvb17niek8tvufvni329r2rreimcs2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:941960172302:android:00a58c6c685ad942",
+        "android_client_info": {
+          "package_name": "app.saloonuser.craftystudio.saloonuser"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "941960172302-rncvb17niek8tvufvni329r2rreimcs2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtOJCaooFbo2PO7BfKIrJ1pUJl7BcB6WY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
