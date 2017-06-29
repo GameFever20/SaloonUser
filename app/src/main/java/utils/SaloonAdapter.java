@@ -8,9 +8,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -59,16 +63,28 @@ public class SaloonAdapter extends RecyclerView.Adapter<SaloonAdapter.SaloonView
 
         //Display image
 
+        if (saloon.getSaloonImageList() != null) {
+            if (saloon.getSaloonImageList().containsKey("profile_image")) {
+                Glide.with(context)
+                        .using(new FirebaseImageLoader())
+                        .load(storageReference)
+                        .listener(new RequestListener<StorageReference, GlideDrawable>() {
+                            @Override
+                            public boolean onException(Exception e, StorageReference model, Target<GlideDrawable> target, boolean isFirstResource) {
+                                Toast.makeText(context, "Exception "+e.getMessage(), Toast.LENGTH_SHORT).show();
 
-        Glide.with(context)
-                .using(new FirebaseImageLoader())
-                .load(storageReference)
-                .thumbnail(0.5f)
-                .override(200, 200)
-                .crossFade(100)
-                .fitCenter()
-                .diskCacheStrategy(DiskCacheStrategy.RESULT)
-                .into(holder.saloonProfileImage);
+                                return false;
+                            }
+
+                            @Override
+                            public boolean onResourceReady(GlideDrawable resource, StorageReference model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                                Toast.makeText(context, "loaded", Toast.LENGTH_SHORT).show();
+                                return false;
+                            }
+                        })
+                        .into(holder.saloonProfileImage);
+            }
+        }
 
 
     }
