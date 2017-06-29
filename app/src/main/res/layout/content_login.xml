@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="app.saloonuser.craftystudio.saloonuser.LoginActivity"
+    tools:showIn="@layout/activity_login">
+
+
+
+
+    <TextView
+        android:id="@+id/loginActivity_status_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center_vertical">
+
+        <LinearLayout
+            android:id="@+id/phone_auth_fields"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:weightSum="2.0">
+
+                <EditText
+                    android:id="@+id/field_phone_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.0"
+                    android:inputType="phone"/>
+
+                <EditText
+                    android:id="@+id/field_verification_code"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.0"
+                    android:inputType="number"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3.0">
+
+                <Button
+                    android:id="@+id/button_start_verification"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.0"
+                    android:text="sent otp"
+
+                    />
+
+                <Button
+                    android:id="@+id/button_verify_phone"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.0"
+                    android:text="verify"
+                    />
+
+                <Button
+                    android:id="@+id/button_resend"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.0"
+                    android:text="resend"
+                    />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+    </RelativeLayout>
+
+
+
+</LinearLayout>

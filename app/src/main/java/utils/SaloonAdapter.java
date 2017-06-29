@@ -90,7 +90,7 @@ public class SaloonAdapter extends RecyclerView.Adapter<SaloonAdapter.SaloonView
             saloonClosingTimeTextView = (TextView) view.findViewById(R.id.saloonadapterrow_saloonclosing_textview);
             saloonAddressTextView = (TextView) view.findViewById(R.id.saloonadapterrow_saloonaddress_textview);
             saloonServiceBtn = (Button) view.findViewById(R.id.saloonadapterrow_saloon_servicebtn_textview);
-            saloonProfileImage = (ImageView) view.findViewById(R.id.saloonadapterrow_saloon_profilepic_textview);
+            saloonProfileImage = (ImageView) view.findViewById(R.id.saloonadapterrow_saloon_profilepic_imageView);
 
         }
     }
