@@ -85,6 +85,7 @@ public class SaloonDetailActivity extends AppCompatActivity {
                     }
                 }
 
+
             }
         });
     }
