@@ -6,7 +6,7 @@ package utils;
 
 public class User {
 
-    String userName ,userGender ;
+    private String userName ,userGender ,userUID ;
     int userAge;
 
     public User() {
@@ -34,5 +34,13 @@ public class User {
 
     public void setUserAge(int userAge) {
         this.userAge = userAge;
+    }
+
+    public String getUserUID() {
+        return userUID;
+    }
+
+    public void setUserUID(String userUID) {
+        this.userUID = userUID;
     }
 }
