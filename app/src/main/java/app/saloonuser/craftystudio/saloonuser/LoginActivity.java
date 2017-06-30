@@ -64,6 +64,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     //private Button mResendButton;
     //private Button mSignOutButton;
 
+    static String USERUID = "aaa";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -180,6 +183,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         updateUI(currentUser);
+USERUID =currentUser.getUid();
 
         // [START_EXCLUDE]
         if (mVerificationInProgress && validatePhoneNumber()) {
@@ -280,6 +284,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void updateUI(FirebaseUser user) {
         if (user != null) {
             updateUI(STATE_SIGNIN_SUCCESS, user);
+            USERUID = user.getUid();
         } else {
             updateUI(STATE_INITIALIZED);
         }
