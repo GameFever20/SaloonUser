@@ -47,15 +47,19 @@
         <activity
             android:name=".ServiceTypeActivity"
             android:label="@string/title_activity_service_type"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
             android:theme="@style/AppTheme.NoActionBar">
 
-
         </activity>
+
+
+
+
         <activity
             android:name=".SaloonDetailActivity"
             android:label="@string/title_activity_saloon_detail"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
     </application>
 
 </manifest>
