@@ -8,9 +8,13 @@
     <color name="lightgreen">#64ca9a</color>
 
     <color name="blackish">#d4303030</color>
+    <color name="grey">#d4515151</color>
+
 
     <color name="whitish">#e6e6e6</color>
     <color name="light_white">#f7f7f7</color>
     <color name="white">#ffffff</color>
+
+    <color name="red">#ff0000</color>
 
 </resources>
