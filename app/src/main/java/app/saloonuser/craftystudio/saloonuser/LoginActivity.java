@@ -40,6 +40,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private static final int STATE_SIGNIN_FAILED = 5;
     private static final int STATE_SIGNIN_SUCCESS = 6;
 
+
     // [START declare_auth]
     private FirebaseAuth mAuth;
     // [END declare_auth]
