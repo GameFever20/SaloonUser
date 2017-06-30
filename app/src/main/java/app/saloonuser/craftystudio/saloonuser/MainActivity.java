@@ -149,6 +149,12 @@ public class MainActivity extends AppCompatActivity
 
                         saloon = mSaloonArraylist.get(position);
 
+                        Intent intent = new Intent(MainActivity.this, SaloonDetailActivity.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("Saloon_Class", saloon);
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+
                         //calling new activity having orders of particular saloon
                        /*
                         Intent intent = new Intent(MainActivity.this, OrderListActivity.class);
@@ -276,6 +282,9 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
+
+            Intent intent = new Intent(MainActivity.this, SaloonDetailActivity.class);
+            startActivity(intent);
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
 
