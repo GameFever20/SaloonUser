@@ -17,8 +17,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.AdapterView;
+import android.widget.ExpandableListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import utils.Service;
+import utils.ServiceTypeExpandableAdapter;
 import utils.User;
 
 public class ServiceTypeActivity extends AppCompatActivity {
@@ -39,6 +47,11 @@ public class ServiceTypeActivity extends AppCompatActivity {
     private ViewPager mViewPager;
     TabLayout tabLayout ;
 
+   static HashMap<String ,ArrayList<Service>> mServiceHashMap =new HashMap<>() ;
+    static ArrayList<String> mServiceSubType = new ArrayList<>();
+
+    ArrayList<Service> serviceArrayList =new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,11 +64,12 @@ public class ServiceTypeActivity extends AppCompatActivity {
         tabLayout = (TabLayout)findViewById(R.id.serviceType_tabLayout);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(),serviceArrayList);
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
+
 
         tabLayout.setupWithViewPager(mViewPager);
 
@@ -69,8 +83,55 @@ public class ServiceTypeActivity extends AppCompatActivity {
             }
         });
 
+
+        createServiceHashMap();
+
+
+
+
     }
 
+
+
+    private void createServiceHashMap() {
+
+        mServiceHashMap.put("Hair Cut", createServiceList());
+        mServiceHashMap.put("Hair color" , createServiceColorList());
+        mServiceHashMap.put("Hair stra" , createServiceList());
+
+
+
+        mServiceSubType.add("Hair Cut");
+        mServiceSubType.add("Hair color");
+        mServiceSubType.add("Hair stra");
+
+
+    }
+
+    private ArrayList<Service> createServiceColorList() {
+        ArrayList<Service> serviceArrayList =new ArrayList<>();
+
+        for (int i = 0 ;i<5 ; i++){
+            Service service =new Service();
+            service.setServiceName("Brown color");
+            serviceArrayList.add(service);
+        }
+
+        return serviceArrayList;
+    }
+
+    private ArrayList<Service> createServiceList() {
+        ArrayList<Service> serviceArrayList =new ArrayList<>();
+
+        for (int i = 0 ;i<5 ; i++){
+            Service service =new Service();
+            service.setServiceName("Bold cut");
+            serviceArrayList.add(service);
+        }
+
+        return serviceArrayList;
+
+    }
 
 
     @Override
@@ -105,8 +166,13 @@ public class ServiceTypeActivity extends AppCompatActivity {
          */
         private static final String ARG_SECTION_NUMBER = "section_number";
 
+        HashMap<String ,ArrayList<Service>> mServiceHashMap ;
+        ArrayList<String> mServiceSubType ;
+
         public PlaceholderFragment() {
         }
+
+
 
         /**
          * Returns a new instance of this fragment for the given section
@@ -116,7 +182,9 @@ public class ServiceTypeActivity extends AppCompatActivity {
             PlaceholderFragment fragment = new PlaceholderFragment();
             Bundle args = new Bundle();
             args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+
             fragment.setArguments(args);
+
             return fragment;
 
         }
@@ -124,7 +192,15 @@ public class ServiceTypeActivity extends AppCompatActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_service_type, container, false);
+             View rootView = inflater.inflate(R.layout.fragment_service_type, container, false);
+
+            ExpandableListView expandableListView =(ExpandableListView)rootView.findViewById(R.id.serviceTypeFragment_ExpandableListView);
+
+            ServiceTypeExpandableAdapter serviceTypeExpandableAdapter=new ServiceTypeExpandableAdapter(ServiceTypeActivity.mServiceHashMap
+            ,ServiceTypeActivity.mServiceSubType,getContext()
+            );
+
+            expandableListView.setAdapter(serviceTypeExpandableAdapter);
 
             return rootView;
         }
@@ -136,15 +212,21 @@ public class ServiceTypeActivity extends AppCompatActivity {
      */
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
-        public SectionsPagerAdapter(FragmentManager fm) {
+        ArrayList<Service> mServiceArrayList =new ArrayList<>();
+
+        public SectionsPagerAdapter(FragmentManager fm , ArrayList<Service> serviceArrayList) {
             super(fm);
+            mServiceArrayList =serviceArrayList;
         }
 
         @Override
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
+
+
+
+            return PlaceholderFragment.newInstance(position + 1 );
         }
 
         @Override
