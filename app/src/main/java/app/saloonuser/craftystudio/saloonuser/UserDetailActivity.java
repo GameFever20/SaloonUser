@@ -28,7 +28,7 @@ public class UserDetailActivity extends AppCompatActivity {
 
     EditText mUserNameEdittext, mUserAgeEdittext, mUserGenderEdittext;
 
-    ImageView mMaleImage, mFemaleImage;
+    ImageView mMaleImage, mFemaleImage, mUserprofile;
 
     TextView mUserGenderTextview;
 
@@ -42,16 +42,18 @@ public class UserDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_detail);
 
+        //detail filling layout
         mUserNameEdittext = (EditText) findViewById(R.id.userDetail_userName_edittext);
         mUserGenderEdittext = (EditText) findViewById(R.id.userDetail_userGender_edittext);
         mUserAgeEdittext = (EditText) findViewById(R.id.userDetail_userAge_edittext);
+        mUserGenderTextview = (TextView) findViewById(R.id.userDetail_userGender_textview);
+        mUserprofile = (ImageView) findViewById(R.id.userdetail_userprofile_imageview);
 
+
+        //male female selection layout
+        mUserDetailLinearlayout = (LinearLayout) findViewById(R.id.user_genderdetail_linearlayout);
         mMaleImage = (ImageView) findViewById(R.id.user_detail_male_imageview);
         mFemaleImage = (ImageView) findViewById(R.id.user_detail_female_imageview);
-        mUserDetailLinearlayout = (LinearLayout) findViewById(R.id.user_genderdetail_linearlayout);
-
-        mUserGenderTextview = (TextView) findViewById(R.id.userDetail_userGender_textview);
-
         mUploadBtn = (Button) findViewById(R.id.user_detail_upload_button);
 
 
@@ -109,11 +111,19 @@ public class UserDetailActivity extends AppCompatActivity {
 
 
     public void userDetailNext(View view) {
+
         mUserDetailLinearlayout.setVisibility(View.GONE);
+
         mUserNameEdittext.setVisibility(View.VISIBLE);
         mUserAgeEdittext.setVisibility(View.VISIBLE);
         mUploadBtn.setVisibility(View.VISIBLE);
-        mUserGenderTextview.setText(GENDER);
-        mUserGenderTextview.setVisibility(View.VISIBLE);
+        //mUserGenderTextview.setText(GENDER);
+        //  mUserGenderTextview.setVisibility(View.VISIBLE);
+        mUserprofile.setVisibility(View.VISIBLE);
+        if (GENDER.equalsIgnoreCase("Male")) {
+            mUserprofile.setImageResource(R.drawable.malefinal);
+        } else {
+            mUserprofile.setImageResource(R.drawable.female_copy);
+        }
     }
 }
