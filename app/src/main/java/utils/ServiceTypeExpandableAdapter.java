@@ -2,16 +2,23 @@ package utils;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import app.saloonuser.craftystudio.saloonuser.R;
+import app.saloonuser.craftystudio.saloonuser.ServiceTypeActivity;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * Created by bunny on 30/06/17.
@@ -90,16 +97,46 @@ public class ServiceTypeExpandableAdapter extends BaseExpandableListAdapter {
 
         final Service service = (Service) getChild(groupPosition, childPosition);
 
-        if (convertView == null) {
-            LayoutInflater infalInflater = (LayoutInflater) this.mContext
-                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = infalInflater.inflate(R.layout.servicetype_adapter_child_row, null);
-        }
 
-        TextView serviceNameTextview = (TextView) convertView
-                .findViewById(R.id.serviceType_adapter_child_subType_textview);
+            if (convertView == null) {
+                LayoutInflater infalInflater = (LayoutInflater) this.mContext
+                        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                convertView = infalInflater.inflate(R.layout.servicetype_adapter_child_row, null);
+            }
 
-        serviceNameTextview.setText(service.getServiceName());
+            TextView serviceNameTextview = (TextView) convertView
+                    .findViewById(R.id.serviceType_adapter_child_subType_textview);
+
+            serviceNameTextview.setText(service.getServiceName());
+
+            CheckBox checkBox = (CheckBox) convertView.findViewById(R.id.serviceType_adapter_child_subType_checkBox);
+            checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                    Toast.makeText(mContext, "service" + service.getServiceName() + " , " + service.getServiceType(), Toast.LENGTH_SHORT).show();
+
+                    if (isChecked) {
+                        ServiceTypeActivity.CURRENTORDER.getOrederServiceIDList().put(service.getServiceUID(), service.getServiceName());
+
+                        ServiceTypeActivity.CURRENTORDER.setOrderPrice(ServiceTypeActivity.CURRENTORDER.getOrderPrice()+service.getServicePrice());
+                        ServiceTypeActivity.CURRENTORDER.setOrderTotalServiceCount(ServiceTypeActivity.CURRENTORDER.getOrderTotalServiceCount()+1);
+
+
+
+                    } else {
+                        ServiceTypeActivity.CURRENTORDER.getOrederServiceIDList().remove(service.getServiceUID());
+                        ServiceTypeActivity.CURRENTORDER.setOrderPrice(ServiceTypeActivity.CURRENTORDER.getOrderPrice()-service.getServicePrice());
+                        ServiceTypeActivity.CURRENTORDER.setOrderTotalServiceCount(ServiceTypeActivity.CURRENTORDER.getOrderTotalServiceCount()-1);
+
+                    }
+
+                    Log.d(TAG, "onCheckedChanged: " + ServiceTypeActivity.CURRENTORDER.getOrederServiceIDList());
+
+                }
+            });
+
+
         return convertView;
     }
 

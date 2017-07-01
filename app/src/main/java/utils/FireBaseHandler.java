@@ -162,6 +162,24 @@ public class FireBaseHandler {
 
 
     }
+    public void uploadOrder(Order order , final OnOrderListener onOrderListener) {
+
+
+        mFirebaseDatabase.getReference().child("Orders/"+order.getSaloonID()).push().setValue(order).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+
+                onOrderListener.onOrderUpload(true);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+                onOrderListener.onOrderUpload(false);
+            }
+        });
+    }
+
 
     //interface
     public interface OnSaloonListListner {
@@ -186,5 +204,14 @@ public class FireBaseHandler {
 
         public void onUserUpload(boolean isSuccessful);
     }
+
+public interface OnOrderListener{
+    public void onOrderUpload(boolean isSuccessful);
+
+    public void onOrderDownload(Order order , boolean isSuccessful );
+
+    public void onOrderListDownload(ArrayList<Order > orderArrayList , boolean isSuccessful);
+
+}
 
 }

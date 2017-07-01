@@ -19,10 +19,12 @@ public class Service implements Serializable ,Parcelable {
     String serviceDuration ;
     String serviceDescription ;
     String serviceTypeName ;
+    int serviceSubTypeName;
 
     int servicePrice;
     int serviceOfferPrice;
     int serviceType ;
+    int serviceSubType;
 
 
 
@@ -112,6 +114,22 @@ public class Service implements Serializable ,Parcelable {
     }
 
 
+    public int getServiceSubTypeName() {
+        return serviceSubTypeName;
+    }
+
+    public void setServiceSubTypeName(int serviceSubTypeName) {
+        this.serviceSubTypeName = serviceSubTypeName;
+    }
+
+    public int getServiceSubType() {
+        return serviceSubType;
+    }
+
+    public void setServiceSubType(int serviceSubType) {
+        this.serviceSubType = serviceSubType;
+    }
+
     //parcel start
     @Override
     public int describeContents() {
@@ -166,6 +184,9 @@ public class Service implements Serializable ,Parcelable {
         }
     };
 
+    public static Creator<Service> getCREATOR() {
+        return CREATOR;
+    }
 
     //parcel imp over
 

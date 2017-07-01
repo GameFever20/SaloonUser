@@ -29,7 +29,7 @@
 
         <activity
             android:name=".MainActivity"
-            android:label="User Detail"
+            android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -62,6 +62,11 @@
         <activity
             android:name=".UserOrderActivity"
             android:label="@string/title_activity_user_order"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".UserOrderPlacementActivity"
+            android:label="@string/title_activity_user_order_placement"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
