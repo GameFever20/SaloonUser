@@ -41,6 +41,8 @@ public class SaloonDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_saloon_detail);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
@@ -235,6 +237,25 @@ public class SaloonDetailActivity extends AppCompatActivity {
         }
 
 
+    }
+
+    public void openImageDisplayActivity(View view) {
+        Intent intent = new Intent(SaloonDetailActivity.this, ImageActivity.class);
+        Bundle bundle=new Bundle();
+        bundle.putSerializable("Saloon",saloon);
+        intent.putExtras(bundle);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 
 }

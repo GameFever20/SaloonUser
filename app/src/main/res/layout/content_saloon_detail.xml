@@ -27,6 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
                 android:scaleType="centerCrop"
+                android:onClick="openImageDisplayActivity"
                 android:src="@drawable/parlourimage"
                 android:visibility="visible" />
 
@@ -140,6 +141,7 @@
                         android:layout_height="100dp"
                         android:layout_margin="5dp"
                         android:scaleType="centerCrop"
+                        android:onClick="openImageDisplayActivity"
                         android:src="@drawable/saloonshopicon" />
 
                     <ImageView
@@ -147,6 +149,7 @@
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:layout_margin="5dp"
+                        android:onClick="openImageDisplayActivity"
                         android:scaleType="centerCrop"
 
                         android:src="@drawable/saloonshopicon" />
@@ -157,6 +160,7 @@
                         android:layout_height="100dp"
                         android:layout_margin="5dp"
                         android:scaleType="centerCrop"
+                        android:onClick="openImageDisplayActivity"
                         android:src="@drawable/saloonshopicon" />
 
                     <ImageView
@@ -164,6 +168,7 @@
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:layout_margin="5dp"
+                        android:onClick="openImageDisplayActivity"
                         android:scaleType="centerCrop"
                         android:src="@drawable/saloonshopicon" />
 
@@ -173,6 +178,7 @@
                         android:layout_height="100dp"
                         android:layout_margin="5dp"
                         android:scaleType="centerCrop"
+                        android:onClick="openImageDisplayActivity"
                         android:src="@drawable/saloonshopicon" />
 
                 </LinearLayout>

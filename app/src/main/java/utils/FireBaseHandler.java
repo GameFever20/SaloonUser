@@ -120,8 +120,8 @@ public class FireBaseHandler {
 
     }
 
-    public void uploadUser(User user , final OnUserlistener onUserlistener ) {
-        mFirebaseDatabase.getReference().child("user/"+user.getUserUID()).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+    public void uploadUser(User user, final OnUserlistener onUserlistener) {
+        mFirebaseDatabase.getReference().child("user/" + user.getUserUID()).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
 
@@ -137,6 +137,31 @@ public class FireBaseHandler {
 
     }
 
+    public void downloadUser(String userUID, final OnUserlistener onUserlistener) {
+
+        mDatabaseRef = mFirebaseDatabase.getReference().child("user/" + userUID);
+
+
+        mDatabaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+
+                User user = dataSnapshot.getValue(User.class);
+
+                onUserlistener.onUserDownLoad(user, true);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                onUserlistener.onUserUpload(false);
+
+
+            }
+        });
+
+
+    }
 
     //interface
     public interface OnSaloonListListner {
@@ -154,10 +179,12 @@ public class FireBaseHandler {
 
     }
 
-public interface OnUserlistener{
-    public void onUserDownLoad(User user ,boolean isSuccessful);
+    public interface OnUserlistener {
 
-    public void onUserUpload(boolean isSuccessful);
-}
+
+        public void onUserDownLoad(User user, boolean isSuccessful);
+
+        public void onUserUpload(boolean isSuccessful);
+    }
 
 }
