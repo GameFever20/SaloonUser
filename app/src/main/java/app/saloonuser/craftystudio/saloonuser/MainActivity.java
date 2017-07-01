@@ -293,9 +293,8 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
 
         } else if (id == R.id.nav_slideshow) {
-            Intent intent =new Intent(MainActivity.this , ServiceTypeActivity.class);
+            Intent intent = new Intent(MainActivity.this, ServiceTypeActivity.class);
             startActivity(intent);
-
 
 
         } else if (id == R.id.nav_manage) {
@@ -308,6 +307,10 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
 
         } else if (id == R.id.nav_send) {
+
+            Intent intent = new Intent(MainActivity.this, UserOrderActivity.class);
+            startActivity(intent);
+
 
         }
 

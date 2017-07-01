@@ -4,12 +4,41 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.widget.TextView;
+
+import utils.OrderAdapter;
 
 public class UserOrderActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
+    RecyclerView mUserOrderRecyclerview;
+    private OrderAdapter mAdapter;
+    //private OrderAdapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
+
+
+
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_user_order);
+
+        mTextMessage = (TextView) findViewById(R.id.message);
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        mUserOrderRecyclerview=(RecyclerView) findViewById(R.id.userOrder_order_recyclerview);
+
+        // use a linear layout manager
+        mLayoutManager = new LinearLayoutManager(this);
+        mUserOrderRecyclerview.setLayoutManager(mLayoutManager);
+
+    }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -32,14 +61,5 @@ public class UserOrderActivity extends AppCompatActivity {
 
     };
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_order);
-
-        mTextMessage = (TextView) findViewById(R.id.message);
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-    }
 
 }
