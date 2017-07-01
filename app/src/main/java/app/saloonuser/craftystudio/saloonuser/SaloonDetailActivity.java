@@ -117,7 +117,9 @@ public class SaloonDetailActivity extends AppCompatActivity {
     }
 
     public void seeSaloonService(View view) {
-
+        Intent intent = new Intent(SaloonDetailActivity.this, ServiceTypeActivity.class);
+        intent.putExtra("Saloon", saloon);
+        startActivity(intent);
     }
 
     public void setSaloonImages() {
@@ -241,8 +243,8 @@ public class SaloonDetailActivity extends AppCompatActivity {
 
     public void openImageDisplayActivity(View view) {
         Intent intent = new Intent(SaloonDetailActivity.this, ImageActivity.class);
-        Bundle bundle=new Bundle();
-        bundle.putSerializable("Saloon",saloon);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("Saloon", saloon);
         intent.putExtras(bundle);
         startActivity(intent);
     }

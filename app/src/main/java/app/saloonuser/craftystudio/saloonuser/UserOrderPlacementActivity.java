@@ -51,7 +51,7 @@ public class UserOrderPlacementActivity extends AppCompatActivity {
 
     public void placeOrderButtonClick(View view) {
 
-        Order order = new Order();
+        Order order = ServiceTypeActivity.CURRENTORDER;
         order.setUserID(LoginActivity.USERUID);
 
         order.setOrderStatus(1);

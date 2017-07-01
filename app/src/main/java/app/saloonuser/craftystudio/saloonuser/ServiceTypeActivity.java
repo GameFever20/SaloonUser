@@ -1,5 +1,6 @@
 package app.saloonuser.craftystudio.saloonuser;
 
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
@@ -54,7 +55,7 @@ public class ServiceTypeActivity extends AppCompatActivity {
 
     ArrayList<Service> serviceArrayList = new ArrayList<>();
 
-    public static Order CURRENTORDER =new Order();
+    public static Order CURRENTORDER ;
     //public static HashMap<String ,Service> SERVICEHASHMAP =new HashMap<>();
     Saloon saloon ;
 
@@ -100,6 +101,8 @@ public class ServiceTypeActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+                Intent intent =new Intent(ServiceTypeActivity.this , UserOrderPlacementActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -145,10 +148,21 @@ public class ServiceTypeActivity extends AppCompatActivity {
 
         for (int i = 0; i < 5; i++) {
             Service service = new Service();
+            service.setServiceName("cutting");
+            service.setServiceType(1);
+            service.setServiceSubType(0);
+            service.setServiceUID("service_"+(100+i));
+            service.setServicePrice(i*50+125);
+            serviceArrayList.add(service);
+        }
+
+
+        for (int i = 0; i < 5; i++) {
+            Service service = new Service();
             service.setServiceName("Bold cut");
             service.setServiceType(1);
             service.setServiceSubType(2);
-            service.setServiceUID("service_"+i);
+            service.setServiceUID("service_"+(120+i));
             service.setServicePrice(i*50+25);
             serviceArrayList.add(service);
         }
@@ -159,20 +173,11 @@ public class ServiceTypeActivity extends AppCompatActivity {
             service.setServiceName("awesome cut");
             service.setServiceType(2);
             service.setServiceSubType(1);
-            service.setServiceUID("service_"+(i+10));
+            service.setServiceUID("service_"+(i+210));
             service.setServicePrice(i*50+75);
             serviceArrayList.add(service);
         }
 
-        for (int i = 0; i < 5; i++) {
-            Service service = new Service();
-            service.setServiceName("cutting");
-            service.setServiceType(1);
-            service.setServiceSubType(0);
-            service.setServiceUID("service_"+(i+20));
-            service.setServicePrice(i*50+125);
-            serviceArrayList.add(service);
-        }
 
 
 

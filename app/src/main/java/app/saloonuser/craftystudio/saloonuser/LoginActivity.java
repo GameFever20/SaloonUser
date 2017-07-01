@@ -1,5 +1,6 @@
 package app.saloonuser.craftystudio.saloonuser;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -189,7 +190,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         updateUI(currentUser);
-        USERUID = currentUser.getUid();
+
 
         // [START_EXCLUDE]
         if (mVerificationInProgress && validatePhoneNumber()) {
@@ -306,9 +307,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if (user != null) {
             updateUI(STATE_SIGNIN_SUCCESS, user);
             USERUID = user.getUid();
+            openMainActivity();
         } else {
             updateUI(STATE_INITIALIZED);
         }
+    }
+
+    private void openMainActivity() {
+        Intent intent =new Intent(LoginActivity.this , MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        finish();
     }
 
     private void updateUI(int uiState, FirebaseUser user) {
