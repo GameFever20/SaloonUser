@@ -53,7 +53,7 @@ public class ServiceTypeActivity extends AppCompatActivity {
 
     ArrayList<Service> serviceArrayList = new ArrayList<>();
 
-    public static Order CURRENTORDER =new Order();
+    //public static Order CURRENTORDER =new Order();
     public static HashMap<String ,Service> SERVICEHASHMAP =new HashMap<>();
 
 

@@ -131,7 +131,7 @@ public class ServiceTypeExpandableAdapter extends BaseExpandableListAdapter {
 
                     }
 
-                    Log.d(TAG, "onCheckedChanged: " + ServiceTypeActivity.CURRENTORDER.getOrederServiceIDList());
+                    Log.d(TAG, "onCheckedChanged: " + ServiceTypeActivity.SERVICEHASHMAP);
 
                 }
             });
