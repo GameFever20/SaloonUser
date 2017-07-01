@@ -4,41 +4,190 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     android:orientation="vertical"
     tools:context="app.saloonuser.craftystudio.saloonuser.UserDetailActivity">
 
-
-    <EditText
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="user gender"
-        android:id="@+id/userDetail_userGender_edittext"
-        />
+        android:layout_height="wrap_content">
 
-   <EditText
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:hint="user name "
-       android:id="@+id/userDetail_userName_edittext"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-       />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="user age"
-        android:inputType="number"
-        android:id="@+id/userDetail_userAge_edittext"
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:text="Tell Us More"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="30sp"
+                android:textStyle="bold" />
 
-        />
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="upload"
-        android:onClick="uploadUserDetailButtonClick"
-        />
+            <LinearLayout
+                android:id="@+id/user_genderdetail_linearlayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="visible">
 
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="60dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="60dp"
+                        android:layout_marginTop="5dp"
+                        android:text="I'm Male"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="60dp"
+                        android:layout_marginTop="5dp"
+                        android:text="I'm Female"
+                        android:textAlignment="viewEnd"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+
+                    <ImageView
+                        android:id="@+id/user_detail_male_imageview"
+                        android:layout_width="100dp"
+                        android:layout_height="150dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="1"
+                        android:onClick="maleSelection"
+                        android:src="@drawable/malefinal" />
+
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="3dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="10dp"
+                        app:cardBackgroundColor="@color/blackish"
+                        app:cardCornerRadius="0dp"
+                        app:cardElevation="0dp"></android.support.v7.widget.CardView>
+
+                    <ImageView
+                        android:id="@+id/user_detail_female_imageview"
+                        android:layout_width="100dp"
+                        android:layout_height="140dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="1"
+                        android:onClick="femaleSelection"
+                        android:src="@drawable/female_copy" />
+
+
+                </LinearLayout>
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="50dp"
+                    android:background="@color/colorPrimary"
+                    android:onClick="userDetailNext"
+                    android:text="Next"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+
+            <EditText
+                android:id="@+id/userDetail_userGender_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="user gender"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/userDetail_userGender_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="20dp"
+                android:text="User Gender "
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:visibility="gone"
+
+                />
+
+            <EditText
+                android:id="@+id/userDetail_userName_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="20dp"
+                android:hint="user name "
+                android:textColor="@color/white"
+                android:textColorHint="@color/whitish"
+                android:visibility="gone"
+
+                />
+
+            <EditText
+                android:id="@+id/userDetail_userAge_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="20dp"
+                android:hint="user age"
+                android:inputType="number"
+                android:textColor="@color/white"
+                android:textColorHint="@color/whitish"
+                android:visibility="gone"
+
+                />
+
+            <Button
+                android:id="@+id/user_detail_upload_button"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="30dp"
+                android:background="@color/whitish"
+                android:onClick="uploadUserDetailButtonClick"
+                android:text="upload"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>
