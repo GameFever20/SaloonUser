@@ -4,24 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="app.saloonuser.craftystudio.saloonuser.LoginActivity"
     tools:showIn="@layout/activity_login">
 
 
-
-
-    <TextView
-        android:id="@+id/loginActivity_status_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        />
-
-
     <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center_vertical">
 
@@ -36,63 +28,91 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:weightSum="2.0">
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/loginActivity_heading_textview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Enter Your Phone Number"
+                    android:textColor="@color/white"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/field_phone_number"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1.0"
-                    android:inputType="phone"/>
+                    android:layout_marginTop="15dp"
+                    android:hint="Enter Phone Number"
+                    android:inputType="phone"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/whitish"
+                    android:visibility="visible" />
 
                 <EditText
                     android:id="@+id/field_verification_code"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1.0"
-                    android:inputType="number"/>
+                    android:layout_marginTop="15dp"
+                    android:hint="Verfication Code here"
+                    android:inputType="number"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/whitish"
+                    android:visibility="gone" />
 
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="3.0">
 
                 <Button
                     android:id="@+id/button_start_verification"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="25dp"
+                    android:layout_marginTop="20dp"
                     android:layout_weight="1.0"
+                    android:background="@drawable/borderonly_button"
                     android:text="sent otp"
-
-                    />
+                    android:textColor="@color/white"
+                    android:textSize="17sp" />
 
                 <Button
                     android:id="@+id/button_verify_phone"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="25dp"
+                    android:layout_marginTop="20dp"
                     android:layout_weight="1.0"
+                    android:background="@drawable/borderonly_button"
                     android:text="verify"
-                    />
+                    android:textColor="@color/white"
+                    android:textSize="17sp"
+                    android:visibility="gone" />
 
                 <Button
                     android:id="@+id/button_resend"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="25dp"
+                    android:layout_marginTop="20dp"
                     android:layout_weight="1.0"
+                    android:background="@drawable/borderonly_button"
                     android:text="resend"
-                    />
+                    android:textColor="@color/white"
+                    android:textSize="17sp"
+                    android:visibility="gone" />
             </LinearLayout>
 
         </LinearLayout>
 
 
-
     </RelativeLayout>
 
+    <TextView
+        android:id="@+id/loginActivity_status_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 
 </LinearLayout>

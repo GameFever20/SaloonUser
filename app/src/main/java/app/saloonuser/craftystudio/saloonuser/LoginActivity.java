@@ -27,7 +27,7 @@ import com.google.firebase.auth.PhoneAuthProvider;
 
 import java.util.concurrent.TimeUnit;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = "PhoneAuthActivity";
 
@@ -54,17 +54,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     //private ViewGroup mSignedInViews;
 
     private TextView mStatusText;
-   // private TextView mDetailText;
+    private TextView mHeadingText;
+    // private TextView mDetailText;
 
     private EditText mPhoneNumberField;
     private EditText mVerificationField;
 
     private Button mStartButton;
     private Button mVerifyButton;
-    //private Button mResendButton;
+    private Button mResendButton;
+
     //private Button mSignOutButton;
 
     static String USERUID = "aaa";
+
+    String mPhoneNumber = "";
 
 
     @Override
@@ -78,10 +82,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
 
         // Assign views
-       // mPhoneNumberViews = (ViewGroup) findViewById(R.id.phone_auth_fields);
-       // mSignedInViews = (ViewGroup) findViewById(R.id.signed_in_buttons);
+        // mPhoneNumberViews = (ViewGroup) findViewById(R.id.phone_auth_fields);
+        // mSignedInViews = (ViewGroup) findViewById(R.id.signed_in_buttons);
 
         mStatusText = (TextView) findViewById(R.id.loginActivity_status_textView);
+        mHeadingText = (TextView) findViewById(R.id.loginActivity_heading_textview);
         //mDetailText = (TextView) findViewById(R.id.detail);
 
         mPhoneNumberField = (EditText) findViewById(R.id.field_phone_number);
@@ -89,13 +94,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         mStartButton = (Button) findViewById(R.id.button_start_verification);
         mVerifyButton = (Button) findViewById(R.id.button_verify_phone);
-        //mResendButton = (Button) findViewById(R.id.button_resend);
+        mResendButton = (Button) findViewById(R.id.button_resend);
         //mSignOutButton = (Button) findViewById(R.id.sign_out_button);
 
         // Assign click listeners
         mStartButton.setOnClickListener(this);
         mVerifyButton.setOnClickListener(this);
-        //mResendButton.setOnClickListener(this);
+        mResendButton.setOnClickListener(this);
+
         //mSignOutButton.setOnClickListener(this);
 
         // [START initialize_auth]
@@ -183,7 +189,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         updateUI(currentUser);
-USERUID =currentUser.getUid();
+        USERUID = currentUser.getUid();
 
         // [START_EXCLUDE]
         if (mVerificationInProgress && validatePhoneNumber()) {
@@ -192,6 +198,21 @@ USERUID =currentUser.getUid();
         // [END_EXCLUDE]
     }
     // [END on_start_check_user]
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+
+        super.onWindowFocusChanged(hasFocus);
+        if (hasFocus) {
+            getWindow().getDecorView().setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_FULLSCREEN
+            );
+        }
+    }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -393,10 +414,12 @@ USERUID =currentUser.getUid();
         switch (view.getId()) {
             case R.id.button_start_verification:
                 if (!validatePhoneNumber()) {
+
                     return;
                 }
 
                 startPhoneNumberVerification(mPhoneNumberField.getText().toString());
+                changeViewValue();
                 break;
             case R.id.button_verify_phone:
                 String code = mVerificationField.getText().toString();
@@ -408,9 +431,24 @@ USERUID =currentUser.getUid();
                 verifyPhoneNumberWithCode(mVerificationId, code);
                 break;
             case R.id.button_resend:
-                resendVerificationCode(mPhoneNumberField.getText().toString(), mResendToken);
+                //  resendVerificationCode(mPhoneNumberField.getText().toString(), mResendToken);
+                resendVerificationCode(mPhoneNumber, mResendToken);
                 break;
-
         }
+    }
+
+    private void changeViewValue() {
+
+        mPhoneNumber = mPhoneNumberField.getText().toString();
+
+        mHeadingText.setText("Validate Your Number");
+        mPhoneNumberField.setVisibility(View.GONE);
+        mStartButton.setVisibility(View.GONE);
+
+        mVerificationField.setVisibility(View.VISIBLE);
+        mVerifyButton.setVisibility(View.VISIBLE);
+        mResendButton.setVisibility(View.VISIBLE);
+
+
     }
 }

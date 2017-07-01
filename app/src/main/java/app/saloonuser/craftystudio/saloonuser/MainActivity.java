@@ -283,14 +283,13 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_camera) {
 
-            Intent intent = new Intent(MainActivity.this, SaloonDetailActivity.class);
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(intent);
             // Handle the camera action
 
 
-
         } else if (id == R.id.nav_gallery) {
-            Intent intent = new Intent( MainActivity.this , UserDetailActivity.class);
+            Intent intent = new Intent(MainActivity.this, UserDetailActivity.class);
             startActivity(intent);
 
         } else if (id == R.id.nav_slideshow) {
