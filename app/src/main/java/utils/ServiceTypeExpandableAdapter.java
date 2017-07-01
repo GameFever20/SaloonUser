@@ -117,21 +117,21 @@ public class ServiceTypeExpandableAdapter extends BaseExpandableListAdapter {
                     Toast.makeText(mContext, "service" + service.getServiceName() + " , " + service.getServiceType(), Toast.LENGTH_SHORT).show();
 
                     if (isChecked) {
-                        ServiceTypeActivity.SERVICEHASHMAP.put(service.getServiceUID(), service);
+                        ServiceTypeActivity.CURRENTORDER.getOrederServiceIDList().put(service.getServiceUID(), service.getServiceName());
 
-                        //ServiceTypeActivity.CURRENTORDER.setOrderPrice(ServiceTypeActivity.CURRENTORDER.getOrderPrice()+service.getServicePrice());
-                        //ServiceTypeActivity.CURRENTORDER.setOrderTotalServiceCount(ServiceTypeActivity.CURRENTORDER.getOrderTotalServiceCount()+1);
+                        ServiceTypeActivity.CURRENTORDER.setOrderPrice(ServiceTypeActivity.CURRENTORDER.getOrderPrice()+service.getServicePrice());
+                        ServiceTypeActivity.CURRENTORDER.setOrderTotalServiceCount(ServiceTypeActivity.CURRENTORDER.getOrderTotalServiceCount()+1);
 
 
 
                     } else {
-                        ServiceTypeActivity.SERVICEHASHMAP.remove(service.getServiceUID());
-                        //ServiceTypeActivity.CURRENTORDER.setOrderPrice(ServiceTypeActivity.CURRENTORDER.getOrderPrice()-service.getServicePrice());
-                        //ServiceTypeActivity.CURRENTORDER.setOrderTotalServiceCount(ServiceTypeActivity.CURRENTORDER.getOrderTotalServiceCount()-1);
+                        ServiceTypeActivity.CURRENTORDER.getOrederServiceIDList().remove(service.getServiceUID());
+                        ServiceTypeActivity.CURRENTORDER.setOrderPrice(ServiceTypeActivity.CURRENTORDER.getOrderPrice()-service.getServicePrice());
+                        ServiceTypeActivity.CURRENTORDER.setOrderTotalServiceCount(ServiceTypeActivity.CURRENTORDER.getOrderTotalServiceCount()-1);
 
                     }
 
-                    Log.d(TAG, "onCheckedChanged: " + ServiceTypeActivity.SERVICEHASHMAP);
+                    Log.d(TAG, "onCheckedChanged: " + ServiceTypeActivity.CURRENTORDER.getOrederServiceIDList());
 
                 }
             });

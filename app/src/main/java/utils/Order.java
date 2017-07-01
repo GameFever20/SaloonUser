@@ -24,9 +24,10 @@ public class Order implements Serializable ,Parcelable{
     private long orderTime = 0 ;
     private int orderPrice =0 ;
     private String orderServiceName ="" ;
-    Map<String,String> orederServiceIDList =new HashMap<String, String>();
-    int orderTotalServiceCount;
+    private Map<String,String> orederServiceIDList =new HashMap<String, String>();
+    private int orderTotalServiceCount;
 
+    private long orderBookingTime ;
 
 
 
@@ -120,6 +121,14 @@ public class Order implements Serializable ,Parcelable{
 
     public void setOrderTotalServiceCount(int orderTotalServiceCount) {
         this.orderTotalServiceCount = orderTotalServiceCount;
+    }
+
+    public long getOrderBookingTime() {
+        return orderBookingTime;
+    }
+
+    public void setOrderBookingTime(long orderBookingTime) {
+        this.orderBookingTime = orderBookingTime;
     }
 
     public String resolveOrderStatus() {

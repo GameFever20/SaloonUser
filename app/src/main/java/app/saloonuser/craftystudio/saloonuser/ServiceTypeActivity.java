@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import utils.Order;
+import utils.Saloon;
 import utils.Service;
 import utils.ServiceTypeExpandableAdapter;
 import utils.User;
@@ -53,9 +54,9 @@ public class ServiceTypeActivity extends AppCompatActivity {
 
     ArrayList<Service> serviceArrayList = new ArrayList<>();
 
-    //public static Order CURRENTORDER =new Order();
-    public static HashMap<String ,Service> SERVICEHASHMAP =new HashMap<>();
-
+    public static Order CURRENTORDER =new Order();
+    //public static HashMap<String ,Service> SERVICEHASHMAP =new HashMap<>();
+    Saloon saloon ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +65,19 @@ public class ServiceTypeActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
+        try {
+            saloon=(Saloon) getIntent().getSerializableExtra("Saloon");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        CURRENTORDER =new Order();
+        CURRENTORDER.setSaloonName(saloon.getSaloonName());
+        CURRENTORDER.setSaloonID(saloon.getSaloonUID());
+
+
 
         tabLayout = (TabLayout) findViewById(R.id.serviceType_tabLayout);
         // Create the adapter that will return a fragment for each of the three
