@@ -76,6 +76,7 @@ public class UserDetailActivity extends AppCompatActivity {
 
                 if (isSuccessful) {
                     Toast.makeText(UserDetailActivity.this, "User uploaded", Toast.LENGTH_SHORT).show();
+
                 } else {
                     Toast.makeText(UserDetailActivity.this, "Failed to upload User", Toast.LENGTH_SHORT).show();
                 }
