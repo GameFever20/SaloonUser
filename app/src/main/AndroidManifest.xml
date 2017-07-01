@@ -43,7 +43,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".UserDetailActivity"
-            android:label="@string/title_activity_user_detail"></activity>
+            android:label="@string/title_activity_user_detail" />
         <activity
             android:name=".ServiceTypeActivity"
             android:label="@string/title_activity_service_type"
@@ -56,8 +56,12 @@
             android:name=".UserProfileActivity"
             android:label="@string/title_activity_user_profile"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ImageActivity"
-            android:label="Image"></activity>
+        <activity
+            android:name=".ImageActivity"
+            android:label="Image" />
+        <activity
+            android:name=".UserOrderActivity"
+            android:label="@string/title_activity_user_order"></activity>
     </application>
 
 </manifest>
