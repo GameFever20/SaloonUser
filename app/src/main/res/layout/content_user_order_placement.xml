@@ -11,14 +11,10 @@
 
 
     <ScrollView
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
 
 
             <LinearLayout
@@ -43,6 +39,8 @@
                         android:layout_marginTop="10dp"
                         android:fontFamily="serif"
                         android:text="Saloon Name"
+                        android:id="@+id/orderPlacement_saloonName_textview"
+
                         android:textAlignment="center"
                         android:textColor="@color/colorPrimary"
                         android:textSize="22sp"
@@ -98,7 +96,7 @@
                                     android:textStyle="normal" />
 
                                 <TextView
-                                    android:id="@+id/orderPlacement_bookingServicetextview"
+                                    android:id="@+id/orderPlacement_bookingService_textview"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="20dp"
@@ -123,7 +121,9 @@
                             android:layout_marginTop="2dp"
                             app:cardBackgroundColor="@color/light_black"
                             app:cardCornerRadius="0dp"
-                            app:cardElevation="0dp"></android.support.v7.widget.CardView>
+                            app:cardElevation="0dp">
+
+                        </android.support.v7.widget.CardView>
 
 
                         <LinearLayout
@@ -315,7 +315,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="20dp"
-                                android:src="@drawable/ic_action_locationBlack" />
+                                android:src="@drawable/ic_action_locationblack" />
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -362,25 +362,24 @@
                 </android.support.v7.widget.CardView>
 
 
+
+
+
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:onClick="placeOrderButtonClick"
-                    android:text="Place ORDER"
-                    android:visibility="gone" />
+                    android:background="@color/colorPrimary"
+                    android:elevation="5dp"
+                    android:text="OKAY"
+                    android:textColor="@color/white"
+                    android:onClick="completeOrderButtonClick"
+                    android:textSize="16dp"
+                    android:visibility="visible" />
+
             </LinearLayout>
 
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@color/colorPrimary"
-                android:elevation="5dp"
-                android:text="OKAY"
-                android:textColor="@color/white"
-                android:textSize="16dp"
-                android:visibility="visible" />
 
-        </LinearLayout>
+
+
     </ScrollView>
 </LinearLayout>

@@ -40,31 +40,25 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.UserViewHold
         holder.orderDateTimeTextView.setText(order.resolveOrderDate());
         holder.orderPiceTextView.setText(order.getOrderPrice()+"");
 
+        if (order.getOrderStatus()==3) {
+            holder.saloonRatingBar.setVisibility(View.VISIBLE);
+            holder.saloonRatingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+                @Override
+                public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
 
-        holder.saloonRatingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-            @Override
-            public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
-
-            }
-        });
-        //changes to be continued
-        holder.allServiceListTextView.setText(getOrderServiceList(order));
-
-
-    }
-
-    public String getOrderServiceList(Order order){
-
-        String serviceList ="";
-
-        for (String string : order.getOrderServiceIDList().values()){
-            serviceList =serviceList+"\n"+string;
+                }
+            });
+        }else{
+            holder.saloonRatingBar.setVisibility(View.GONE);
         }
+        //changes to be continued
+        holder.allServiceListTextView.setText(order.resolveOrderServiceList());
 
-        return serviceList;
+
 
 
     }
+
 
     @Override
     public int getItemCount() {

@@ -19,7 +19,7 @@ public class UserProfileActivity extends AppCompatActivity {
     TextView mUserName, mUserAge, mUserGender, mUserMobileNumber;
     ImageView mUserProfileImage;
 
-    FireBaseHandler fireBaseHandler;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +49,7 @@ public class UserProfileActivity extends AppCompatActivity {
 
 
 
-        fireBaseHandler.downloadUser(LoginActivity.USER.getUserUID(), new FireBaseHandler.OnUserlistener() {
+        new FireBaseHandler().downloadUser(LoginActivity.USER.getUserUID(), new FireBaseHandler.OnUserlistener() {
             @Override
             public void onUserDownLoad(User user, boolean isSuccessful) {
                 mUserName.setText(user.getUserName());

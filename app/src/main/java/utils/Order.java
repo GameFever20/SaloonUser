@@ -155,6 +155,19 @@ public class Order implements Serializable ,Parcelable{
 
     }
 
+    public String resolveOrderServiceList(){
+
+        String serviceList ="";
+
+        for (String string : getOrderServiceIDList().values()){
+            serviceList =serviceList+"\n"+string;
+        }
+
+        return serviceList;
+
+
+    }
+
 
     //parcell implementation
     @Override
