@@ -162,10 +162,11 @@ public class FireBaseHandler {
 
 
     }
-    public void uploadOrder(Order order , final OnOrderListener onOrderListener) {
+
+    public void uploadOrder(Order order, final OnOrderListener onOrderListener) {
 
 
-        mFirebaseDatabase.getReference().child("Orders/"+order.getSaloonID()).push().setValue(order).addOnCompleteListener(new OnCompleteListener<Void>() {
+        mFirebaseDatabase.getReference().child("Orders/" + order.getSaloonID()).push().setValue(order).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
 
@@ -178,6 +179,35 @@ public class FireBaseHandler {
                 onOrderListener.onOrderUpload(false);
             }
         });
+    }
+
+    public void downloadOrderList(String userUID, int limitTo, final OnOrderListener onOrderListener) {
+
+        DatabaseReference myRef = mFirebaseDatabase.getReference().child("userOrders/" + userUID);
+
+        Query myref2 = myRef.limitToLast(limitTo);
+        myref2.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                ArrayList<Order> orderArrayList = new ArrayList<Order>();
+
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+
+                    Order order = snapshot.getValue(Order.class);
+                    order.setOrderID(snapshot.getKey());
+                    orderArrayList.add(order);
+                }
+
+                onOrderListener.onOrderListDownload(orderArrayList, true);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
     }
 
 
@@ -205,13 +235,13 @@ public class FireBaseHandler {
         public void onUserUpload(boolean isSuccessful);
     }
 
-public interface OnOrderListener{
-    public void onOrderUpload(boolean isSuccessful);
+    public interface OnOrderListener {
+        public void onOrderUpload(boolean isSuccessful);
 
-    public void onOrderDownload(Order order , boolean isSuccessful );
+        public void onOrderDownload(Order order, boolean isSuccessful);
 
-    public void onOrderListDownload(ArrayList<Order > orderArrayList , boolean isSuccessful);
+        public void onOrderListDownload(ArrayList<Order> orderArrayList, boolean isSuccessful);
 
-}
+    }
 
 }
