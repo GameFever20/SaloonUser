@@ -34,7 +34,7 @@ public class UserOrderPlacementActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         try {
-            saloon=(Saloon) getIntent().getSerializableExtra("Saloon");
+            saloon = (Saloon) getIntent().getSerializableExtra("Saloon");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -80,8 +80,11 @@ public class UserOrderPlacementActivity extends AppCompatActivity {
 
     private long calculateBookingTime() {
 
-        DatePicker datePicker =(DatePicker)findViewById(R.id.orderPlacement_bookingDate_datePicker);
-        TimePicker timePicker = (TimePicker)findViewById(R.id.orderPlacement_bookingTime_timePicker);
+        DatePicker datePicker = (DatePicker) findViewById(R.id.orderPlacement_bookingDate_datePicker);
+        TimePicker timePicker = (TimePicker) findViewById(R.id.orderPlacement_bookingTime_timePicker);
+
+        Toast.makeText(this, "time "+checkTimeSelected(), Toast.LENGTH_SHORT).show();
+
         Calendar calendar = Calendar.getInstance();
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.M) {
             calendar.set(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth(),
@@ -96,6 +99,32 @@ public class UserOrderPlacementActivity extends AppCompatActivity {
 
         long startTime = calendar.getTimeInMillis();
         return startTime;
+    }
+
+
+    public boolean checkTimeSelected() {
+        TimePicker timePicker = (TimePicker) findViewById(R.id.orderPlacement_bookingTime_timePicker);
+        int selectedHour, selectedMinute;
+
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.M) {
+            selectedHour=timePicker.getCurrentHour();
+            selectedMinute=timePicker.getCurrentMinute();
+
+        } else {
+            selectedHour = timePicker.getHour();
+            selectedMinute = timePicker.getMinute();
+
+        }
+
+
+        if (selectedHour> saloon.getClosingTimeHour() || selectedHour < saloon.getOpeningTimeHour()){
+
+            return false;
+        }
+
+
+
+        return true;
     }
 
 

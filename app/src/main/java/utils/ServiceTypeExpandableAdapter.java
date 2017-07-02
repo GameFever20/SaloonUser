@@ -98,11 +98,16 @@ public class ServiceTypeExpandableAdapter extends BaseExpandableListAdapter {
         final Service service = (Service) getChild(groupPosition, childPosition);
 
 
-            if (convertView == null) {
+           /* if (convertView == null) {
                 LayoutInflater infalInflater = (LayoutInflater) this.mContext
                         .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 convertView = infalInflater.inflate(R.layout.servicetype_adapter_child_row, null);
-            }
+            }*/
+
+
+        LayoutInflater infalInflater = (LayoutInflater) this.mContext
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        convertView = infalInflater.inflate(R.layout.servicetype_adapter_child_row, null);
 
             TextView serviceNameTextview = (TextView) convertView
                     .findViewById(R.id.serviceType_adapter_child_subType_textview);
@@ -110,6 +115,12 @@ public class ServiceTypeExpandableAdapter extends BaseExpandableListAdapter {
             serviceNameTextview.setText(service.getServiceName());
 
             CheckBox checkBox = (CheckBox) convertView.findViewById(R.id.serviceType_adapter_child_subType_checkBox);
+
+
+        if (service.isSelected()){
+            checkBox.setChecked(true);
+        }
+
             checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -117,21 +128,27 @@ public class ServiceTypeExpandableAdapter extends BaseExpandableListAdapter {
                     Toast.makeText(mContext, "service" + service.getServiceName() + " , " + service.getServiceType(), Toast.LENGTH_SHORT).show();
 
                     if (isChecked) {
-                        ServiceTypeActivity.CURRENTORDER.getOrederServiceIDList().put(service.getServiceUID(), service.getServiceName());
+                        ServiceTypeActivity.CURRENTORDER.getOrderServiceIDList().put(service.getServiceUID(), service.getServiceName());
 
                         ServiceTypeActivity.CURRENTORDER.setOrderPrice(ServiceTypeActivity.CURRENTORDER.getOrderPrice()+service.getServicePrice());
                         ServiceTypeActivity.CURRENTORDER.setOrderTotalServiceCount(ServiceTypeActivity.CURRENTORDER.getOrderTotalServiceCount()+1);
 
+                        service.setSelected(true);
+
+                        ServiceTypeActivity.updateOrderDetail();
 
 
                     } else {
-                        ServiceTypeActivity.CURRENTORDER.getOrederServiceIDList().remove(service.getServiceUID());
+                        ServiceTypeActivity.CURRENTORDER.getOrderServiceIDList().remove(service.getServiceUID());
                         ServiceTypeActivity.CURRENTORDER.setOrderPrice(ServiceTypeActivity.CURRENTORDER.getOrderPrice()-service.getServicePrice());
                         ServiceTypeActivity.CURRENTORDER.setOrderTotalServiceCount(ServiceTypeActivity.CURRENTORDER.getOrderTotalServiceCount()-1);
 
+                        service.setSelected(false);
+
+                        ServiceTypeActivity.updateOrderDetail();
                     }
 
-                    Log.d(TAG, "onCheckedChanged: " + ServiceTypeActivity.CURRENTORDER.getOrederServiceIDList());
+                    Log.d(TAG, "onCheckedChanged: " + ServiceTypeActivity.CURRENTORDER.getOrderServiceIDList());
 
                 }
             });

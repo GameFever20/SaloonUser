@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -50,14 +51,16 @@ public class ServiceTypeActivity extends AppCompatActivity {
     private ViewPager mViewPager;
     TabLayout tabLayout;
 
-    static HashMap<String, ArrayList<Service>> mServiceHashMap = new HashMap<>();
-    static ArrayList<String> mServiceSubType = new ArrayList<>();
+    //static HashMap<String, ArrayList<Service>> mServiceHashMap = new HashMap<>();
+    //static ArrayList<String> mServiceSubType = new ArrayList<>();
 
     ArrayList<Service> serviceArrayList = new ArrayList<>();
 
     public static Order CURRENTORDER ;
     //public static HashMap<String ,Service> SERVICEHASHMAP =new HashMap<>();
     Saloon saloon ;
+
+    static Button placeOrderButton ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +81,7 @@ public class ServiceTypeActivity extends AppCompatActivity {
         CURRENTORDER.setSaloonName(saloon.getSaloonName());
         CURRENTORDER.setSaloonID(saloon.getSaloonUID());
 
+        placeOrderButton =(Button)findViewById(R.id.serviceType_placeOrder_button);
 
 
         tabLayout = (TabLayout) findViewById(R.id.serviceType_tabLayout);
@@ -117,9 +121,17 @@ public class ServiceTypeActivity extends AppCompatActivity {
     }
 
 
+    public static void updateOrderDetail(){
+
+        placeOrderButton.setText(CURRENTORDER.getOrderPrice() + " and "+CURRENTORDER.getOrderTotalServiceCount());
+
+    }
+
+
+
     private void createServiceHashMap() {
 
-        mServiceHashMap.put("Hair Cut", createServiceList());
+       /* mServiceHashMap.put("Hair Cut", createServiceList());
         mServiceHashMap.put("Hair color", createServiceColorList());
         mServiceHashMap.put("Hair stra", createServiceList());
 
@@ -127,7 +139,7 @@ public class ServiceTypeActivity extends AppCompatActivity {
         mServiceSubType.add("Hair Cut");
         mServiceSubType.add("Hair color");
         mServiceSubType.add("Hair stra");
-
+*/
 
     }
 

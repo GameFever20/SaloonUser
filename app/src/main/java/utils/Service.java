@@ -26,6 +26,7 @@ public class Service implements Serializable ,Parcelable {
     int serviceType ;
     int serviceSubType;
 
+    boolean selected;
 
 
 
@@ -128,6 +129,15 @@ public class Service implements Serializable ,Parcelable {
 
     public void setServiceSubType(int serviceSubType) {
         this.serviceSubType = serviceSubType;
+    }
+
+
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
     }
 
     //parcel start
