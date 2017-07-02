@@ -35,6 +35,7 @@ public class ServiceTypeExpandableAdapter extends BaseExpandableListAdapter {
         mServiceSubType =serviceSubType;
         mContext =context;
 
+
     }
 
     @Override
