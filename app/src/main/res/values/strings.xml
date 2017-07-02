@@ -17,9 +17,9 @@
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="title_activity_user_profile">Profile</string>
     <string name="title_activity_user_order">UserOrderActivity</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_home">Booking</string>
+    <string name="title_dashboard">Pending</string>
+    <string name="title_notifications">Completed</string>
 
 
     <array name="haircare_sub_type_list">

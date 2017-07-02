@@ -106,6 +106,7 @@ public class ServiceTypeActivity extends AppCompatActivity {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
                 Intent intent =new Intent(ServiceTypeActivity.this , UserOrderPlacementActivity.class);
+                intent.putExtra("Saloon" ,saloon);
                 startActivity(intent);
             }
         });

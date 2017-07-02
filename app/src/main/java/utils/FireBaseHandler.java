@@ -13,6 +13,8 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Aisha on 6/28/2017.
@@ -166,8 +168,16 @@ public class FireBaseHandler {
 
     public void uploadOrder(Order order, final OnOrderListener onOrderListener) {
 
+        String pushKey = mFirebaseDatabase.getReference().child("Orders/" + order.getSaloonID()).push().getKey();
 
-        mFirebaseDatabase.getReference().child("Orders/" + order.getSaloonID()).push().setValue(order).addOnCompleteListener(new OnCompleteListener<Void>() {
+
+        order.setOrderID(pushKey);
+        Map post = new HashMap();
+        post.put("Orders/" + order.getSaloonID()+"/"+pushKey, order);
+        post.put("userOrders/" + order.getUserID()+"/"+pushKey, order);
+
+
+        mFirebaseDatabase.getReference().updateChildren(post).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
 

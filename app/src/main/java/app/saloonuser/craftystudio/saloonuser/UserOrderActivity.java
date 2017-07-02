@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -30,6 +31,8 @@ public class UserOrderActivity extends AppCompatActivity {
 
     ArrayList<Order> mUserOrderArraylist;
 
+    ArrayList<Order> mTempOrderArraylist = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +50,33 @@ public class UserOrderActivity extends AppCompatActivity {
         mUserOrderRecyclerview.setLayoutManager(mLayoutManager);
 
         fireBaseHandler = new FireBaseHandler();
+        fireBaseHandler.downloadOrderList(LoginActivity.USER.getUserUID(), 20, new FireBaseHandler.OnOrderListener() {
+            @Override
+            public void onOrderUpload(boolean isSuccessful) {
+
+            }
+
+            @Override
+            public void onOrderDownload(Order order, boolean isSuccessful) {
+
+            }
+
+            @Override
+            public void onOrderListDownload(ArrayList<Order> orderArrayList, boolean isSuccessful) {
+                if (isSuccessful) {
+
+                    Collections.reverse(orderArrayList);
+                    mUserOrderArraylist = orderArrayList;
+                    Toast.makeText(UserOrderActivity.this, "Order fetched ", Toast.LENGTH_SHORT).show();
+                    setBookingOrderList();
+
+
+                } else {
+                    Toast.makeText(UserOrderActivity.this, "No order Found", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
 
     }
 
@@ -57,15 +87,15 @@ public class UserOrderActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_home);
-                    downloadCompletedOrderList();
+                    setBookingOrderList();
                     return true;
                 case R.id.navigation_dashboard:
-                    mTextMessage.setText(R.string.title_dashboard);
-                    downloadPendingOrderList();
+
+                    setPendingOrderList();
                     return true;
                 case R.id.navigation_notifications:
-                    mTextMessage.setText(R.string.title_notifications);
+
+                    setCompletedOrderList();
                     return true;
             }
             return false;
@@ -73,79 +103,51 @@ public class UserOrderActivity extends AppCompatActivity {
 
     };
 
-    private void downloadCompletedOrderList() {
-        fireBaseHandler.downloadOrderList("userUID", 20, new FireBaseHandler.OnOrderListener() {
-            @Override
-            public void onOrderUpload(boolean isSuccessful) {
 
+    public void setCompletedOrderList() {
+        mTempOrderArraylist = new ArrayList<>();
+        for (Order order : mUserOrderArraylist) {
+            if (order.getOrderStatus() == 3) {
+                mTempOrderArraylist.add(order);
             }
+        }
+        mAdapter = new OrderAdapter(mTempOrderArraylist);
+        mUserOrderRecyclerview.setAdapter(mAdapter);
 
-            @Override
-            public void onOrderDownload(Order order, boolean isSuccessful) {
+        //Reverse a arraylist
+        mAdapter.notifyDataSetChanged();
 
-            }
-
-            @Override
-            public void onOrderListDownload(ArrayList<Order> orderArrayList, boolean isSuccessful) {
-
-                int x = orderArrayList.size() - 1;
-
-                for (int i = 0; i <= x; i++) {
-                    Order order = orderArrayList.get(i);
-                    if (order.getOrderStatus() == 3) {
-                        mUserOrderArraylist.add(order);
-                    } else {
-
-                    }
-                }
-                mAdapter = new OrderAdapter(mUserOrderArraylist);
-                mUserOrderRecyclerview.setAdapter(mAdapter);
-
-                //Reverse a arraylist
-                Collections.reverse(mUserOrderArraylist);
-                mAdapter.notifyDataSetChanged();
-
-
-            }
-        });
 
     }
 
-    private void downloadPendingOrderList() {
-        fireBaseHandler.downloadOrderList("userUID", 20, new FireBaseHandler.OnOrderListener() {
-            @Override
-            public void onOrderUpload(boolean isSuccessful) {
-
+    public void setBookingOrderList() {
+        mTempOrderArraylist = new ArrayList<>();
+        for (Order order : mUserOrderArraylist) {
+            if (order.getOrderStatus() == 2) {
+                mTempOrderArraylist.add(order);
             }
+        }
+        mAdapter = new OrderAdapter(mTempOrderArraylist);
+        mUserOrderRecyclerview.setAdapter(mAdapter);
 
-            @Override
-            public void onOrderDownload(Order order, boolean isSuccessful) {
+        //Reverse a arraylist
+        mAdapter.notifyDataSetChanged();
 
+
+    }
+
+    private void setPendingOrderList() {
+        mTempOrderArraylist = new ArrayList<>();
+        for (Order order : mUserOrderArraylist) {
+            if (order.getOrderStatus() == -1 || order.getOrderStatus() == 1) {
+                mTempOrderArraylist.add(order);
             }
+        }
+        mAdapter = new OrderAdapter(mTempOrderArraylist);
+        mUserOrderRecyclerview.setAdapter(mAdapter);
 
-            @Override
-            public void onOrderListDownload(ArrayList<Order> orderArrayList, boolean isSuccessful) {
-
-                int x = orderArrayList.size() - 1;
-
-                for (int i = 0; i <= x; i++) {
-                    Order order = orderArrayList.get(i);
-                    if (order.getOrderStatus() == 2) {
-                        mUserOrderArraylist.add(order);
-                    } else {
-
-                    }
-                }
-
-                mAdapter = new OrderAdapter(mUserOrderArraylist);
-                mUserOrderRecyclerview.setAdapter(mAdapter);
-
-                //Reverse a arraylist
-                Collections.reverse(mUserOrderArraylist);
-                mAdapter.notifyDataSetChanged();
-
-            }
-        });
+        //Reverse a arraylist
+        mAdapter.notifyDataSetChanged();
 
     }
 

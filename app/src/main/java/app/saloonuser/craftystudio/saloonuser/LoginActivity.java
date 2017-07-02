@@ -320,7 +320,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void updateUI(FirebaseUser user) {
         if (user != null) {
             //updateUI(STATE_SIGNIN_SUCCESS, user);
-
+            USERUID = user.getUid();
+            USER.setUserUID(user.getUid());
+            USER.setUserPhoneNumber(user.getPhoneNumber());
             openMainActivity();
 
         } else {

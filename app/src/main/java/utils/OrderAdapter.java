@@ -38,7 +38,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.UserViewHold
         Order order = userOrderArrayList.get(position);
         holder.saloonNameTextView.setText(order.getSaloonName());
         holder.orderDateTimeTextView.setText(order.resolveOrderDate());
-        holder.orderPiceTextView.setText(order.getOrderPrice());
+        holder.orderPiceTextView.setText(order.getOrderPrice()+"");
 
 
         holder.saloonRatingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
@@ -48,7 +48,20 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.UserViewHold
             }
         });
         //changes to be continued
-        holder.allServiceListTextView.setText(order.getOrderServiceIDList().get(position));
+        holder.allServiceListTextView.setText(getOrderServiceList(order));
+
+
+    }
+
+    public String getOrderServiceList(Order order){
+
+        String serviceList ="";
+
+        for (String string : order.getOrderServiceIDList().values()){
+            serviceList =serviceList+"\n"+string;
+        }
+
+        return serviceList;
 
 
     }

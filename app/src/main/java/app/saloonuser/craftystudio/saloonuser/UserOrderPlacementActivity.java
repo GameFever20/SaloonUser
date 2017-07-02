@@ -52,7 +52,7 @@ public class UserOrderPlacementActivity extends AppCompatActivity {
     public void placeOrderButtonClick(View view) {
 
         Order order = ServiceTypeActivity.CURRENTORDER;
-        order.setUserID(LoginActivity.USERUID);
+        order.setUserID(LoginActivity.USER.getUserUID());
 
         order.setOrderStatus(1);
         order.setOrderTime(new Date().getTime());
