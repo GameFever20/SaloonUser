@@ -21,6 +21,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/orderAdapter_allServiceName_textview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="2dp"
@@ -41,6 +42,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/orderAdapter_saloonName_textview"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="2dp"
@@ -51,6 +53,7 @@
                         android:textStyle="italic" />
 
                     <TextView
+                        android:id="@+id/orderAdapter_orderDate_textview"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="2dp"
@@ -62,6 +65,7 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/orderAdapter_orderPrice_textview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="2dp"
@@ -74,6 +78,36 @@
 
 
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2.0"
+                android:orientation="horizontal">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="5dp"
+                    android:visibility="gone"
+                    android:id="@+id/orderAdapter_giveRating_button"
+                    android:layout_weight="1.0"
+                    android:background="@color/colorPrimary"
+                    android:text="Give rating"
+                    android:textColor="@color/white" />
+
+                <RatingBar
+                    android:id="@+id/orderAdapter_saloonRating_ratingBar"
+                     android:layout_width="wrap_content"
+                    android:visibility="visible"
+                    android:numStars="5"
+                    android:layout_gravity="center_vertical"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="5dp" />
+            </LinearLayout>
+
 
         </LinearLayout>
 
