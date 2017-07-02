@@ -56,11 +56,11 @@ public class ServiceTypeActivity extends AppCompatActivity {
 
     ArrayList<Service> serviceArrayList = new ArrayList<>();
 
-    public static Order CURRENTORDER ;
+    public static Order CURRENTORDER;
     //public static HashMap<String ,Service> SERVICEHASHMAP =new HashMap<>();
-    Saloon saloon ;
+    Saloon saloon;
 
-    static Button placeOrderButton ;
+    static Button placeOrderButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,23 +72,23 @@ public class ServiceTypeActivity extends AppCompatActivity {
 
 
         try {
-            saloon=(Saloon) getIntent().getSerializableExtra("Saloon");
+            saloon = (Saloon) getIntent().getSerializableExtra("Saloon");
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        CURRENTORDER =new Order();
+        CURRENTORDER = new Order();
         CURRENTORDER.setSaloonName(saloon.getSaloonName());
         CURRENTORDER.setSaloonID(saloon.getSaloonUID());
 
-        placeOrderButton =(Button)findViewById(R.id.serviceType_placeOrder_button);
+        placeOrderButton = (Button) findViewById(R.id.serviceType_placeOrder_button);
 
 
         tabLayout = (TabLayout) findViewById(R.id.serviceType_tabLayout);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
 
-        serviceArrayList=createServiceList();
+        serviceArrayList = createServiceList();
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(), serviceArrayList);
 
         // Set up the ViewPager with the sections adapter.
@@ -112,22 +112,17 @@ public class ServiceTypeActivity extends AppCompatActivity {
         });
 
 
-
-
         //createServiceHashMap();
 
 
-
-
     }
 
 
-    public static void updateOrderDetail(){
+    public static void updateOrderDetail() {
 
-        placeOrderButton.setText(CURRENTORDER.getOrderPrice() + " and "+CURRENTORDER.getOrderTotalServiceCount());
+        placeOrderButton.setText(CURRENTORDER.getOrderPrice() + " and " + CURRENTORDER.getOrderTotalServiceCount());
 
     }
-
 
 
     private void createServiceHashMap() {
@@ -164,8 +159,8 @@ public class ServiceTypeActivity extends AppCompatActivity {
             service.setServiceName("cutting");
             service.setServiceType(1);
             service.setServiceSubType(0);
-            service.setServiceUID("service_"+(100+i));
-            service.setServicePrice(i*50+125);
+            service.setServiceUID("service_" + (100 + i));
+            service.setServicePrice(i * 50 + 125);
             serviceArrayList.add(service);
         }
 
@@ -175,8 +170,8 @@ public class ServiceTypeActivity extends AppCompatActivity {
             service.setServiceName("Bold cut");
             service.setServiceType(1);
             service.setServiceSubType(2);
-            service.setServiceUID("service_"+(120+i));
-            service.setServicePrice(i*50+25);
+            service.setServiceUID("service_" + (120 + i));
+            service.setServicePrice(i * 50 + 25);
             serviceArrayList.add(service);
         }
 
@@ -186,12 +181,10 @@ public class ServiceTypeActivity extends AppCompatActivity {
             service.setServiceName("awesome cut");
             service.setServiceType(2);
             service.setServiceSubType(1);
-            service.setServiceUID("service_"+(i+210));
-            service.setServicePrice(i*50+75);
+            service.setServiceUID("service_" + (i + 210));
+            service.setServicePrice(i * 50 + 75);
             serviceArrayList.add(service);
         }
-
-
 
 
         return serviceArrayList;
@@ -233,8 +226,8 @@ public class ServiceTypeActivity extends AppCompatActivity {
 
         private static ArrayList<Service> mServiceArrayList;
 
-        ArrayList<String> mServiceSubTypeList ;
-        HashMap<String ,ArrayList<Service>> mServiceHashMap ;
+        ArrayList<String> mServiceSubTypeList;
+        HashMap<String, ArrayList<Service>> mServiceHashMap;
 
         public PlaceholderFragment() {
         }
@@ -275,11 +268,10 @@ public class ServiceTypeActivity extends AppCompatActivity {
             expandableListView.setAdapter(serviceTypeExpandableAdapter);
 
 
-
             expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
                 @Override
                 public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-                    Toast.makeText(getContext(), "position is "+serviceTypeIndex +" , "+groupPosition+" , "+childPosition, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "position is " + serviceTypeIndex + " , " + groupPosition + " , " + childPosition, Toast.LENGTH_SHORT).show();
 
                     return false;
 
@@ -290,26 +282,26 @@ public class ServiceTypeActivity extends AppCompatActivity {
         }
 
 
-        public void createServiceHashMap(int serviceTypeIndex){
+        public void createServiceHashMap(int serviceTypeIndex) {
 
             String[] serviceTypeName = getResources().getStringArray(R.array.haircare_sub_type_list);
 
 
-            ArrayList<String> serviceSubTypeList =new ArrayList<String>();
-            HashMap<String ,ArrayList<Service>> serviceHashMap =new HashMap<>();
+            ArrayList<String> serviceSubTypeList = new ArrayList<String>();
+            HashMap<String, ArrayList<Service>> serviceHashMap = new HashMap<>();
 
-            for (String serviceSubTypeName :serviceTypeName){
+            for (String serviceSubTypeName : serviceTypeName) {
 
                 serviceSubTypeList.add(serviceSubTypeName);
 
-                serviceHashMap.put(serviceSubTypeName ,new ArrayList<Service>());
+                serviceHashMap.put(serviceSubTypeName, new ArrayList<Service>());
 
             }
 
 
-            for (Service service : mServiceArrayList){
+            for (Service service : mServiceArrayList) {
 
-                if (service.getServiceType() ==serviceTypeIndex){
+                if (service.getServiceType() == serviceTypeIndex) {
 
                     serviceHashMap.get(serviceSubTypeList.get(service.getServiceSubType())).add(service);
 
@@ -317,8 +309,8 @@ public class ServiceTypeActivity extends AppCompatActivity {
 
             }
 
-            mServiceHashMap=serviceHashMap;
-            mServiceSubTypeList=serviceSubTypeList;
+            mServiceHashMap = serviceHashMap;
+            mServiceSubTypeList = serviceSubTypeList;
 
         }
 
@@ -343,7 +335,7 @@ public class ServiceTypeActivity extends AppCompatActivity {
             // Return a PlaceholderFragment (defined as a static inner class below).
 
 
-            return PlaceholderFragment.newInstance(position + 1 ,mServiceArrayList);
+            return PlaceholderFragment.newInstance(position + 1, mServiceArrayList);
         }
 
         @Override
