@@ -48,7 +48,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.UserViewHold
             }
         });
         //changes to be continued
-        holder.allServiceListTextView.setText(order.getOrederServiceIDList().get(position));
+        holder.allServiceListTextView.setText(order.getOrderServiceIDList().get(position));
 
 
     }
