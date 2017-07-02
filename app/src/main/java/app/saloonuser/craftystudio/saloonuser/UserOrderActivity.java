@@ -49,6 +49,7 @@ public class UserOrderActivity extends AppCompatActivity {
         mLayoutManager = new LinearLayoutManager(this);
         mUserOrderRecyclerview.setLayoutManager(mLayoutManager);
 
+
         fireBaseHandler = new FireBaseHandler();
         fireBaseHandler.downloadOrderList(LoginActivity.USER.getUserUID(), 20, new FireBaseHandler.OnOrderListener() {
             @Override
