@@ -139,6 +139,7 @@ public class FireBaseHandler {
 
     public void downloadUser(String userUID, final OnUserlistener onUserlistener) {
 
+
         mDatabaseRef = mFirebaseDatabase.getReference().child("user/" + userUID);
 
 

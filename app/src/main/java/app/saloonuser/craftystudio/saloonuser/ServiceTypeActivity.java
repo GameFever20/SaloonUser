@@ -269,6 +269,8 @@ public class ServiceTypeActivity extends AppCompatActivity {
                     , mServiceSubTypeList, getContext()
             );
 
+
+
             expandableListView.setAdapter(serviceTypeExpandableAdapter);
 
 

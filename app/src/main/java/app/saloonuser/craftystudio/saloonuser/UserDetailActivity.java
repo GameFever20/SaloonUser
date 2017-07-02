@@ -1,5 +1,7 @@
 package app.saloonuser.craftystudio.saloonuser;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.media.Image;
 import android.support.annotation.Nullable;
@@ -36,11 +38,15 @@ public class UserDetailActivity extends AppCompatActivity {
 
     LinearLayout mUserDetailLinearlayout;
     Button mUploadBtn;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_detail);
+
+
+        progressDialog = new ProgressDialog(this);
 
         //detail filling layout
         mUserNameEdittext = (EditText) findViewById(R.id.userDetail_userName_edittext);
@@ -64,6 +70,8 @@ public class UserDetailActivity extends AppCompatActivity {
 
         creteUser();
 
+        showProgressDialog("Uploading");
+
         new FireBaseHandler().uploadUser(USER, new FireBaseHandler.OnUserlistener() {
             @Override
             public void onUserDownLoad(User user, boolean isSuccessful) {
@@ -73,9 +81,11 @@ public class UserDetailActivity extends AppCompatActivity {
 
             @Override
             public void onUserUpload(boolean isSuccessful) {
-
+                closeProgressDialog();
                 if (isSuccessful) {
                     Toast.makeText(UserDetailActivity.this, "User uploaded", Toast.LENGTH_SHORT).show();
+
+                    openMainActivity();
 
                 } else {
                     Toast.makeText(UserDetailActivity.this, "Failed to upload User", Toast.LENGTH_SHORT).show();
@@ -85,13 +95,19 @@ public class UserDetailActivity extends AppCompatActivity {
 
     }
 
+    private void openMainActivity() {
+        Intent intent =new Intent(UserDetailActivity.this , MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        finish();
+    }
+
     private void creteUser() {
-        USER = new User();
+        USER = LoginActivity.USER;
         USER.setUserName(mUserNameEdittext.getText().toString().trim());
         //  USER.setUserGender(mUserGenderEdittext.getText().toString().trim());
         USER.setUserGender(GENDER);
         USER.setUserAge(Integer.valueOf(mUserAgeEdittext.getText().toString().trim()));
-        USER.setUserUID(LoginActivity.USERUID);
 
     }
 
@@ -127,4 +143,16 @@ public class UserDetailActivity extends AppCompatActivity {
             mUserprofile.setImageResource(R.drawable.female_copy);
         }
     }
+
+    public void showProgressDialog( String message) {
+        progressDialog.setMessage(message);
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+    }
+
+    public void closeProgressDialog() {
+        progressDialog.dismiss();
+    }
+
+
 }

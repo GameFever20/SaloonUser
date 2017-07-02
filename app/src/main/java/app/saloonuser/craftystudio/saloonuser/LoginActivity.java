@@ -1,5 +1,6 @@
 package app.saloonuser.craftystudio.saloonuser;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -27,6 +28,9 @@ import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 
 import java.util.concurrent.TimeUnit;
+
+import utils.FireBaseHandler;
+import utils.User;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -69,7 +73,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     static String USERUID = "aaa";
 
+    static User USER ;
+
     String mPhoneNumber = "";
+    private ProgressDialog progressDialog;
 
 
     @Override
@@ -81,6 +88,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if (savedInstanceState != null) {
             onRestoreInstanceState(savedInstanceState);
         }
+
+
+        progressDialog =new ProgressDialog(this);
 
         // Assign views
         // mPhoneNumberViews = (ViewGroup) findViewById(R.id.phone_auth_fields);
@@ -102,6 +112,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mStartButton.setOnClickListener(this);
         mVerifyButton.setOnClickListener(this);
         mResendButton.setOnClickListener(this);
+
+
 
         //mSignOutButton.setOnClickListener(this);
 
@@ -188,6 +200,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
+        USER = new User();
+
         FirebaseUser currentUser = mAuth.getCurrentUser();
         updateUI(currentUser);
 
@@ -305,9 +319,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void updateUI(FirebaseUser user) {
         if (user != null) {
-            updateUI(STATE_SIGNIN_SUCCESS, user);
-            USERUID = user.getUid();
+            //updateUI(STATE_SIGNIN_SUCCESS, user);
+
             openMainActivity();
+
         } else {
             updateUI(STATE_INITIALIZED);
         }
@@ -319,6 +334,42 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         startActivity(intent);
         finish();
     }
+
+    private void openUserDetailActivity() {
+        Intent intent =new Intent(LoginActivity.this , UserDetailActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        finish();
+    }
+
+
+    private void checkUserDetail(String userUID) {
+
+        showProgressDialog("Loading...");
+
+        new FireBaseHandler().downloadUser(userUID, new FireBaseHandler.OnUserlistener() {
+            @Override
+            public void onUserDownLoad(User user, boolean isSuccessful) {
+                closeProgressDialog();
+                if (isSuccessful){
+                    if (user!=null){
+                        openMainActivity();
+                    }else{
+                        openUserDetailActivity();
+                    }
+                }else{
+                    openMainActivity();
+                }
+            }
+
+            @Override
+            public void onUserUpload(boolean isSuccessful) {
+
+            }
+        });
+
+    }
+
 
     private void updateUI(int uiState, FirebaseUser user) {
         updateUI(uiState, user, null);
@@ -366,6 +417,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     }
                 }
 
+
                 break;
             case STATE_SIGNIN_FAILED:
                 // No-op, handled by sign-in check
@@ -373,6 +425,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 break;
             case STATE_SIGNIN_SUCCESS:
                 // Np-op, handled by sign-in check
+                USERUID = user.getUid();
+                USER.setUserUID(user.getUid());
+                USER.setUserPhoneNumber(user.getPhoneNumber());
+                checkUserDetail(user.getUid());
                 break;
         }
 
@@ -395,6 +451,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             //mStatusText.setText(getString(R.string.firebase_status_fmt, user.getUid()));
         }
     }
+
+
+
 
     private boolean validatePhoneNumber() {
         String phoneNumber = mPhoneNumberField.getText().toString();
@@ -460,4 +519,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
     }
+
+
+    public void showProgressDialog( String message) {
+        progressDialog.setMessage(message);
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+    }
+
+    public void closeProgressDialog() {
+        progressDialog.dismiss();
+    }
+
 }

@@ -48,12 +48,12 @@ public class UserProfileActivity extends AppCompatActivity {
         });
 
 
-        /*
-        fireBaseHandler.downloadUser("userUID", new FireBaseHandler.OnUserlistener() {
+
+        fireBaseHandler.downloadUser(LoginActivity.USER.getUserUID(), new FireBaseHandler.OnUserlistener() {
             @Override
             public void onUserDownLoad(User user, boolean isSuccessful) {
                 mUserName.setText(user.getUserName());
-                mUserAge.setText(user.getUserAge());
+                mUserAge.setText(user.getUserAge()+"");
                 mUserGender.setText(user.getUserGender());
 
                 if (user.getUserGender().equalsIgnoreCase("Male")) {
@@ -62,7 +62,7 @@ public class UserProfileActivity extends AppCompatActivity {
                     mUserProfileImage.setImageResource(R.drawable.female_copy);
                 }
 
-               // mUserMobileNumber.setText(user.getPhoneNumber);
+                mUserMobileNumber.setText(user.getUserPhoneNumber());
             }
 
             @Override
@@ -70,7 +70,8 @@ public class UserProfileActivity extends AppCompatActivity {
 
             }
         });
-        */
+
+
     }
 
     @Override
