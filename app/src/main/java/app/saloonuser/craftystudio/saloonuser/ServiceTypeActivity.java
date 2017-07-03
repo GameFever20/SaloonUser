@@ -201,6 +201,7 @@ public class ServiceTypeActivity extends AppCompatActivity {
             service.setServiceUID("service_" + (120 + i));
             service.setServicePrice(i * 50 + 25);
             serviceArrayList.add(service);
+
         }
 
 
