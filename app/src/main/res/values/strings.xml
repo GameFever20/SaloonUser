@@ -43,6 +43,16 @@
 
     </string-array>
 
+    <string-array name="skincare_service_sub_type">
+        <item>BLEACH</item>
+        <item>ORGANIC FACIAL</item>
+        <item>SKIN LIGHTENING</item>
+        <item>THREADING</item>
+        <item>WAXING</item>
+
+    </string-array>
+
+
     <string-array name="spa_service_sub_type">
         <item>BLEACH</item>
         <item>ORGANIC FACIAL</item>

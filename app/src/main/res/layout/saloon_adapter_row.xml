@@ -147,22 +147,22 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:id="@+id/saloonadapterrow_saloonrating_textview"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_marginLeft="10dp"
                             android:layout_marginRight="5dp"
-                            android:text="Rating"
-                            android:id="@+id/saloonadapterrow_saloonrating_textview"
-                            android:textAlignment="viewEnd"
                             android:layout_weight="1"
-                            android:textSize="16sp"
+                            android:text="Rating"
+                            android:textAlignment="textEnd"
+
+                            android:textSize="20sp"
                             android:textStyle="normal" />
 
                         <ImageView
-                            android:layout_width="match_parent"
-                             android:layout_weight="1"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_action_currency"/>
+                            android:src="@drawable/ic_action_currency" />
                     </LinearLayout>
 
                 </LinearLayout>

@@ -29,7 +29,8 @@
                 android:scaleType="centerCrop"
                 android:onClick="openImageDisplayActivity"
                 android:src="@drawable/parlourimage"
-                android:visibility="gone" />
+
+                />
 
 
             <android.support.v7.widget.CardView

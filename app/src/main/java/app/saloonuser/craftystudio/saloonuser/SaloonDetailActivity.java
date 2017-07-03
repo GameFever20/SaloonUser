@@ -137,11 +137,9 @@ public class SaloonDetailActivity extends AppCompatActivity {
                         .using(new FirebaseImageLoader())
                         .load(storageReference)
                         .thumbnail(0.5f)
-                        .override(900, 400)
+                        .override(1000, 500)
                         .crossFade(100)
                         .fitCenter()
-                        .diskCacheStrategy(DiskCacheStrategy.NONE)
-                        .skipMemoryCache(true)
                         .into(mSaloonDetailProfileIv);
             }
 
@@ -155,11 +153,9 @@ public class SaloonDetailActivity extends AppCompatActivity {
                         .using(new FirebaseImageLoader())
                         .load(storageReference)
                         .thumbnail(0.5f)
-                        .override(900, 400)
+                        .override(300, 300)
                         .crossFade(100)
                         .fitCenter()
-                        .diskCacheStrategy(DiskCacheStrategy.NONE)
-                        .skipMemoryCache(true)
                         .into(mSaloonDetailShow1Iv);
             }
 
@@ -173,11 +169,9 @@ public class SaloonDetailActivity extends AppCompatActivity {
                         .using(new FirebaseImageLoader())
                         .load(storageReference)
                         .thumbnail(0.5f)
-                        .override(900, 400)
+                        .override(300, 300)
                         .crossFade(100)
                         .fitCenter()
-                        .diskCacheStrategy(DiskCacheStrategy.NONE)
-                        .skipMemoryCache(true)
                         .into(mSaloonDetailShow2Iv);
             }
 
@@ -191,11 +185,10 @@ public class SaloonDetailActivity extends AppCompatActivity {
                         .using(new FirebaseImageLoader())
                         .load(storageReference)
                         .thumbnail(0.5f)
-                        .override(900, 400)
+                        .override(300, 300)
                         .crossFade(100)
                         .fitCenter()
-                        .diskCacheStrategy(DiskCacheStrategy.NONE)
-                        .skipMemoryCache(true)
+
                         .into(mSaloonDetailShow3Iv);
             }
 
@@ -209,11 +202,10 @@ public class SaloonDetailActivity extends AppCompatActivity {
                         .using(new FirebaseImageLoader())
                         .load(storageReference)
                         .thumbnail(0.5f)
-                        .override(900, 400)
+                        .override(300, 300)
                         .crossFade(100)
                         .fitCenter()
-                        .diskCacheStrategy(DiskCacheStrategy.NONE)
-                        .skipMemoryCache(true)
+
                         .into(mSaloonDetailShow4Iv);
             }
 
@@ -227,11 +219,10 @@ public class SaloonDetailActivity extends AppCompatActivity {
                         .using(new FirebaseImageLoader())
                         .load(storageReference)
                         .thumbnail(0.5f)
-                        .override(900, 400)
+                        .override(300, 300)
                         .crossFade(100)
                         .fitCenter()
-                        .diskCacheStrategy(DiskCacheStrategy.NONE)
-                        .skipMemoryCache(true)
+
                         .into(mSaloonDetailShow5Iv);
             }
 

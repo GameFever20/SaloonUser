@@ -134,7 +134,7 @@ public class MainActivity extends AppCompatActivity
                                                                   //  Toast.makeText(MainActivity.this, "Refreshing", Toast.LENGTH_SHORT).show();
 
                                                               } else {
-                                                                  Toast.makeText(MainActivity.this, "Loaded", Toast.LENGTH_SHORT).show();
+                                                                  Toast.makeText(MainActivity.this, "Loading", Toast.LENGTH_SHORT).show();
 
                                                               }
                                                           }
@@ -190,7 +190,7 @@ public class MainActivity extends AppCompatActivity
     public void onScrolledSaloonListToBottom(int lastSaloonPoint) {
 
         isLodingMoreSaloon = true;
-        Toast.makeText(MainActivity.this, "On Data calling ..", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(MainActivity.this, "On Data calling ..", Toast.LENGTH_SHORT).show();
 
         fireBaseHandler.downloadMoreSaloonList(20, lastSaloonPoint, new FireBaseHandler.OnSaloonListListner() {
             @Override
@@ -208,14 +208,14 @@ public class MainActivity extends AppCompatActivity
                             mSaloonArraylist.add(saloonArrayList.get(i));
                         }
                         mAdapter.notifyDataSetChanged();
-                        Toast.makeText(MainActivity.this, "On Data Refreshed", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(MainActivity.this, "On Data Refreshed", Toast.LENGTH_SHORT).show();
                         isLodingMoreSaloon = false;
 
                     }
 
                 } else {
                     isLodingMoreSaloon = false;
-                    Toast.makeText(MainActivity.this, "Data Already Refreshed", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(MainActivity.this, "Data Already Refreshed", Toast.LENGTH_SHORT).show();
 
                 }
 

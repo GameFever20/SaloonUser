@@ -84,25 +84,17 @@ public class SaloonAdapter extends RecyclerView.Adapter<SaloonAdapter.SaloonView
 
                             @Override
                             public boolean onResourceReady(GlideDrawable resource, StorageReference model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
-                                Toast.makeText(context, "loaded", Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(context, "loaded", Toast.LENGTH_SHORT).show();
                                 return false;
                             }
                         })
+                        .thumbnail(0.5f)
                         .into(holder.saloonProfileImage);
             }
         }
 
 
-        holder.saloonServiceBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, SaloonDetailActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("Saloon_Class", saloon);
-                intent.putExtras(bundle);
-                context.startActivity(intent);
-            }
-        });
+
 
 
     }

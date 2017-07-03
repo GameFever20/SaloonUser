@@ -22,6 +22,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -59,10 +60,8 @@ public class ServiceTypeActivity extends AppCompatActivity {
     ArrayList<Service> serviceArrayList = new ArrayList<>();
 
     public static Order CURRENTORDER;
-    //public static HashMap<String ,Service> SERVICEHASHMAP =new HashMap<>();
     Saloon saloon;
 
-    static Button placeOrderButton;
 
     static TextView mPriceNServiceTextview;
 
@@ -86,11 +85,12 @@ public class ServiceTypeActivity extends AppCompatActivity {
         CURRENTORDER.setSaloonName(saloon.getSaloonName());
         CURRENTORDER.setSaloonID(saloon.getSaloonUID());
 
-        placeOrderButton = (Button) findViewById(R.id.serviceType_placeOrder_button);
+
         mPriceNServiceTextview = (TextView) findViewById(R.id.serviceType_priceAndServiceOrder_textview);
 
 
         tabLayout = (TabLayout) findViewById(R.id.serviceType_tabLayout);
+
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
 
@@ -147,7 +147,6 @@ public class ServiceTypeActivity extends AppCompatActivity {
 
     public static void updateOrderDetail() {
 
-        //  placeOrderButton.setText(CURRENTORDER.getOrderPrice() + " and " + CURRENTORDER.getOrderTotalServiceCount());
         mPriceNServiceTextview.setText(CURRENTORDER.getOrderPrice() + " and " + CURRENTORDER.getOrderTotalServiceCount());
 
     }
@@ -245,6 +244,17 @@ public class ServiceTypeActivity extends AppCompatActivity {
 
 
     public void proceedOrderPlacement(View view) {
+        boolean isServiceSelected = false;
+        for (String service : CURRENTORDER.getOrderServiceIDList().values()) {
+            isServiceSelected = true;
+            break;
+        }
+
+        if (!isServiceSelected) {
+            Toast.makeText(this, " Add Service to proceed", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         Intent intent = new Intent(ServiceTypeActivity.this, UserOrderPlacementActivity.class);
         intent.putExtra("Saloon", saloon);
         startActivity(intent);
@@ -319,7 +329,33 @@ public class ServiceTypeActivity extends AppCompatActivity {
 
         public void createServiceHashMap(int serviceTypeIndex) {
 
-            String[] serviceTypeName = getResources().getStringArray(R.array.haircare_service_sub_type);
+
+            String[] serviceTypeName ;
+
+            switch (serviceTypeIndex) {
+                case 1:
+                    serviceTypeName = getResources().getStringArray(R.array.haircare_service_sub_type);
+                    break;
+                case 2:
+                    serviceTypeName = getResources().getStringArray(R.array.skincare_service_sub_type);
+                    break;
+                case 3:
+                    serviceTypeName = getResources().getStringArray(R.array.manicure_service_sub_type);
+                    break;
+                case 4:
+                    serviceTypeName = getResources().getStringArray(R.array.bodywrap_service_sub_type);
+                    break;
+                case 5:
+                    serviceTypeName = getResources().getStringArray(R.array.massage_service_sub_type);
+                    break;
+                case 6:
+                    serviceTypeName = getResources().getStringArray(R.array.makeup_service_sub_type);
+                default:
+                    serviceTypeName = getResources().getStringArray(R.array.haircare_service_sub_type);
+                    break;
+
+
+            }
 
 
             ArrayList<String> serviceSubTypeList = new ArrayList<String>();
@@ -332,7 +368,6 @@ public class ServiceTypeActivity extends AppCompatActivity {
                 serviceHashMap.put(serviceSubTypeName, new ArrayList<Service>());
 
             }
-
 
 
             for (Service service : mServiceArrayList) {

@@ -115,7 +115,7 @@ public class ServiceTypeExpandableAdapter extends BaseExpandableListAdapter {
                 .findViewById(R.id.serviceType_adapter_child_subType_textview);
         TextView serviceSubTypePriceTextview = (TextView) convertView.findViewById(R.id.serviceType_adapter_child_subTypeprice_textview);
 
-        serviceSubTypePriceTextview.setText(service.getServicePrice());
+        serviceSubTypePriceTextview.setText(service.getServicePrice()+"");
 
         serviceNameTextview.setText(service.getServiceName());
 
