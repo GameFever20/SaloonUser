@@ -1,5 +1,8 @@
 package app.saloonuser.craftystudio.saloonuser;
 
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -32,7 +35,6 @@ public class UserOrderActivity extends AppCompatActivity {
     ArrayList<Order> mUserOrderArraylist;
 
     ArrayList<Order> mTempOrderArraylist = new ArrayList<>();
-
 
 
     @Override
@@ -80,6 +82,24 @@ public class UserOrderActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void openGPSDirection() {
+       /*
+        String uri = "http://maps.google.com/maps?daddr=" + 23f + "," + 41f + " (" + "Parlour Location" + ")";
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+        intent.setPackage("com.google.android.apps.maps");
+        try {
+            startActivity(intent);
+        } catch (ActivityNotFoundException ex) {
+            try {
+                Intent unrestrictedIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                startActivity(unrestrictedIntent);
+            } catch (ActivityNotFoundException innerEx) {
+                Toast.makeText(UserOrderActivity.this, "Please install a maps application", Toast.LENGTH_LONG).show();
+            }
+        }
+        */
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener

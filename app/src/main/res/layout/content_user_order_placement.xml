@@ -50,10 +50,10 @@
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="5dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="5dp"
                 app:cardCornerRadius="4dp"
                 app:cardElevation="5dp">
 
@@ -110,6 +110,69 @@
 
 
                     </LinearLayout>
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginBottom="4dp"
+                        android:layout_marginLeft="80dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="2dp"
+                        app:cardBackgroundColor="@color/light_black"
+                        app:cardCornerRadius="0dp"
+                        app:cardElevation="0dp">
+
+                    </android.support.v7.widget.CardView>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="3dp"
+                        android:layout_marginRight="3dp"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:src="@drawable/ic_action_currency" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="20dp"
+                                android:layout_marginTop="2dp"
+                                android:text="Total Service Price"
+                                android:textColor="@color/light_black"
+                                android:textSize="12sp"
+                                android:textStyle="normal" />
+
+                            <TextView
+                                android:id="@+id/orderPlacement_totalPrice_Textview"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="20dp"
+                                android:layout_marginTop="2dp"
+                                android:text="Total Price"
+                                android:textColor="@color/blackish"
+                                android:textSize="17sp"
+                                android:textStyle="bold" />
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
 
                     <android.support.v7.widget.CardView
                         android:layout_width="match_parent"
@@ -383,6 +446,7 @@
                 android:onClick="completeOrderButtonClick"
                 android:text="OKAY"
                 android:textColor="@color/white"
+                android:layout_marginTop="10dp"
                 android:textSize="16dp"
                 android:visibility="visible" />
 

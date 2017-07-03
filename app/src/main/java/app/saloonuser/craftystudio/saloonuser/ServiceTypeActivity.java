@@ -21,6 +21,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ExpandableListView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -63,6 +64,9 @@ public class ServiceTypeActivity extends AppCompatActivity {
 
     static Button placeOrderButton;
 
+    static TextView mPriceNServiceTextview;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,6 +87,7 @@ public class ServiceTypeActivity extends AppCompatActivity {
         CURRENTORDER.setSaloonID(saloon.getSaloonUID());
 
         placeOrderButton = (Button) findViewById(R.id.serviceType_placeOrder_button);
+        mPriceNServiceTextview = (TextView) findViewById(R.id.serviceType_priceAndServiceOrder_textview);
 
 
         tabLayout = (TabLayout) findViewById(R.id.serviceType_tabLayout);
@@ -98,8 +103,8 @@ public class ServiceTypeActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-                Intent intent =new Intent(ServiceTypeActivity.this , UserOrderPlacementActivity.class);
-                intent.putExtra("Saloon" ,saloon);
+                Intent intent = new Intent(ServiceTypeActivity.this, UserOrderPlacementActivity.class);
+                intent.putExtra("Saloon", saloon);
                 startActivity(intent);
             }
         });
@@ -114,7 +119,7 @@ public class ServiceTypeActivity extends AppCompatActivity {
             @Override
             public void onServiceList(ArrayList<Service> serviceArrayList, boolean isSuccesful) {
 
-                ServiceTypeActivity.this.serviceArrayList =serviceArrayList;
+                ServiceTypeActivity.this.serviceArrayList = serviceArrayList;
                 initializeActivity();
 
             }
@@ -127,7 +132,7 @@ public class ServiceTypeActivity extends AppCompatActivity {
     }
 
 
-    public void initializeActivity(){
+    public void initializeActivity() {
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(), serviceArrayList);
 
         // Set up the ViewPager with the sections adapter.
@@ -142,7 +147,8 @@ public class ServiceTypeActivity extends AppCompatActivity {
 
     public static void updateOrderDetail() {
 
-        placeOrderButton.setText(CURRENTORDER.getOrderPrice() + " and " + CURRENTORDER.getOrderTotalServiceCount());
+        //  placeOrderButton.setText(CURRENTORDER.getOrderPrice() + " and " + CURRENTORDER.getOrderTotalServiceCount());
+        mPriceNServiceTextview.setText(CURRENTORDER.getOrderPrice() + " and " + CURRENTORDER.getOrderTotalServiceCount());
 
     }
 
@@ -236,6 +242,13 @@ public class ServiceTypeActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
+    public void proceedOrderPlacement(View view) {
+        Intent intent = new Intent(ServiceTypeActivity.this, UserOrderPlacementActivity.class);
+        intent.putExtra("Saloon", saloon);
+        startActivity(intent);
+    }
+
     /**
      * A placeholder fragment containing a simple view.
      */
@@ -284,7 +297,6 @@ public class ServiceTypeActivity extends AppCompatActivity {
             ServiceTypeExpandableAdapter serviceTypeExpandableAdapter = new ServiceTypeExpandableAdapter(mServiceHashMap
                     , mServiceSubTypeList, getContext()
             );
-
 
 
             expandableListView.setAdapter(serviceTypeExpandableAdapter);

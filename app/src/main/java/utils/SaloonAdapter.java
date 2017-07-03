@@ -19,6 +19,8 @@ import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 import app.saloonuser.craftystudio.saloonuser.R;
@@ -54,7 +56,7 @@ public class SaloonAdapter extends RecyclerView.Adapter<SaloonAdapter.SaloonView
         holder.saloonOpeningTimeTextView.setText(saloon.getOpeningTimeHour() + ":" + saloon.getOpeningTimeMinute());
         holder.saloonClosingTimeTextView.setText(saloon.getClosingTimeHour() + ":" + saloon.getClosingTimeMinute());
         holder.saloonAddressTextView.setText(saloon.getSaloonAddress());
-        // holder.saloonRatingTextView.setText(saloon.getSaloonRating()+"");
+        holder.saloonRatingTextView.setText(saloon.getSaloonRating() + "");
 
         //firebase storage connection
         FirebaseStorage storage = FirebaseStorage.getInstance();
@@ -71,7 +73,7 @@ public class SaloonAdapter extends RecyclerView.Adapter<SaloonAdapter.SaloonView
                         .listener(new RequestListener<StorageReference, GlideDrawable>() {
                             @Override
                             public boolean onException(Exception e, StorageReference model, Target<GlideDrawable> target, boolean isFirstResource) {
-                                Toast.makeText(context, "Exception "+e.getMessage(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "Exception " + e.getMessage(), Toast.LENGTH_SHORT).show();
 
                                 return false;
                             }
@@ -105,7 +107,8 @@ public class SaloonAdapter extends RecyclerView.Adapter<SaloonAdapter.SaloonView
             saloonOpeningTimeTextView = (TextView) view.findViewById(R.id.saloonadapterrow_saloonopening_textview);
             saloonClosingTimeTextView = (TextView) view.findViewById(R.id.saloonadapterrow_saloonclosing_textview);
             saloonAddressTextView = (TextView) view.findViewById(R.id.saloonadapterrow_saloonaddress_textview);
-            saloonServiceBtn = (Button) view.findViewById(R.id.saloonadapterrow_saloon_servicebtn_textview);
+            saloonRatingTextView = (TextView) view.findViewById(R.id.saloonadapterrow_saloonrating_textview);
+            //  saloonServiceBtn = (Button) view.findViewById(R.id.saloonadapterrow_saloon_servicebtn_textview);
             saloonProfileImage = (ImageView) view.findViewById(R.id.saloonadapterrow_saloon_profilepic_imageView);
 
         }

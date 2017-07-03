@@ -67,13 +67,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private Button mStartButton;
     private Button mVerifyButton;
-    private Button mResendButton;
+    // private Button mResendButton;
+
+    private TextView mResendTextview;
 
     //private Button mSignOutButton;
 
     static String USERUID = "aaa";
 
-    static User USER ;
+    static User USER;
 
     String mPhoneNumber = "";
     private ProgressDialog progressDialog;
@@ -90,7 +92,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
 
 
-        progressDialog =new ProgressDialog(this);
+        progressDialog = new ProgressDialog(this);
 
         // Assign views
         // mPhoneNumberViews = (ViewGroup) findViewById(R.id.phone_auth_fields);
@@ -105,14 +107,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         mStartButton = (Button) findViewById(R.id.button_start_verification);
         mVerifyButton = (Button) findViewById(R.id.button_verify_phone);
-        mResendButton = (Button) findViewById(R.id.button_resend);
+        mResendTextview = (TextView) findViewById(R.id.textview_resend);
         //mSignOutButton = (Button) findViewById(R.id.sign_out_button);
 
         // Assign click listeners
         mStartButton.setOnClickListener(this);
         mVerifyButton.setOnClickListener(this);
-        mResendButton.setOnClickListener(this);
-
+        mResendTextview.setOnClickListener(this);
 
 
         //mSignOutButton.setOnClickListener(this);
@@ -331,14 +332,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void openMainActivity() {
-        Intent intent =new Intent(LoginActivity.this , MainActivity.class);
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         finish();
     }
 
     private void openUserDetailActivity() {
-        Intent intent =new Intent(LoginActivity.this , UserDetailActivity.class);
+        Intent intent = new Intent(LoginActivity.this, UserDetailActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         finish();
@@ -353,13 +354,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onUserDownLoad(User user, boolean isSuccessful) {
                 closeProgressDialog();
-                if (isSuccessful){
-                    if (user!=null){
+                if (isSuccessful) {
+                    if (user != null) {
                         openMainActivity();
-                    }else{
+                    } else {
                         openUserDetailActivity();
                     }
-                }else{
+                } else {
                     openMainActivity();
                 }
             }
@@ -455,8 +456,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
 
-
-
     private boolean validatePhoneNumber() {
         String phoneNumber = mPhoneNumberField.getText().toString();
         if (TextUtils.isEmpty(phoneNumber)) {
@@ -500,7 +499,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                 verifyPhoneNumberWithCode(mVerificationId, code);
                 break;
-            case R.id.button_resend:
+            case R.id.textview_resend:
                 //  resendVerificationCode(mPhoneNumberField.getText().toString(), mResendToken);
                 resendVerificationCode(mPhoneNumber, mResendToken);
                 break;
@@ -517,13 +516,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         mVerificationField.setVisibility(View.VISIBLE);
         mVerifyButton.setVisibility(View.VISIBLE);
-        mResendButton.setVisibility(View.VISIBLE);
+        mResendTextview.setVisibility(View.VISIBLE);
 
 
     }
 
 
-    public void showProgressDialog( String message) {
+    public void showProgressDialog(String message) {
         progressDialog.setMessage(message);
         progressDialog.setCancelable(false);
         progressDialog.show();

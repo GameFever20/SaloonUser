@@ -31,8 +31,8 @@
 
                 <ImageView
                     android:id="@+id/saloonadapterrow_saloon_profilepic_imageView"
-                    android:layout_width="110dp"
-                    android:layout_height="120dp"
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
                     android:layout_margin="4dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/parlourimage" />
@@ -67,17 +67,17 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="3dp"
                         android:layout_marginRight="3dp"
-                        android:layout_marginTop="15dp">
+                        android:layout_marginTop="5dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="7dp"
                             android:layout_marginTop="2dp"
-                            android:text="Opening Time "
+                            android:text="Opening Time : "
                             android:textColor="@color/blackish"
                             android:textSize="15sp"
-                            android:textStyle="bold" />
+                            android:textStyle="normal" />
 
                         <TextView
                             android:id="@+id/saloonadapterrow_saloonopening_textview"
@@ -104,10 +104,10 @@
                             android:layout_marginBottom="2dp"
                             android:layout_marginLeft="7dp"
                             android:layout_marginTop="5dp"
-                            android:text="Closing Time "
+                            android:text="Closing Time   :"
                             android:textColor="@color/blackish"
                             android:textSize="15sp"
-                            android:textStyle="bold" />
+                            android:textStyle="normal" />
 
                         <TextView
                             android:id="@+id/saloonadapterrow_saloonclosing_textview"
@@ -123,40 +123,51 @@
                     </LinearLayout>
 
 
+                    <TextView
+                        android:id="@+id/saloonadapterrow_saloonaddress_textview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10sp"
+                        android:text="Address"
+                        android:textSize="16sp" />
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="5dp"
+                        app:cardBackgroundColor="@color/whitish"
+                        app:cardCornerRadius="0dp"
+                        app:cardElevation="0dp"></android.support.v7.widget.CardView>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="5dp"
+                            android:text="Rating"
+                            android:id="@+id/saloonadapterrow_saloonrating_textview"
+                            android:textAlignment="viewEnd"
+                            android:layout_weight="1"
+                            android:textSize="16sp"
+                            android:textStyle="normal" />
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                             android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_action_currency"/>
+                    </LinearLayout>
+
                 </LinearLayout>
-
-
             </LinearLayout>
 
-
-            <TextView
-                android:id="@+id/saloonadapterrow_saloonaddress_textview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="3sp"
-                android:text="Address"
-                android:textSize="16sp" />
-
-            <android.support.v7.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                app:cardBackgroundColor="@color/colorPrimary"
-                app:cardCornerRadius="0dp"
-                app:cardElevation="0dp"></android.support.v7.widget.CardView>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <Button
-                    android:id="@+id/saloonadapterrow_saloon_servicebtn_textview"
-                    android:layout_width="match_parent"
-                    android:layout_height="35dp"
-                    android:layout_margin="6dp"
-                    android:background="@color/colorPrimary"
-                    android:text="See Service"
-                    android:textColor="@color/white" />
-            </LinearLayout>
 
         </LinearLayout>
 
