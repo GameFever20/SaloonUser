@@ -1,5 +1,6 @@
 package app.saloonuser.craftystudio.saloonuser;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -54,6 +55,7 @@ public class ServiceTypeActivity extends AppCompatActivity {
     private ViewPager mViewPager;
     TabLayout tabLayout;
 
+
     //static HashMap<String, ArrayList<Service>> mServiceHashMap = new HashMap<>();
     //static ArrayList<String> mServiceSubType = new ArrayList<>();
 
@@ -64,6 +66,8 @@ public class ServiceTypeActivity extends AppCompatActivity {
 
 
     static TextView mPriceNServiceTextview;
+
+    private ProgressDialog progressDialog;
 
 
     @Override
@@ -80,6 +84,9 @@ public class ServiceTypeActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        progressDialog = new ProgressDialog(this);
+        showProgressDialog("Fetching Service");
 
         CURRENTORDER = new Order();
         CURRENTORDER.setSaloonName(saloon.getSaloonName());
@@ -121,6 +128,7 @@ public class ServiceTypeActivity extends AppCompatActivity {
 
                 ServiceTypeActivity.this.serviceArrayList = serviceArrayList;
                 initializeActivity();
+                closeProgressDialog();
 
             }
         });
@@ -259,6 +267,20 @@ public class ServiceTypeActivity extends AppCompatActivity {
         intent.putExtra("Saloon", saloon);
         startActivity(intent);
     }
+
+
+
+    public void showProgressDialog(String message) {
+        progressDialog.setMessage(message);
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+    }
+
+    public void closeProgressDialog() {
+        progressDialog.dismiss();
+    }
+
+
 
     /**
      * A placeholder fragment containing a simple view.
