@@ -7,11 +7,13 @@
 
 
     <ExpandableListView
+        android:id="@+id/serviceTypeFragment_ExpandableListView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/serviceTypeFragment_ExpandableListView"
-         />
-
+        android:textDirection="inherit"
+        android:cacheColorHint="@color/colorAccent"
+        android:childIndicator="@color/transparent"
+        android:divider="@color/transparent" />
 
 
 </LinearLayout>

@@ -12,6 +12,8 @@
     <color name="grey">#d4515151</color>
     <color name="light_black">#d4767676</color>
 
+    <color name="transparent">#01ffffff</color>
+
 
     <color name="whitish">#e6e6e6</color>
     <color name="light_white">#f7f7f7</color>

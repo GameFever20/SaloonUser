@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
 
     >
@@ -10,33 +10,61 @@
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginRight="8dp"
         android:layout_marginTop="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginBottom="0dp"
-        app:cardMaxElevation="4dp"
-        app:cardCornerRadius="2dp">
+        app:cardBackgroundColor="@color/light_white"
+        app:cardCornerRadius="2dp"
+        app:cardMaxElevation="5dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="1dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="1dp"
+            android:layout_marginTop="5dp"
             android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/serviceType_adapter_child_subType_textview"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="7dp"
-                android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:layout_marginBottom="0dp"
                 android:layout_weight="1"
-                android:fontFamily="sans-serif"
-                android:text="Sub Type"
-                android:textColor="@color/black"
-                android:textSize="14sp"
-                android:textStyle="normal" />
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/serviceType_adapter_child_subType_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="0dp"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="7dp"
+                    android:layout_weight="1"
+                    android:fontFamily="serif"
+                    android:text="Sub Type"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:textStyle="italic" />
+
+                <TextView
+                    android:id="@+id/serviceType_adapter_child_subTypeprice_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="29dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="1dp"
+                    android:layout_weight="1"
+                    android:fontFamily="serif"
+                    android:text="900"
+                    android:textColor="@color/blackish"
+                    android:textSize="14sp"
+                    android:textStyle="italic" />
+            </LinearLayout>
+
 
             <CheckBox
                 android:id="@+id/serviceType_adapter_child_subType_checkBox"
@@ -47,7 +75,6 @@
 
         </LinearLayout>
     </android.support.v7.widget.CardView>
-
 
 
 </LinearLayout>
