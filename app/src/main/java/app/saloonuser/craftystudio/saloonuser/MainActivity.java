@@ -281,36 +281,21 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-
-            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        if (id == R.id.nav_profile) {
+            Intent intent = new Intent(MainActivity.this, UserProfileActivity.class);
             startActivity(intent);
+
             // Handle the camera action
 
 
-        } else if (id == R.id.nav_gallery) {
-            Intent intent = new Intent(MainActivity.this, UserDetailActivity.class);
-            startActivity(intent);
-
-        } else if (id == R.id.nav_slideshow) {
-            Intent intent = new Intent(MainActivity.this, ServiceTypeActivity.class);
-            startActivity(intent);
-
-
-        } else if (id == R.id.nav_manage) {
-            Intent intent = new Intent(MainActivity.this, ImageActivity.class);
+        } else if (id == R.id.nav_order) {
+            Intent intent = new Intent(MainActivity.this, UserOrderActivity.class);
             startActivity(intent);
 
 
         } else if (id == R.id.nav_share) {
-            Intent intent = new Intent(MainActivity.this, UserProfileActivity.class);
-            startActivity(intent);
 
         } else if (id == R.id.nav_send) {
-
-            Intent intent = new Intent(MainActivity.this, UserOrderActivity.class);
-            startActivity(intent);
-
 
 
         }
