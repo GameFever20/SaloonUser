@@ -55,6 +55,7 @@ public class ServiceTypeActivity extends AppCompatActivity {
     private ViewPager mViewPager;
     TabLayout tabLayout;
 
+
     //static HashMap<String, ArrayList<Service>> mServiceHashMap = new HashMap<>();
     //static ArrayList<String> mServiceSubType = new ArrayList<>();
 
