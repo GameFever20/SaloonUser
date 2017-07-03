@@ -52,17 +52,17 @@ public class UserProfileActivity extends AppCompatActivity {
         new FireBaseHandler().downloadUser(LoginActivity.USER.getUserUID(), new FireBaseHandler.OnUserlistener() {
             @Override
             public void onUserDownLoad(User user, boolean isSuccessful) {
-                mUserName.setText(user.getUserName());
-                mUserAge.setText(user.getUserAge()+"");
-                mUserGender.setText(user.getUserGender());
-
-                if (user.getUserGender().equalsIgnoreCase("Male")) {
-                    mUserProfileImage.setImageResource(R.drawable.malefinal);
-                } else {
-                    mUserProfileImage.setImageResource(R.drawable.female_copy);
+                if (isSuccessful) {
+                    if (user != null) {
+                        updateUI(user);
+                    }else{
+                        user =LoginActivity.USER;
+                        user.setUserGender("Male");
+                        user.setUserName("Hey Handsome");
+                        user.setUserAge(20);
+                        updateUI(user);
+                    }
                 }
-
-                mUserMobileNumber.setText(user.getUserPhoneNumber());
             }
 
             @Override
@@ -71,6 +71,21 @@ public class UserProfileActivity extends AppCompatActivity {
             }
         });
 
+
+    }
+
+    public void updateUI(User user){
+        mUserName.setText(user.getUserName());
+        mUserAge.setText(user.getUserAge() + "");
+        mUserGender.setText(user.getUserGender());
+
+        if (user.getUserGender().equalsIgnoreCase("Male")) {
+            mUserProfileImage.setImageResource(R.drawable.malefinal);
+        } else {
+            mUserProfileImage.setImageResource(R.drawable.female_copy);
+        }
+
+        mUserMobileNumber.setText(user.getUserPhoneNumber());
 
     }
 

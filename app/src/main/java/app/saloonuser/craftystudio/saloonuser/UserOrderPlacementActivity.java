@@ -127,12 +127,15 @@ public class UserOrderPlacementActivity extends AppCompatActivity {
                 long currentTimeInMillis =calendar.getTimeInMillis();
 
                 calendar.set(selectedyear, selectedMonth, selectedDay, selectedHour, selectedMinute, 0);
+                Date date =calendar.getTime();
 
 
 
-                if((calendar.getTimeInMillis()-3600000l) >currentTimeInMillis){
 
-                    bookingTime =calendar.getTimeInMillis();
+                if((date.getTime()-3600000l) >currentTimeInMillis){
+
+                    bookingTime =date.getTime();
+
                     placeOrder();
                 }else{
                     Toast.makeText(UserOrderPlacementActivity.this, "Order canot be placed for passed time", Toast.LENGTH_SHORT).show();

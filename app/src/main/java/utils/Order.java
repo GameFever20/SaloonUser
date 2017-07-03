@@ -160,7 +160,8 @@ public class Order implements Serializable ,Parcelable{
         String serviceList ="";
 
         for (String string : getOrderServiceIDList().values()){
-            serviceList =serviceList+"\n"+string;
+            serviceList =serviceList+"* "+string+"\n";
+
         }
 
         return serviceList;

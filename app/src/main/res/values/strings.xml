@@ -33,13 +33,49 @@
     </array>
 
 
-    <string-array name="service_sub_type">
+    <string-array name="haircare_service_sub_type">
         <item>Hair Cut</item>
         <item>Hair color</item>
         <item>HAIR STRAIGHTENING</item>
         <item>Hair SPA</item>
-        <item>Hair </item>
+        <item>HAIR STYLING</item>
+        <item>HAIR TREATMENTS</item>
 
+    </string-array>
+
+    <string-array name="spa_service_sub_type">
+        <item>BLEACH</item>
+        <item>ORGANIC FACIAL</item>
+        <item>SKIN LIGHTENING</item>
+        <item>THREADING</item>
+        <item>WAXING</item>
+        <item>Make up</item>
+
+    </string-array>
+
+    <string-array name="makeup_service_sub_type">
+        <item>Bridal package</item>
+        <item>Mehndi</item>
+
+    </string-array>
+
+    <string-array name="manicure_service_sub_type">
+        <item>Pedicure</item>
+        <item>Manicure</item>
+        <item>Nail Art</item>
+        <item>Other Hands and Feet Services</item>
+
+    </string-array>
+
+    <string-array name="bodywrap_service_sub_type">
+        <item>BODY SCRUBS</item>
+        <item>BODY WRAPS</item>
+
+
+    </string-array>
+
+    <string-array name="massage_service_sub_type">
+        <item>Massage</item>
     </string-array>
 
     <string name="title_activity_user_order_placement">UserOrderPlacementActivity</string>
