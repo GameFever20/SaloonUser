@@ -33,7 +33,7 @@ import utils.Saloon;
 public class UserOrderPlacementActivity extends AppCompatActivity {
 
     private Saloon saloon;
-    TextView mSalooonNameTextview, mServiceListTextview, mSaloonAddressTextview, mOrderDateTextview, mOrderTimeTextview;
+    TextView mSalooonNameTextview, mServiceListTextview, mSaloonAddressTextview, mOrderDateTextview, mOrderTimeTextview ,mOrderPriceTextview;
     private int selectedyear;
     private int selectedMonth;
     private int selectedDay;
@@ -78,6 +78,7 @@ public class UserOrderPlacementActivity extends AppCompatActivity {
         mSaloonAddressTextview = (TextView) findViewById(R.id.orderPlacement_bookingAddress_textview);
         mOrderDateTextview = (TextView) findViewById(R.id.orderPlacement_bookingOrderDate_textview);
         mOrderTimeTextview = (TextView) findViewById(R.id.orderPlacement_bookingOrderTime_textview);
+        mOrderPriceTextview = (TextView)findViewById(R.id.orderPlacement_totalPrice_Textview);
 
         mOrderDateTextview.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -262,6 +263,7 @@ public class UserOrderPlacementActivity extends AppCompatActivity {
         mServiceListTextview.setText(order.resolveOrderServiceList());
         mOrderTimeTextview.setText(selectedHour + ":" + selectedMinute);
         mOrderDateTextview.setText(selectedDay + "/" + selectedMonth + "/" + selectedyear);
+        mOrderPriceTextview.setText(order.getOrderPrice()+"");
 
         ServiceTypeActivity.CURRENTORDER = new Order();
 

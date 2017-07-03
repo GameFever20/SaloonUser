@@ -1,5 +1,6 @@
 package app.saloonuser.craftystudio.saloonuser;
 
+import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
@@ -36,6 +37,7 @@ public class UserOrderActivity extends AppCompatActivity {
 
     ArrayList<Order> mTempOrderArraylist = new ArrayList<>();
 
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +54,8 @@ public class UserOrderActivity extends AppCompatActivity {
         mLayoutManager = new LinearLayoutManager(this);
         mUserOrderRecyclerview.setLayoutManager(mLayoutManager);
 
+        progressDialog = new ProgressDialog(this);
+        showProgressDialog("Fetching orders");
 
         fireBaseHandler = new FireBaseHandler();
         fireBaseHandler.downloadOrderList(LoginActivity.USER.getUserUID(), 20, new FireBaseHandler.OnOrderListener() {
@@ -69,11 +73,16 @@ public class UserOrderActivity extends AppCompatActivity {
             public void onOrderListDownload(ArrayList<Order> orderArrayList, boolean isSuccessful) {
                 if (isSuccessful) {
 
-                    Collections.reverse(orderArrayList);
-                    mUserOrderArraylist = orderArrayList;
-                    Toast.makeText(UserOrderActivity.this, "Order fetched ", Toast.LENGTH_SHORT).show();
-                    setBookingOrderList();
+                    closeProgressDialog();
 
+                    if (orderArrayList!=null && orderArrayList.size()>0) {
+                        Collections.reverse(orderArrayList);
+                        mUserOrderArraylist = orderArrayList;
+                        Toast.makeText(UserOrderActivity.this, "Order fetched ", Toast.LENGTH_SHORT).show();
+                        setBookingOrderList();
+                    }else{
+                        Toast.makeText(UserOrderActivity.this, "No Order ", Toast.LENGTH_SHORT).show();
+                    }
 
                 } else {
                     Toast.makeText(UserOrderActivity.this, "No order Found", Toast.LENGTH_SHORT).show();
@@ -172,6 +181,16 @@ public class UserOrderActivity extends AppCompatActivity {
         //Reverse a arraylist
         mAdapter.notifyDataSetChanged();
 
+    }
+
+    public void showProgressDialog(String message) {
+        progressDialog.setMessage(message);
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+    }
+
+    public void closeProgressDialog() {
+        progressDialog.dismiss();
     }
 
 
