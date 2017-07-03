@@ -222,6 +222,42 @@ public class FireBaseHandler {
     }
 
 
+    public void downloadServiceList(String saloonUID, int limitTo, final OnServiceListener onServiceListener) {
+
+        DatabaseReference myRef = mFirebaseDatabase.getReference().child("services/");
+
+        Query myref2 = myRef.orderByChild("saloonUID").equalTo(saloonUID).limitToLast(limitTo);
+        myref2.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                ArrayList<Service> serviceArrayList = new ArrayList<Service>();
+
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+
+                    Service service = snapshot.getValue(Service.class);
+                    if (service != null) {
+                        service.setServiceUID(snapshot.getKey());
+                    }
+                    serviceArrayList.add(service);
+                }
+
+
+                onServiceListener.onServiceList(serviceArrayList, true);
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                onServiceListener.onServiceList(null, false);
+
+            }
+        });
+
+    }
+
+
+
     //interface
     public interface OnSaloonListListner {
 
@@ -254,5 +290,12 @@ public class FireBaseHandler {
         public void onOrderListDownload(ArrayList<Order> orderArrayList, boolean isSuccessful);
 
     }
+
+    public interface OnServiceListener {
+        public void onSeviceUpload(boolean isSuccesful);
+
+        public void onServiceList(ArrayList<Service> serviceArrayList, boolean isSuccesful);
+    }
+
 
 }

@@ -31,6 +31,17 @@
         <item>hair smooth</item>
 
     </array>
+
+
+    <string-array name="service_sub_type">
+        <item>Hair Cut</item>
+        <item>Hair color</item>
+        <item>HAIR STRAIGHTENING</item>
+        <item>Hair SPA</item>
+        <item>Hair </item>
+
+    </string-array>
+
     <string name="title_activity_user_order_placement">UserOrderPlacementActivity</string>
 
 </resources>

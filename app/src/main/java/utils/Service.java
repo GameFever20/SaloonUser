@@ -19,7 +19,7 @@ public class Service implements Serializable ,Parcelable {
     String serviceDuration ;
     String serviceDescription ;
     String serviceTypeName ;
-    int serviceSubTypeName;
+    String serviceSubTypeName;
 
     int servicePrice;
     int serviceOfferPrice;
@@ -115,11 +115,11 @@ public class Service implements Serializable ,Parcelable {
     }
 
 
-    public int getServiceSubTypeName() {
+    public String getServiceSubTypeName() {
         return serviceSubTypeName;
     }
 
-    public void setServiceSubTypeName(int serviceSubTypeName) {
+    public void setServiceSubTypeName(String serviceSubTypeName) {
         this.serviceSubTypeName = serviceSubTypeName;
     }
 

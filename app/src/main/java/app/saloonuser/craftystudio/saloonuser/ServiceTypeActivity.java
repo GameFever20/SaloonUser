@@ -27,6 +27,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import utils.FireBaseHandler;
 import utils.Order;
 import utils.Saloon;
 import utils.Service;
@@ -88,15 +89,7 @@ public class ServiceTypeActivity extends AppCompatActivity {
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
 
-        serviceArrayList = createServiceList();
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(), serviceArrayList);
-
-        // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) findViewById(R.id.container);
-        mViewPager.setAdapter(mSectionsPagerAdapter);
-
-
-        tabLayout.setupWithViewPager(mViewPager);
+        //serviceArrayList = createServiceList();
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -112,8 +105,37 @@ public class ServiceTypeActivity extends AppCompatActivity {
         });
 
 
+        new FireBaseHandler().downloadServiceList(saloon.getSaloonUID(), 50, new FireBaseHandler.OnServiceListener() {
+            @Override
+            public void onSeviceUpload(boolean isSuccesful) {
+
+            }
+
+            @Override
+            public void onServiceList(ArrayList<Service> serviceArrayList, boolean isSuccesful) {
+
+                ServiceTypeActivity.this.serviceArrayList =serviceArrayList;
+                initializeActivity();
+
+            }
+        });
+
+
         //createServiceHashMap();
 
+
+    }
+
+
+    public void initializeActivity(){
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(), serviceArrayList);
+
+        // Set up the ViewPager with the sections adapter.
+        mViewPager = (ViewPager) findViewById(R.id.container);
+        mViewPager.setAdapter(mSectionsPagerAdapter);
+
+
+        tabLayout.setupWithViewPager(mViewPager);
 
     }
 
@@ -284,7 +306,7 @@ public class ServiceTypeActivity extends AppCompatActivity {
 
         public void createServiceHashMap(int serviceTypeIndex) {
 
-            String[] serviceTypeName = getResources().getStringArray(R.array.haircare_sub_type_list);
+            String[] serviceTypeName = getResources().getStringArray(R.array.service_sub_type);
 
 
             ArrayList<String> serviceSubTypeList = new ArrayList<String>();
