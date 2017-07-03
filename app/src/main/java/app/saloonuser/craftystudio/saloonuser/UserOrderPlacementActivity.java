@@ -1,7 +1,9 @@
 package app.saloonuser.craftystudio.saloonuser;
 
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -9,6 +11,7 @@ import android.os.SystemClock;
 import android.provider.Settings;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -37,8 +40,11 @@ public class UserOrderPlacementActivity extends AppCompatActivity {
     private int selectedHour;
     private int selectedMinute;
 
-    long bookingTime ;
+    long bookingTime;
 
+    boolean isOrderPlaced = false;
+
+    private ProgressDialog progressDialog;
 
 
     @Override
@@ -53,6 +59,8 @@ public class UserOrderPlacementActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        progressDialog = new ProgressDialog(this);
 
         showDateDialog();
 
@@ -71,7 +79,41 @@ public class UserOrderPlacementActivity extends AppCompatActivity {
         mOrderDateTextview = (TextView) findViewById(R.id.orderPlacement_bookingOrderDate_textview);
         mOrderTimeTextview = (TextView) findViewById(R.id.orderPlacement_bookingOrderTime_textview);
 
+        mOrderDateTextview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!isOrderPlaced) {
+                    showDateDialog();
+                }
+            }
+        });
 
+        mOrderTimeTextview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!isOrderPlaced) {
+                    showTimeDialog();
+                }
+            }
+        });
+
+
+    }
+
+    private void showInfoDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(false)
+                .setTitle("Time")
+                .setMessage("Select Appoinment date and time")
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        showDateDialog();
+                    }
+                });
+
+        // Create the AlertDialog object and return it
+        builder.create();
+        builder.show();
     }
 
     private void showDateDialog() {
@@ -99,8 +141,14 @@ public class UserOrderPlacementActivity extends AppCompatActivity {
                     cal.get(Calendar.DAY_OF_MONTH));
 
             datePicker.setCancelable(false);
-            datePicker.setTitle("Select the date");
-
+            datePicker.setTitle("Select appoinment date ");
+            datePicker.setCanceledOnTouchOutside(false);
+            datePicker.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                @Override
+                public void onCancel(DialogInterface dialog) {
+                    showDateDialog();
+                }
+            });
             datePicker.show();
 
         } catch (Exception e) {
@@ -113,7 +161,7 @@ public class UserOrderPlacementActivity extends AppCompatActivity {
 
         Toast.makeText(this, "Select order Time", Toast.LENGTH_SHORT).show();
 
-        Calendar calendar =Calendar.getInstance(TimeZone.getDefault());
+        Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
 
         TimePickerDialog timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
             @Override
@@ -124,20 +172,18 @@ public class UserOrderPlacementActivity extends AppCompatActivity {
 
                 Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
 
-                long currentTimeInMillis =calendar.getTimeInMillis();
+                long currentTimeInMillis = calendar.getTimeInMillis();
 
                 calendar.set(selectedyear, selectedMonth, selectedDay, selectedHour, selectedMinute, 0);
-                Date date =calendar.getTime();
+                Date date = calendar.getTime();
 
 
+                if ((date.getTime() - 3600000l) > currentTimeInMillis) {
 
-
-                if((date.getTime()-3600000l) >currentTimeInMillis){
-
-                    bookingTime =date.getTime();
+                    bookingTime = date.getTime();
 
                     placeOrder();
-                }else{
+                } else {
                     Toast.makeText(UserOrderPlacementActivity.this, "Order canot be placed for passed time", Toast.LENGTH_SHORT).show();
 
 
@@ -149,6 +195,15 @@ public class UserOrderPlacementActivity extends AppCompatActivity {
             }
         }, calendar.HOUR, calendar.MINUTE, false);
 
+        timePickerDialog.setCanceledOnTouchOutside(false);
+        timePickerDialog.setCancelable(false);
+        timePickerDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                showTimeDialog();
+            }
+        });
+        timePickerDialog.setTitle("Select appoinment time");
         timePickerDialog.show();
 
     }
@@ -161,13 +216,21 @@ public class UserOrderPlacementActivity extends AppCompatActivity {
         order.setOrderTime(Calendar.getInstance().getTimeInMillis());
 
         order.setOrderBookingTime(bookingTime);
-        Toast.makeText(this, "time " + checkTimeSelected(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "time " + checkTimeSelected(), Toast.LENGTH_SHORT).show();
+        if (!checkTimeSelected()){
+            showTimeDialog();
+            return;
+        }
+
+        showProgressDialog("Placing your order");
 
         new FireBaseHandler().uploadOrder(order, new FireBaseHandler.OnOrderListener() {
             @Override
             public void onOrderUpload(boolean isSuccessful) {
                 Toast.makeText(UserOrderPlacementActivity.this, "Order placed", Toast.LENGTH_SHORT).show();
                 updateUI(order);
+                closeProgressDialog();
+
             }
 
             @Override
@@ -192,13 +255,15 @@ public class UserOrderPlacementActivity extends AppCompatActivity {
     public void updateUI(Order order) {
 
 
+        isOrderPlaced = true;
+
         mSalooonNameTextview.setText(order.getSaloonName());
         mSaloonAddressTextview.setText(saloon.getSaloonAddress());
         mServiceListTextview.setText(order.resolveOrderServiceList());
-        mOrderTimeTextview.setText(selectedHour+":"+selectedMinute);
-        mOrderDateTextview.setText(selectedDay+"/"+selectedMonth+"/"+selectedyear);
+        mOrderTimeTextview.setText(selectedHour + ":" + selectedMinute);
+        mOrderDateTextview.setText(selectedDay + "/" + selectedMonth + "/" + selectedyear);
 
-        ServiceTypeActivity.CURRENTORDER =new Order();
+        ServiceTypeActivity.CURRENTORDER = new Order();
 
     }
 
@@ -206,7 +271,6 @@ public class UserOrderPlacementActivity extends AppCompatActivity {
 
         DatePicker datePicker = (DatePicker) findViewById(R.id.orderPlacement_bookingDate_datePicker);
         TimePicker timePicker = (TimePicker) findViewById(R.id.orderPlacement_bookingTime_timePicker);
-
 
 
         Calendar calendar = Calendar.getInstance();
@@ -229,7 +293,6 @@ public class UserOrderPlacementActivity extends AppCompatActivity {
     public boolean checkTimeSelected() {
 
 
-
         if (selectedHour > saloon.getClosingTimeHour() || selectedHour < saloon.getOpeningTimeHour()) {
 
             return false;
@@ -239,12 +302,35 @@ public class UserOrderPlacementActivity extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        if (isOrderPlaced) {
+            Intent intent = new Intent(UserOrderPlacementActivity.this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            finish();
+        }
+    }
+
 
     public void completeOrderButtonClick(View view) {
 
-        Intent intent =new Intent(UserOrderPlacementActivity.this , MainActivity.class);
+        Intent intent = new Intent(UserOrderPlacementActivity.this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         finish();
     }
+
+    public void showProgressDialog(String message) {
+        progressDialog.setMessage(message);
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+    }
+
+    public void closeProgressDialog() {
+        progressDialog.dismiss();
+    }
+
 }

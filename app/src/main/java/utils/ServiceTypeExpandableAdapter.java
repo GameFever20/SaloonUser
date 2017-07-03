@@ -130,7 +130,7 @@ public class ServiceTypeExpandableAdapter extends BaseExpandableListAdapter {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-                Toast.makeText(mContext, "service" + service.getServiceName() + " , " + service.getServiceType(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(mContext, "service" + service.getServiceName() + " , " + service.getServiceType(), Toast.LENGTH_SHORT).show();
 
                 if (isChecked) {
                     ServiceTypeActivity.CURRENTORDER.getOrderServiceIDList().put(service.getServiceUID(), service.getServiceName());
