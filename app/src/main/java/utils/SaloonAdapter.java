@@ -1,6 +1,8 @@
 package utils;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,7 +25,9 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
+import app.saloonuser.craftystudio.saloonuser.MainActivity;
 import app.saloonuser.craftystudio.saloonuser.R;
+import app.saloonuser.craftystudio.saloonuser.SaloonDetailActivity;
 
 import static app.saloonuser.craftystudio.saloonuser.R.id.imageView;
 
@@ -51,7 +55,7 @@ public class SaloonAdapter extends RecyclerView.Adapter<SaloonAdapter.SaloonView
     @Override
     public void onBindViewHolder(SaloonAdapter.SaloonViewHolder holder, int position) {
 
-        Saloon saloon = saloonArrayList.get(position);
+        final Saloon saloon = saloonArrayList.get(position);
         holder.saloonNameTextView.setText(saloon.getSaloonName());
         holder.saloonOpeningTimeTextView.setText(saloon.getOpeningTimeHour() + ":" + saloon.getOpeningTimeMinute());
         holder.saloonClosingTimeTextView.setText(saloon.getClosingTimeHour() + ":" + saloon.getClosingTimeMinute());
@@ -87,6 +91,18 @@ public class SaloonAdapter extends RecyclerView.Adapter<SaloonAdapter.SaloonView
                         .into(holder.saloonProfileImage);
             }
         }
+
+
+        holder.saloonServiceBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, SaloonDetailActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("Saloon_Class", saloon);
+                intent.putExtras(bundle);
+                context.startActivity(intent);
+            }
+        });
 
 
     }

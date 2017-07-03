@@ -26,14 +26,14 @@ import static android.content.ContentValues.TAG;
 
 public class ServiceTypeExpandableAdapter extends BaseExpandableListAdapter {
 
-    HashMap<String ,ArrayList<utils.Service>> mServiceHashMap ;
-    ArrayList<String> mServiceSubType ;
-    Context mContext ;
+    HashMap<String, ArrayList<utils.Service>> mServiceHashMap;
+    ArrayList<String> mServiceSubType;
+    Context mContext;
 
-    public ServiceTypeExpandableAdapter(HashMap<String ,ArrayList<utils.Service>> serviceHashMap , ArrayList<String> serviceSubType , Context context) {
-        mServiceHashMap =serviceHashMap;
-        mServiceSubType =serviceSubType;
-        mContext =context;
+    public ServiceTypeExpandableAdapter(HashMap<String, ArrayList<utils.Service>> serviceHashMap, ArrayList<String> serviceSubType, Context context) {
+        mServiceHashMap = serviceHashMap;
+        mServiceSubType = serviceSubType;
+        mContext = context;
 
 
     }
@@ -72,6 +72,7 @@ public class ServiceTypeExpandableAdapter extends BaseExpandableListAdapter {
     public boolean hasStableIds() {
         return false;
     }
+
     @Override
     public boolean isChildSelectable(int groupPosition, int childPosition) {
         return true;
@@ -110,49 +111,52 @@ public class ServiceTypeExpandableAdapter extends BaseExpandableListAdapter {
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         convertView = infalInflater.inflate(R.layout.servicetype_adapter_child_row, null);
 
-            TextView serviceNameTextview = (TextView) convertView
-                    .findViewById(R.id.serviceType_adapter_child_subType_textview);
+        TextView serviceNameTextview = (TextView) convertView
+                .findViewById(R.id.serviceType_adapter_child_subType_textview);
+        TextView serviceSubTypePriceTextview = (TextView) convertView.findViewById(R.id.serviceType_adapter_child_subTypeprice_textview);
 
-            serviceNameTextview.setText(service.getServiceName());
+        serviceSubTypePriceTextview.setText(service.getServicePrice());
 
-            CheckBox checkBox = (CheckBox) convertView.findViewById(R.id.serviceType_adapter_child_subType_checkBox);
+        serviceNameTextview.setText(service.getServiceName());
+
+        CheckBox checkBox = (CheckBox) convertView.findViewById(R.id.serviceType_adapter_child_subType_checkBox);
 
 
-        if (service.isSelected()){
+        if (service.isSelected()) {
             checkBox.setChecked(true);
         }
 
-            checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-                    Toast.makeText(mContext, "service" + service.getServiceName() + " , " + service.getServiceType(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "service" + service.getServiceName() + " , " + service.getServiceType(), Toast.LENGTH_SHORT).show();
 
-                    if (isChecked) {
-                        ServiceTypeActivity.CURRENTORDER.getOrderServiceIDList().put(service.getServiceUID(), service.getServiceName());
+                if (isChecked) {
+                    ServiceTypeActivity.CURRENTORDER.getOrderServiceIDList().put(service.getServiceUID(), service.getServiceName());
 
-                        ServiceTypeActivity.CURRENTORDER.setOrderPrice(ServiceTypeActivity.CURRENTORDER.getOrderPrice()+service.getServicePrice());
-                        ServiceTypeActivity.CURRENTORDER.setOrderTotalServiceCount(ServiceTypeActivity.CURRENTORDER.getOrderTotalServiceCount()+1);
+                    ServiceTypeActivity.CURRENTORDER.setOrderPrice(ServiceTypeActivity.CURRENTORDER.getOrderPrice() + service.getServicePrice());
+                    ServiceTypeActivity.CURRENTORDER.setOrderTotalServiceCount(ServiceTypeActivity.CURRENTORDER.getOrderTotalServiceCount() + 1);
 
-                        service.setSelected(true);
+                    service.setSelected(true);
 
-                        ServiceTypeActivity.updateOrderDetail();
+                    ServiceTypeActivity.updateOrderDetail();
 
 
-                    } else {
-                        ServiceTypeActivity.CURRENTORDER.getOrderServiceIDList().remove(service.getServiceUID());
-                        ServiceTypeActivity.CURRENTORDER.setOrderPrice(ServiceTypeActivity.CURRENTORDER.getOrderPrice()-service.getServicePrice());
-                        ServiceTypeActivity.CURRENTORDER.setOrderTotalServiceCount(ServiceTypeActivity.CURRENTORDER.getOrderTotalServiceCount()-1);
+                } else {
+                    ServiceTypeActivity.CURRENTORDER.getOrderServiceIDList().remove(service.getServiceUID());
+                    ServiceTypeActivity.CURRENTORDER.setOrderPrice(ServiceTypeActivity.CURRENTORDER.getOrderPrice() - service.getServicePrice());
+                    ServiceTypeActivity.CURRENTORDER.setOrderTotalServiceCount(ServiceTypeActivity.CURRENTORDER.getOrderTotalServiceCount() - 1);
 
-                        service.setSelected(false);
+                    service.setSelected(false);
 
-                        ServiceTypeActivity.updateOrderDetail();
-                    }
-
-                    Log.d(TAG, "onCheckedChanged: " + ServiceTypeActivity.CURRENTORDER.getOrderServiceIDList());
-
+                    ServiceTypeActivity.updateOrderDetail();
                 }
-            });
+
+                Log.d(TAG, "onCheckedChanged: " + ServiceTypeActivity.CURRENTORDER.getOrderServiceIDList());
+
+            }
+        });
 
 
         return convertView;

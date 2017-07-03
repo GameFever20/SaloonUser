@@ -318,7 +318,7 @@ public class ServiceTypeActivity extends AppCompatActivity {
 
         public void createServiceHashMap(int serviceTypeIndex) {
 
-            String[] serviceTypeName = getResources().getStringArray(R.array.service_sub_type);
+            String[] serviceTypeName = getResources().getStringArray(R.array.haircare_service_sub_type);
 
 
             ArrayList<String> serviceSubTypeList = new ArrayList<String>();
@@ -331,6 +331,7 @@ public class ServiceTypeActivity extends AppCompatActivity {
                 serviceHashMap.put(serviceSubTypeName, new ArrayList<Service>());
 
             }
+
 
 
             for (Service service : mServiceArrayList) {
@@ -375,7 +376,7 @@ public class ServiceTypeActivity extends AppCompatActivity {
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 3;
+            return 6;
         }
 
         @Override
@@ -384,9 +385,15 @@ public class ServiceTypeActivity extends AppCompatActivity {
                 case 0:
                     return "Hair Care";
                 case 1:
-                    return "Spa";
+                    return "Skin Care";
                 case 2:
-                    return "Body care";
+                    return "MANICURE";
+                case 3:
+                    return "Body Scrub";
+                case 4:
+                    return "MASSAGES";
+                case 5:
+                    return "Make up";
             }
             return null;
         }
