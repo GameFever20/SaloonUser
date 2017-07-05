@@ -39,7 +39,7 @@
                     android:layout_marginRight="7dp"
                     android:layout_marginTop="10dp"
                     android:fontFamily="serif"
-                    android:text="PROFIlE"
+                    android:text="PROFILE"
 
                     android:textAlignment="center"
                     android:textColor="@color/colorPrimary"

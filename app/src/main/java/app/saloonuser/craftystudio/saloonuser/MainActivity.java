@@ -140,7 +140,7 @@ public class MainActivity extends AppCompatActivity
                                                                   //  Toast.makeText(MainActivity.this, "Refreshing", Toast.LENGTH_SHORT).show();
 
                                                               } else {
-                                                                  Toast.makeText(MainActivity.this, "Loading", Toast.LENGTH_SHORT).show();
+                                                                 // Toast.makeText(MainActivity.this, "Loading", Toast.LENGTH_SHORT).show();
 
                                                               }
                                                           }
@@ -171,7 +171,7 @@ public class MainActivity extends AppCompatActivity
                         intent.putExtras(bundle);
                         startActivity(intent);
                         */
-                        Toast.makeText(MainActivity.this, "Click", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(MainActivity.this, "Click", Toast.LENGTH_SHORT).show();
 
                     }
 
@@ -302,9 +302,10 @@ public class MainActivity extends AppCompatActivity
 
 
         } else if (id == R.id.nav_share) {
+            Toast.makeText(this, "Link to share app", Toast.LENGTH_SHORT).show();
 
         } else if (id == R.id.nav_send) {
-
+            Toast.makeText(this, "Link to share app", Toast.LENGTH_SHORT).show();
 
         }
 
