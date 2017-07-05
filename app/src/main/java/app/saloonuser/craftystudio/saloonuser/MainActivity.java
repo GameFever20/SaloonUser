@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.util.Pair;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.transition.Explode;
@@ -20,6 +21,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 import android.widget.Toast;
+
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -52,6 +56,7 @@ public class MainActivity extends AppCompatActivity
 
     Saloon saloon;
 
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +64,7 @@ public class MainActivity extends AppCompatActivity
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
 
@@ -110,7 +115,7 @@ public class MainActivity extends AppCompatActivity
     private void downloadingSaloonList() {
 
         //calling download saloon list
-        fireBaseHandler.downloadSaloonList(20, new FireBaseHandler.OnSaloonListListner() {
+        fireBaseHandler.downloadSaloonList(30, new FireBaseHandler.OnSaloonListListner() {
             @Override
             public void onSaloonList(ArrayList<Saloon> saloonArrayList) {
 
@@ -124,6 +129,14 @@ public class MainActivity extends AppCompatActivity
                 //Reverse a arraylist
                 Collections.reverse(mSaloonArraylist);
                 mAdapter.notifyDataSetChanged();
+
+
+                //animate toolbar
+                YoYo.with(Techniques.BounceIn)
+                        .duration(1000)
+                        .repeat(1)
+                        .playOn(toolbar);
+
 
                 //loading more
                 mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -140,7 +153,7 @@ public class MainActivity extends AppCompatActivity
                                                                   //  Toast.makeText(MainActivity.this, "Refreshing", Toast.LENGTH_SHORT).show();
 
                                                               } else {
-                                                                 // Toast.makeText(MainActivity.this, "Loading", Toast.LENGTH_SHORT).show();
+                                                                  // Toast.makeText(MainActivity.this, "Loading", Toast.LENGTH_SHORT).show();
 
                                                               }
                                                           }
@@ -157,11 +170,12 @@ public class MainActivity extends AppCompatActivity
 
 
                         //animation
+                        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this);
                         Intent intent = new Intent(MainActivity.this, SaloonDetailActivity.class);
                         Bundle bundle = new Bundle();
                         bundle.putSerializable("Saloon_Class", saloon);
                         intent.putExtras(bundle);
-                        startActivity(intent);
+                        startActivity(intent, options.toBundle());
 
                         //calling new activity having orders of particular saloon
                        /*

@@ -11,6 +11,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
+
 import org.w3c.dom.Text;
 
 import utils.FireBaseHandler;
@@ -63,9 +66,22 @@ public class UserProfileActivity extends AppCompatActivity {
                         if (user.getUserName() != null) {
                             if (user.getUserName().isEmpty()) {
                                 mAddServiceButton.setVisibility(View.VISIBLE);
+                                //animate Button
+                                YoYo.with(Techniques.Shake)
+                                        .duration(1000)
+                                        .repeat(1)
+                                        .playOn(mAddServiceButton);
+
+
                             }
                         } else {
                             mAddServiceButton.setVisibility(View.VISIBLE);
+                            //animate Button
+                            YoYo.with(Techniques.Shake)
+                                    .duration(1000)
+                                    .repeat(1)
+                                    .playOn(mAddServiceButton);
+
                         }
                     } else {
                         user = LoginActivity.USER;

@@ -40,6 +40,8 @@ public class SaloonAdapter extends RecyclerView.Adapter<SaloonAdapter.SaloonView
     private ArrayList<Saloon> saloonArrayList;
     Context context;
 
+    int previousPosition=0;
+
 
     public SaloonAdapter(ArrayList<Saloon> saloonArrayList, Context context) {
         this.saloonArrayList = saloonArrayList;
@@ -67,8 +69,8 @@ public class SaloonAdapter extends RecyclerView.Adapter<SaloonAdapter.SaloonView
         StorageReference storageRef = storage.getReference();
         StorageReference storageReference = storageRef.child("saloon_image/" + saloon.getSaloonUID() + "/" + "profile_image");
 
-        //Display image
 
+        //Display image
         if (saloon.getSaloonImageList() != null) {
             if (saloon.getSaloonImageList().containsKey("profile_image")) {
                 Glide.with(context)
@@ -94,7 +96,16 @@ public class SaloonAdapter extends RecyclerView.Adapter<SaloonAdapter.SaloonView
         }
 
 
+        //getting position to know about moving up or down
+        if (position > previousPosition) {//we are going Down
 
+            AnimationUtil.animate(holder,true);
+
+        } else { //we are going UP
+            AnimationUtil.animate(holder,false);
+
+        }
+        previousPosition = position;
 
 
     }

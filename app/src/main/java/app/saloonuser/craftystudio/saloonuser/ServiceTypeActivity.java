@@ -27,6 +27,9 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -157,6 +160,11 @@ public class ServiceTypeActivity extends AppCompatActivity {
     public static void updateOrderDetail() {
 
         mPriceNServiceTextview.setText(CURRENTORDER.getOrderPrice() + " and " + CURRENTORDER.getOrderTotalServiceCount());
+
+        YoYo.with(Techniques.Swing)
+                .duration(1000)
+                .repeat(2)
+                .playOn(mPriceNServiceTextview);
 
     }
 

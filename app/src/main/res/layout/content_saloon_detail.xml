@@ -26,9 +26,11 @@
                 android:id="@+id/saloon_detail_profileimage_imageview"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
-                android:scaleType="centerCrop"
                 android:onClick="openImageDisplayActivity"
+                android:scaleType="centerCrop"
                 android:src="@drawable/parlourimage"
+                android:transitionName="profile_image_shared"
+
 
                 />
 
@@ -64,7 +66,10 @@
                             android:text="Saloon Name "
                             android:textColor="@color/colorPrimary"
                             android:textSize="22dp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            android:transitionName="saloon_name_shared"
+
+                            />
 
                         <TextView
                             android:id="@+id/saloon_detail_rating_textview"
@@ -94,7 +99,8 @@
                         android:text="Saloon Address "
                         android:textColor="@color/grey"
                         android:textSize="15dp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:transitionName=" saloon_address_shared" />
 
                 </LinearLayout>
 
@@ -141,8 +147,8 @@
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:layout_margin="5dp"
-                        android:scaleType="centerCrop"
                         android:onClick="openImageDisplayActivity"
+                        android:scaleType="centerCrop"
                         android:src="@drawable/saloonshopicon" />
 
                     <ImageView
@@ -160,8 +166,8 @@
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:layout_margin="5dp"
-                        android:scaleType="centerCrop"
                         android:onClick="openImageDisplayActivity"
+                        android:scaleType="centerCrop"
                         android:src="@drawable/saloonshopicon" />
 
                     <ImageView
@@ -178,8 +184,8 @@
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:layout_margin="5dp"
-                        android:scaleType="centerCrop"
                         android:onClick="openImageDisplayActivity"
+                        android:scaleType="centerCrop"
                         android:src="@drawable/saloonshopicon" />
 
                 </LinearLayout>
