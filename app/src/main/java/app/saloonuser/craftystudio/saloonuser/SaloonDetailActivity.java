@@ -8,7 +8,11 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.transition.Explode;
+import android.transition.Slide;
+import android.view.Gravity;
 import android.view.View;
+import android.view.animation.GridLayoutAnimationController;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -47,6 +51,7 @@ public class SaloonDetailActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         saloon = (Saloon) bundle.getSerializable("Saloon_Class");
+
 
         SaloonUID = saloon.getSaloonUID();
 
@@ -242,12 +247,15 @@ public class SaloonDetailActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+
         super.onBackPressed();
+        finishAfterTransition();
     }
 
     @Override
     public boolean onSupportNavigateUp() {
-        onBackPressed();
+        finishAfterTransition();
+       // onBackPressed();
         return true;
     }
 
