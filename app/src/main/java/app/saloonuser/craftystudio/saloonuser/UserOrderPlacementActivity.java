@@ -212,6 +212,9 @@ public class UserOrderPlacementActivity extends AppCompatActivity {
     private void placeOrder() {
         final Order order = ServiceTypeActivity.CURRENTORDER;
         order.setUserID(LoginActivity.USER.getUserUID());
+        order.setUserPhoneNumber(LoginActivity.USER.getUserPhoneNumber());
+        order.setUserName(LoginActivity.USER.getUserName());
+
 
         order.setOrderStatus(1);
         order.setOrderTime(Calendar.getInstance().getTimeInMillis());
