@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -33,6 +34,7 @@ import utils.FireBaseHandler;
 import utils.RecyclerTouchListener;
 import utils.Saloon;
 import utils.SaloonAdapter;
+import utils.User;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -57,6 +59,8 @@ public class MainActivity extends AppCompatActivity
     Saloon saloon;
 
     Toolbar toolbar;
+
+    User user =LoginActivity.USER;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,6 +114,12 @@ public class MainActivity extends AppCompatActivity
         downloadingSaloonList();
 
 
+        subscribeToTopic();
+
+    }
+
+    private void subscribeToTopic() {
+        FirebaseMessaging.getInstance().subscribeToTopic("user_"+user.getUserUID());
     }
 
     private void downloadingSaloonList() {
