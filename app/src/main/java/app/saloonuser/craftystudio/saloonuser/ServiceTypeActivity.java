@@ -1,7 +1,9 @@
 package app.saloonuser.craftystudio.saloonuser;
 
+import android.app.ActivityOptions;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
@@ -13,12 +15,17 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.transition.Explode;
+import android.transition.Slide;
+import android.transition.Visibility;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ExpandableListView;
@@ -59,7 +66,6 @@ public class ServiceTypeActivity extends AppCompatActivity {
     TabLayout tabLayout;
 
 
-
     //static HashMap<String, ArrayList<Service>> mServiceHashMap = new HashMap<>();
     //static ArrayList<String> mServiceSubType = new ArrayList<>();
 
@@ -73,14 +79,23 @@ public class ServiceTypeActivity extends AppCompatActivity {
 
     private ProgressDialog progressDialog;
 
+    AppBarLayout appBarLayout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        //getting window component
+        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_service_type);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        appBarLayout = (AppBarLayout) findViewById(R.id.appbar);
+
 
 
         try {
@@ -129,6 +144,13 @@ public class ServiceTypeActivity extends AppCompatActivity {
 
             @Override
             public void onServiceList(ArrayList<Service> serviceArrayList, boolean isSuccesful) {
+
+                //animate app bar in service activity
+                YoYo.with(Techniques.StandUp)
+                        .duration(1000)
+                        .repeat(1)
+                        .playOn(appBarLayout);
+
 
                 ServiceTypeActivity.this.serviceArrayList = serviceArrayList;
                 initializeActivity();
@@ -260,23 +282,39 @@ public class ServiceTypeActivity extends AppCompatActivity {
     }
 
 
-    public void proceedOrderPlacement(View view) {
+    public void proceedOrderPlacement(View view) throws InterruptedException {
         boolean isServiceSelected = false;
         for (String service : CURRENTORDER.getOrderServiceIDList().values()) {
             isServiceSelected = true;
+
+           /*
+            //animate toolbar
+            YoYo.with(Techniques.SlideOutRight)
+                    .duration(300)
+                    .repeat(1)
+                    .playOn(view);
+            */
+
             break;
         }
 
         if (!isServiceSelected) {
             Toast.makeText(this, " Add Service to proceed", Toast.LENGTH_SHORT).show();
+            //animate toolbar
+            YoYo.with(Techniques.Shake)
+                    .duration(1000)
+                    .repeat(2)
+                    .playOn(view);
+
             return;
         }
 
+
+        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(ServiceTypeActivity.this);
         Intent intent = new Intent(ServiceTypeActivity.this, UserOrderPlacementActivity.class);
         intent.putExtra("Saloon", saloon);
-        startActivity(intent);
+        startActivity(intent, options.toBundle());
     }
-
 
 
     public void showProgressDialog(String message) {
@@ -288,7 +326,6 @@ public class ServiceTypeActivity extends AppCompatActivity {
     public void closeProgressDialog() {
         progressDialog.dismiss();
     }
-
 
 
     /**
@@ -361,7 +398,7 @@ public class ServiceTypeActivity extends AppCompatActivity {
         public void createServiceHashMap(int serviceTypeIndex) {
 
 
-            String[] serviceTypeName ;
+            String[] serviceTypeName;
 
             switch (serviceTypeIndex) {
                 case 1:

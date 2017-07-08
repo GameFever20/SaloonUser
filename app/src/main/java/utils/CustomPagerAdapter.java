@@ -1,15 +1,21 @@
 package utils;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -24,13 +30,6 @@ import static app.saloonuser.craftystudio.saloonuser.SaloonDetailActivity.Saloon
 
 public class CustomPagerAdapter extends PagerAdapter {
 
-    int[] mResources = {
-            R.drawable.malecolor,
-            R.drawable.female_copy,
-            R.drawable.malecolor,
-            R.drawable.femalecolor,
-
-    };
 
     Context mContext;
     LayoutInflater mLayoutInflater;
@@ -60,6 +59,26 @@ public class CustomPagerAdapter extends PagerAdapter {
         View itemView = mLayoutInflater.inflate(R.layout.pager_item, container, false);
 
         ImageView imageView = (ImageView) itemView.findViewById(R.id.slideimageView);
+
+
+        //animate shake in Saloon Name
+        YoYo.with(Techniques.Bounce)
+                .duration(3000)
+                .repeat(ValueAnimator.INFINITE)
+                 .playOn(imageView);
+
+
+        /*
+        AnimatorSet animationSet = new AnimatorSet();
+
+        //Translating Details_Card in Y Scale
+        ObjectAnimator card_y = ObjectAnimator.ofFloat(imageView, View.TRANSLATION_Y, 70);
+        card_y.setDuration(2500);
+        card_y.setRepeatMode(ValueAnimator.REVERSE);
+        card_y.setRepeatCount(ValueAnimator.INFINITE);
+        card_y.setInterpolator(new LinearInterpolator());
+
+*/
 
         if (saloon.getSaloonImageList() != null) {
 

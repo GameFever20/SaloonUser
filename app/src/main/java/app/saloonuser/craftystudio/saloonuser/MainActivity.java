@@ -10,6 +10,7 @@ import android.support.v4.util.Pair;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.transition.Explode;
+import android.transition.Visibility;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -141,8 +142,9 @@ public class MainActivity extends AppCompatActivity
                 mAdapter.notifyDataSetChanged();
 
 
+
                 //animate toolbar
-                YoYo.with(Techniques.BounceIn)
+                YoYo.with(Techniques.BounceInDown)
                         .duration(1000)
                         .repeat(1)
                         .playOn(toolbar);
@@ -180,7 +182,11 @@ public class MainActivity extends AppCompatActivity
 
 
                         //animation
-                        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this);
+                       // ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this);
+
+                        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this, android.util.Pair.create(view,"profile_image_shared"));
+
+
                         Intent intent = new Intent(MainActivity.this, SaloonDetailActivity.class);
                         Bundle bundle = new Bundle();
                         bundle.putSerializable("Saloon_Class", saloon);
@@ -314,15 +320,17 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_profile) {
+            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this);
             Intent intent = new Intent(MainActivity.this, UserProfileActivity.class);
-            startActivity(intent);
+            startActivity(intent,options.toBundle());
 
             // Handle the camera action
 
 
         } else if (id == R.id.nav_order) {
+            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this);
             Intent intent = new Intent(MainActivity.this, UserOrderActivity.class);
-            startActivity(intent);
+            startActivity(intent,options.toBundle());
 
 
         } else if (id == R.id.nav_share) {

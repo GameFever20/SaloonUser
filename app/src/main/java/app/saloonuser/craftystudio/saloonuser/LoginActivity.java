@@ -9,13 +9,20 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.transition.Explode;
+import android.transition.Visibility;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.animation.Interpolator;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
@@ -80,9 +87,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     String mPhoneNumber = "";
     private ProgressDialog progressDialog;
 
+    private ImageView mLoginBG;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        //getting window component
+        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
@@ -90,6 +102,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if (savedInstanceState != null) {
             onRestoreInstanceState(savedInstanceState);
         }
+
+        //animation
+        final Explode explode = new Explode();
+        explode.setDuration(700);
+        explode.setMode(Visibility.MODE_IN);
+        getWindow().setEnterTransition(explode);
 
 
         progressDialog = new ProgressDialog(this);
@@ -100,6 +118,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         mStatusText = (TextView) findViewById(R.id.loginActivity_status_textView);
         mHeadingText = (TextView) findViewById(R.id.loginActivity_heading_textview);
+        mLoginBG = (ImageView) findViewById(R.id.mLoginBg);
         //mDetailText = (TextView) findViewById(R.id.detail);
 
         mPhoneNumberField = (EditText) findViewById(R.id.field_phone_number);
@@ -114,6 +133,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mStartButton.setOnClickListener(this);
         mVerifyButton.setOnClickListener(this);
         mResendTextview.setOnClickListener(this);
+
+
+        //animate shake in LoginBg
+        YoYo.with(Techniques.ZoomIn)
+                .duration(1000)
+                .repeat(1)
+                .playOn(mLoginBG);
 
 
         //mSignOutButton.setOnClickListener(this);
@@ -459,6 +485,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private boolean validatePhoneNumber() {
         String phoneNumber = mPhoneNumberField.getText().toString();
         if (TextUtils.isEmpty(phoneNumber)) {
+
+            //animate shake in EditText
+            YoYo.with(Techniques.Shake)
+                    .duration(1000)
+                    .repeat(1)
+                    .playOn(mPhoneNumberField);
+
             mPhoneNumberField.setError("Invalid phone number.");
             return false;
         }
@@ -493,6 +526,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.button_verify_phone:
                 String code = mVerificationField.getText().toString();
                 if (TextUtils.isEmpty(code)) {
+                    //animate shake in EditText
+                    YoYo.with(Techniques.Shake)
+                            .duration(1000)
+                            .repeat(1)
+                            .playOn(mVerificationField);
+
                     mVerificationField.setError("Cannot be empty.");
                     return;
                 }

@@ -56,7 +56,7 @@ public class SaloonDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         //getting window component
-         getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_saloon_detail);
@@ -79,10 +79,12 @@ public class SaloonDetailActivity extends AppCompatActivity {
         getWindow().setEnterTransition(explode);
         */
 
+        /*
         Slide slide = new Slide();
         slide.setDuration(250);
         slide.setSlideEdge(Gravity.TOP);
         getWindow().setEnterTransition(slide);
+        */
 
 
         SaloonUID = saloon.getSaloonUID();

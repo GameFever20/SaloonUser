@@ -20,10 +20,12 @@ public class ImageActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //getting window component
-          getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image);
+
+        getSupportActionBar().hide();
 
 
         Intent intent = getIntent();

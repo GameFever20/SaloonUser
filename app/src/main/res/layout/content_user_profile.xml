@@ -82,7 +82,7 @@
                         android:layout_height="100dp"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="10dp"
-                        android:src="@drawable/malefinal" />
+                        />
 
                     <TextView
                         android:layout_width="match_parent"
