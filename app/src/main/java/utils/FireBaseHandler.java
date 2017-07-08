@@ -90,6 +90,10 @@ public class FireBaseHandler {
 
     }
 
+
+
+
+
     public void downloadMoreSaloonList(int limit, int lastSaloonPoint, final OnSaloonListListner onSaloonListListner) {
 
         DatabaseReference myRef = mFirebaseDatabase.getReference().child("saloon");
@@ -224,6 +228,37 @@ public class FireBaseHandler {
     }
 
 
+    public void downloadOrder(String userUID ,String orderID, final OnOrderListener onOrderListener) {
+
+        DatabaseReference myRef = mFirebaseDatabase.getReference().child("userOrders/" + userUID+"/"+orderID);
+
+
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+
+
+
+
+                    Order order = dataSnapshot.getValue(Order.class);
+                    order.setOrderID(dataSnapshot.getKey());
+
+                onOrderListener.onOrderDownload(order ,true);
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                onOrderListener.onOrderDownload(null ,false);
+
+            }
+        });
+
+    }
+
+
+
     public void downloadServiceList(String saloonUID, int limitTo, final OnServiceListener onServiceListener) {
 
         DatabaseReference myRef = mFirebaseDatabase.getReference().child("services/");
@@ -259,7 +294,7 @@ public class FireBaseHandler {
     }
 
 
-    public void uploadRating(String orderID , final CustomRating customRating , final OnRatingListener onRatingListener){
+    public void uploadRating( final CustomRating customRating , final OnRatingListener onRatingListener){
 
         if (customRating.getSaloonPoint()<10){
             return;
@@ -289,6 +324,31 @@ public class FireBaseHandler {
             }
         });
     }
+
+    public void downloadRating(Order order , final OnRatingListener onRatingListener){
+
+
+        DatabaseReference myRef = mFirebaseDatabase.getReference().child("rating/" + order.getOrderID());
+
+
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                CustomRating customRating = (CustomRating) dataSnapshot.getValue();
+
+                onRatingListener.onRatingDownload(customRating, true);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                onRatingListener.onRatingDownload(null, false);
+
+            }
+        });
+
+
+    }
+
 
     //interface
     public interface OnSaloonListListner {
@@ -331,6 +391,7 @@ public class FireBaseHandler {
 
     public interface OnRatingListener{
         public void onRatingUploaded(CustomRating customRating , boolean isSuccessful);
+        public void onRatingDownload(CustomRating customRating ,boolean isSuccessful);
     }
 
 

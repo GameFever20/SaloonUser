@@ -60,7 +60,7 @@ public class SaloonAdapter extends RecyclerView.Adapter<SaloonAdapter.SaloonView
         holder.saloonOpeningTimeTextView.setText(saloon.getOpeningTimeHour() + ":" + saloon.getOpeningTimeMinute());
         holder.saloonClosingTimeTextView.setText(saloon.getClosingTimeHour() + ":" + saloon.getClosingTimeMinute());
         holder.saloonAddressTextView.setText(saloon.getSaloonAddress());
-        holder.saloonRatingTextView.setText(saloon.getSaloonRating() + "");
+        holder.saloonRatingTextView.setText(saloon.getSaloonTotalRating() + "");
 
         //firebase storage connection
         FirebaseStorage storage = FirebaseStorage.getInstance();

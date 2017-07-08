@@ -110,7 +110,7 @@ public class SaloonDetailActivity extends AppCompatActivity {
         }
         mSaloonDetailOpeningTimeTv.setText(mSaloonDetailOpeningTimeTv.getText() + " " + saloon.getOpeningTimeHour() + m);
         mSaloonDetailClosingTimeTv.setText(mSaloonDetailClosingTimeTv.getText() + " " + saloon.getClosingTimeHour() + p);
-        mSaloonDetailRatingTv.setText(saloon.getSaloonRating() + "");
+        mSaloonDetailRatingTv.setText(saloon.getSaloonTotalRating() + "");
         lattitude = saloon.getSaloonLocationLatitude();
         longitute = saloon.getSaloonLocationLongitude();
         setSaloonImages();
