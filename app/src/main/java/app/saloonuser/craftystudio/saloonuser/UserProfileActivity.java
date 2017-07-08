@@ -6,10 +6,16 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.transition.Explode;
+import android.transition.Visibility;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 
 import org.w3c.dom.Text;
 
@@ -25,11 +31,29 @@ public class UserProfileActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        //getting window component
+        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+        //animation
+        final Explode explode = new Explode();
+        explode.setDuration(700);
+        explode.setMode(Visibility.MODE_IN);
+        getWindow().setEnterTransition(explode);
+        getWindow().setAllowEnterTransitionOverlap(true);
+
+        //animate shake in ToolBar
+        YoYo.with(Techniques.DropOut)
+                .duration(1000)
+                .repeat(1)
+                .playOn(toolbar);
 
 
         //views
@@ -63,9 +87,22 @@ public class UserProfileActivity extends AppCompatActivity {
                         if (user.getUserName() != null) {
                             if (user.getUserName().isEmpty()) {
                                 mAddServiceButton.setVisibility(View.VISIBLE);
+                                //animate Button
+                                YoYo.with(Techniques.Shake)
+                                        .duration(1000)
+                                        .repeat(1)
+                                        .playOn(mAddServiceButton);
+
+
                             }
                         } else {
                             mAddServiceButton.setVisibility(View.VISIBLE);
+                            //animate Button
+                            YoYo.with(Techniques.Shake)
+                                    .duration(1000)
+                                    .repeat(1)
+                                    .playOn(mAddServiceButton);
+
                         }
                     } else {
                         user = LoginActivity.USER;
@@ -107,9 +144,16 @@ public class UserProfileActivity extends AppCompatActivity {
         if (user.getUserGender() != null) {
             if (user.getUserGender().equalsIgnoreCase("Male")) {
                 mUserProfileImage.setImageResource(R.drawable.malefinal);
+
             } else {
                 mUserProfileImage.setImageResource(R.drawable.female_copy);
             }
+            //animate shake in Saloon Name
+            YoYo.with(Techniques.DropOut)
+                    .duration(1000)
+                    .repeat(1)
+                    .playOn(mUserProfileImage);
+
         }
 
         mUserMobileNumber.setText(user.getUserPhoneNumber());
@@ -118,11 +162,14 @@ public class UserProfileActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        finishAfterTransition();
         super.onBackPressed();
+
     }
 
     @Override
     public boolean onSupportNavigateUp() {
+
         onBackPressed();
         return true;
     }

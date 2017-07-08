@@ -10,7 +10,10 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.transition.Explode;
+import android.transition.Visibility;
 import android.view.MenuItem;
+import android.view.Window;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,12 +44,28 @@ public class UserOrderActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        //getting window component
+        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_order);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+
+        //animation
+        Explode explode = new Explode();
+        explode.setDuration(1000);
+        explode.setMode(Visibility.MODE_IN);
+        getWindow().setEnterTransition(explode);
+        getWindow().setAllowEnterTransitionOverlap(true);
+
 
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
 
         mUserOrderRecyclerview = (RecyclerView) findViewById(R.id.userOrder_order_recyclerview);
 
@@ -76,12 +95,13 @@ public class UserOrderActivity extends AppCompatActivity {
 
                     closeProgressDialog();
 
-                    if (orderArrayList!=null && orderArrayList.size()>0) {
+
+                    if (orderArrayList != null && orderArrayList.size() > 0) {
                         Collections.reverse(orderArrayList);
                         mUserOrderArraylist = orderArrayList;
                         Toast.makeText(UserOrderActivity.this, "Order fetched ", Toast.LENGTH_SHORT).show();
                         setBookingOrderList();
-                    }else{
+                    } else {
                         Toast.makeText(UserOrderActivity.this, "No Order ", Toast.LENGTH_SHORT).show();
                     }
 
@@ -122,11 +142,9 @@ public class UserOrderActivity extends AppCompatActivity {
                     setBookingOrderList();
                     return true;
                 case R.id.navigation_dashboard:
-
                     setPendingOrderList();
                     return true;
                 case R.id.navigation_notifications:
-
                     setCompletedOrderList();
                     return true;
             }
@@ -194,5 +212,17 @@ public class UserOrderActivity extends AppCompatActivity {
         progressDialog.dismiss();
     }
 
+    @Override
+    public void onBackPressed() {
+        finishAfterTransition();
+        super.onBackPressed();
 
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+
+        onBackPressed();
+        return true;
+    }
 }

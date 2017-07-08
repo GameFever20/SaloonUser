@@ -29,7 +29,8 @@ public class Order implements Serializable ,Parcelable{
 
     private long orderBookingTime ;
 
-    private String userName , userPhoneNumber;
+    private String userPhoneNumber;
+    private String userName ;
 
 
 
@@ -133,6 +134,13 @@ public class Order implements Serializable ,Parcelable{
         this.orderBookingTime = orderBookingTime;
     }
 
+    public String getUserPhoneNumber() {
+        return userPhoneNumber;
+    }
+
+    public void setUserPhoneNumber(String userPhoneNumber) {
+        this.userPhoneNumber = userPhoneNumber;
+    }
 
     public String getUserName() {
         return userName;
@@ -140,14 +148,6 @@ public class Order implements Serializable ,Parcelable{
 
     public void setUserName(String userName) {
         this.userName = userName;
-    }
-
-    public String getUserPhoneNumber() {
-        return userPhoneNumber;
-    }
-
-    public void setUserPhoneNumber(String userPhoneNumber) {
-        this.userPhoneNumber = userPhoneNumber;
     }
 
     public String resolveOrderStatus() {

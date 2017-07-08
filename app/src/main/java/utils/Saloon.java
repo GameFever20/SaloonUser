@@ -17,7 +17,9 @@ public class Saloon implements Serializable {
     private boolean saloonUpdated;
     private boolean saloonHirePhotographer;
     private String saloonUID = "";
-    private String saloonEmailID;
+
+    private String saloonEmailID ;
+
     private String saloonPhoneNumber;//input
     private String saloonAddress;//input
 
@@ -154,6 +156,9 @@ public class Saloon implements Serializable {
         return saloonEmailID;
     }
 
+    public void setSaloonEmailID(String saloonEmailID) {
+        this.saloonEmailID = saloonEmailID;
+    }
     public void setSaloonEmailID(String saloonEmailID) {
         this.saloonEmailID = saloonEmailID;
     }

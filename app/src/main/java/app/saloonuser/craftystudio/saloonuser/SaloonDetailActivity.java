@@ -1,5 +1,7 @@
 package app.saloonuser.craftystudio.saloonuser;
 
+import android.animation.Animator;
+import android.app.ActivityOptions;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
@@ -8,13 +10,26 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Layout;
+import android.transition.Explode;
+import android.transition.Slide;
+import android.transition.Visibility;
+import android.util.DisplayMetrics;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewAnimationUtils;
+import android.view.Window;
+import android.view.animation.GridLayoutAnimationController;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.animation.ViewPropertyAnimation;
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -35,8 +50,14 @@ public class SaloonDetailActivity extends AppCompatActivity {
 
     public double lattitude, longitute;
 
+    public RelativeLayout mSaloonDetailRelativeLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        //getting window component
+        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_saloon_detail);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -48,9 +69,29 @@ public class SaloonDetailActivity extends AppCompatActivity {
         Bundle bundle = intent.getExtras();
         saloon = (Saloon) bundle.getSerializable("Saloon_Class");
 
+
+        //animation
+
+        /*
+        Explode explode = new Explode();
+        explode.setDuration(200);
+        explode.setMode(Visibility.MODE_IN);
+        getWindow().setEnterTransition(explode);
+        */
+
+        /*
+        Slide slide = new Slide();
+        slide.setDuration(250);
+        slide.setSlideEdge(Gravity.TOP);
+        getWindow().setEnterTransition(slide);
+        */
+
+
         SaloonUID = saloon.getSaloonUID();
 
         //views
+        mSaloonDetailRelativeLayout = (RelativeLayout) findViewById(R.id.content_saloon_detail);
+
         mSaloonDetailNameTv = (TextView) findViewById(R.id.saloon_detail_name_textview);
         mSaloonDetailAddressTv = (TextView) findViewById(R.id.saloon_detail_address_textview);
         mSaloonDetailRatingTv = (TextView) findViewById(R.id.saloon_detail_rating_textview);
@@ -66,6 +107,12 @@ public class SaloonDetailActivity extends AppCompatActivity {
 
         //setting all data in views
         setAllValues();
+
+        //animate shake in Saloon Name
+        YoYo.with(Techniques.BounceIn)
+                .duration(1000)
+                .repeat(1)
+                .playOn(mSaloonDetailNameTv);
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -233,21 +280,68 @@ public class SaloonDetailActivity extends AppCompatActivity {
     }
 
     public void openImageDisplayActivity(View view) {
-        Intent intent = new Intent(SaloonDetailActivity.this, ImageActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("Saloon", saloon);
-        intent.putExtras(bundle);
-        startActivity(intent);
+
+        //get screen size
+        DisplayMetrics metrics = SaloonDetailActivity.this.getResources().getDisplayMetrics();
+        int fullWidth = metrics.widthPixels;
+        int fullHeight = metrics.heightPixels;
+
+        int centerX = (view.getLeft() + view.getRight()) / 2;
+        int centerY = (view.getTop() + view.getBottom()) / 2;
+
+        float radius = Math.max(view.getWidth(), view.getHeight()) * 2.0f;
+
+        Toast.makeText(this, " width " + view.getWidth() + "  height " + view.getHeight(), Toast.LENGTH_SHORT).show();
+
+        float maxradius = Math.max(fullWidth, fullHeight) * 2.0f;
+        Toast.makeText(this, "full width " + fullWidth + " full height " + fullHeight, Toast.LENGTH_SHORT).show();
+
+        Animator reveal = ViewAnimationUtils.createCircularReveal(view, centerX, centerY, 0, maxradius);
+        reveal.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animator) {
+
+                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(SaloonDetailActivity.this);
+                Intent intent = new Intent(SaloonDetailActivity.this, ImageActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("Saloon", saloon);
+                intent.putExtras(bundle);
+                startActivity(intent, options.toBundle());
+
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animator) {
+
+
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animator) {
+
+            }
+        });
+        reveal.start();
+
     }
 
     @Override
     public void onBackPressed() {
+
         super.onBackPressed();
+        finishAfterTransition();
     }
 
     @Override
     public boolean onSupportNavigateUp() {
-        onBackPressed();
+        finishAfterTransition();
+        // onBackPressed();
         return true;
     }
 

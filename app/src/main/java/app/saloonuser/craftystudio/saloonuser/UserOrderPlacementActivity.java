@@ -14,7 +14,12 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.transition.Explode;
+import android.transition.Slide;
+import android.transition.Visibility;
+import android.view.Gravity;
 import android.view.View;
+import android.view.Window;
 import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -49,10 +54,22 @@ public class UserOrderPlacementActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        //getting window component
+        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_order_placement);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
+        //animation
+        Explode explode = new Explode();
+        explode.setDuration(1000);
+        explode.setMode(Visibility.MODE_IN);
+        getWindow().setEnterTransition(explode);
 
         try {
             saloon = (Saloon) getIntent().getSerializableExtra("Saloon");
@@ -63,6 +80,7 @@ public class UserOrderPlacementActivity extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
 
         showDateDialog();
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -212,8 +230,9 @@ public class UserOrderPlacementActivity extends AppCompatActivity {
     private void placeOrder() {
         final Order order = ServiceTypeActivity.CURRENTORDER;
         order.setUserID(LoginActivity.USER.getUserUID());
-        order.setUserName(LoginActivity.USER.getUserName());
         order.setUserPhoneNumber(LoginActivity.USER.getUserPhoneNumber());
+        order.setUserName(LoginActivity.USER.getUserName());
+
 
         order.setOrderStatus(1);
         order.setOrderTime(Calendar.getInstance().getTimeInMillis());
@@ -269,6 +288,8 @@ public class UserOrderPlacementActivity extends AppCompatActivity {
 
         ServiceTypeActivity.CURRENTORDER = new Order();
 
+
+
     }
 
     private long calculateBookingTime() {
@@ -314,7 +335,8 @@ public class UserOrderPlacementActivity extends AppCompatActivity {
             Intent intent = new Intent(UserOrderPlacementActivity.this, MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
-            finish();
+            //finish();
+            finishAfterTransition();
         }
     }
 
@@ -324,7 +346,8 @@ public class UserOrderPlacementActivity extends AppCompatActivity {
         Intent intent = new Intent(UserOrderPlacementActivity.this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
-        finish();
+      //  finish();
+        finishAfterTransition();
     }
 
     public void showProgressDialog(String message) {

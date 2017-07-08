@@ -1,12 +1,16 @@
 package app.saloonuser.craftystudio.saloonuser;
 
+import android.app.ActivityOptions;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.util.Pair;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.transition.Explode;
+import android.transition.Visibility;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -16,7 +20,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
 import android.widget.Toast;
+
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -26,6 +35,7 @@ import utils.FireBaseHandler;
 import utils.RecyclerTouchListener;
 import utils.Saloon;
 import utils.SaloonAdapter;
+import utils.User;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -49,13 +59,19 @@ public class MainActivity extends AppCompatActivity
 
     Saloon saloon;
 
+    Toolbar toolbar;
+
+    User user =LoginActivity.USER;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -99,12 +115,18 @@ public class MainActivity extends AppCompatActivity
         downloadingSaloonList();
 
 
+        subscribeToTopic();
+
+    }
+
+    private void subscribeToTopic() {
+        FirebaseMessaging.getInstance().subscribeToTopic("user_"+user.getUserUID());
     }
 
     private void downloadingSaloonList() {
 
         //calling download saloon list
-        fireBaseHandler.downloadSaloonList(20, new FireBaseHandler.OnSaloonListListner() {
+        fireBaseHandler.downloadSaloonList(30, new FireBaseHandler.OnSaloonListListner() {
             @Override
             public void onSaloonList(ArrayList<Saloon> saloonArrayList) {
 
@@ -118,6 +140,15 @@ public class MainActivity extends AppCompatActivity
                 //Reverse a arraylist
                 Collections.reverse(mSaloonArraylist);
                 mAdapter.notifyDataSetChanged();
+
+
+
+                //animate toolbar
+                YoYo.with(Techniques.BounceInDown)
+                        .duration(1000)
+                        .repeat(1)
+                        .playOn(toolbar);
+
 
                 //loading more
                 mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -134,7 +165,7 @@ public class MainActivity extends AppCompatActivity
                                                                   //  Toast.makeText(MainActivity.this, "Refreshing", Toast.LENGTH_SHORT).show();
 
                                                               } else {
-                                                                 // Toast.makeText(MainActivity.this, "Loading", Toast.LENGTH_SHORT).show();
+                                                                  // Toast.makeText(MainActivity.this, "Loading", Toast.LENGTH_SHORT).show();
 
                                                               }
                                                           }
@@ -149,11 +180,18 @@ public class MainActivity extends AppCompatActivity
 
                         saloon = mSaloonArraylist.get(position);
 
+
+                        //animation
+                       // ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this);
+
+                        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this, android.util.Pair.create(view,"profile_image_shared"));
+
+
                         Intent intent = new Intent(MainActivity.this, SaloonDetailActivity.class);
                         Bundle bundle = new Bundle();
                         bundle.putSerializable("Saloon_Class", saloon);
                         intent.putExtras(bundle);
-                        startActivity(intent);
+                        startActivity(intent, options.toBundle());
 
                         //calling new activity having orders of particular saloon
                        /*
@@ -282,15 +320,17 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_profile) {
+            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this);
             Intent intent = new Intent(MainActivity.this, UserProfileActivity.class);
-            startActivity(intent);
+            startActivity(intent,options.toBundle());
 
             // Handle the camera action
 
 
         } else if (id == R.id.nav_order) {
+            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this);
             Intent intent = new Intent(MainActivity.this, UserOrderActivity.class);
-            startActivity(intent);
+            startActivity(intent,options.toBundle());
 
 
         } else if (id == R.id.nav_share) {

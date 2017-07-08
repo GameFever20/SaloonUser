@@ -18,6 +18,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.github.paolorotolo.appintro.AppIntro;
 import com.github.paolorotolo.appintro.AppIntroFragment;
 
@@ -37,7 +39,7 @@ public class UserDetailActivity extends AppCompatActivity {
     static String GENDER;
 
     LinearLayout mUserDetailLinearlayout;
-    Button mUploadBtn;
+    Button mUploadBtn, mNextUploadButton;
     private ProgressDialog progressDialog;
 
     @Override
@@ -61,6 +63,8 @@ public class UserDetailActivity extends AppCompatActivity {
         mMaleImage = (ImageView) findViewById(R.id.user_detail_male_imageview);
         mFemaleImage = (ImageView) findViewById(R.id.user_detail_female_imageview);
         mUploadBtn = (Button) findViewById(R.id.user_detail_upload_button);
+
+        mNextUploadButton = (Button) findViewById(R.id.nextUserDetailButton);
 
 
     }
@@ -96,7 +100,7 @@ public class UserDetailActivity extends AppCompatActivity {
     }
 
     private void openMainActivity() {
-        Intent intent =new Intent(UserDetailActivity.this , MainActivity.class);
+        Intent intent = new Intent(UserDetailActivity.this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         finish();
@@ -116,6 +120,13 @@ public class UserDetailActivity extends AppCompatActivity {
         mMaleImage.setImageResource(R.drawable.malefinal);
         GENDER = "Female";
         Toast.makeText(this, "Hey! Beautiful", Toast.LENGTH_SHORT).show();
+
+        //animate Next Button
+        YoYo.with(Techniques.FlipInX)
+                .duration(1000)
+                .repeat(1)
+                .playOn(mNextUploadButton);
+
     }
 
     public void maleSelection(View view) {
@@ -123,6 +134,13 @@ public class UserDetailActivity extends AppCompatActivity {
         mMaleImage.setImageResource(R.drawable.malecolor);
         GENDER = "Male";
         Toast.makeText(this, "Hey! HandSome", Toast.LENGTH_SHORT).show();
+
+        //animate Next Button
+        YoYo.with(Techniques.FlipInX)
+                .duration(1000)
+                .repeat(1)
+                .playOn(mNextUploadButton);
+
 
     }
 
@@ -144,7 +162,7 @@ public class UserDetailActivity extends AppCompatActivity {
         }
     }
 
-    public void showProgressDialog( String message) {
+    public void showProgressDialog(String message) {
         progressDialog.setMessage(message);
         progressDialog.setCancelable(false);
         progressDialog.show();
