@@ -259,6 +259,36 @@ public class FireBaseHandler {
     }
 
 
+    public void uploadRating(String orderID , final CustomRating customRating , final OnRatingListener onRatingListener){
+
+        if (customRating.getSaloonPoint()<10){
+            return;
+        }
+
+        Map post = new HashMap();
+        post.put("rating/" + customRating.getOrderID(), customRating);
+        post.put("saloon/" + customRating.getSaloonUID()+"/saloonPoint", customRating.getSaloonPoint()+customRating.getRating());
+        post.put("saloon/" + customRating.getSaloonUID()+"/saloonRatingSum", customRating.getSaloonRatingSum()+customRating.getRating());
+        post.put("saloon/" + customRating.getSaloonUID()+"/saloonTotalRating", customRating.getSaloonTotalRating()+5);
+
+
+
+        mFirebaseDatabase.getReference().updateChildren(post).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+
+                onRatingListener.onRatingUploaded(customRating , true);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+
+                onRatingListener.onRatingUploaded(null , false);
+
+            }
+        });
+    }
 
     //interface
     public interface OnSaloonListListner {
@@ -297,6 +327,10 @@ public class FireBaseHandler {
         public void onSeviceUpload(boolean isSuccesful);
 
         public void onServiceList(ArrayList<Service> serviceArrayList, boolean isSuccesful);
+    }
+
+    public interface OnRatingListener{
+        public void onRatingUploaded(CustomRating customRating , boolean isSuccessful);
     }
 
 

@@ -12,12 +12,12 @@ public class Saloon implements Serializable {
     private int saloonPoint;
 
     private String saloonLocation;
-    private int saloonRating;
+    private int  saloonRatingSum , saloonTotalRating;
     private String saloonName;
     private boolean saloonUpdated;
     private boolean saloonHirePhotographer;
     private String saloonUID = "";
-
+    private String saloonEmailID;
     private String saloonPhoneNumber;//input
     private String saloonAddress;//input
 
@@ -45,13 +45,6 @@ public class Saloon implements Serializable {
         this.saloonPoint = saloonPoint;
     }
 
-    public int getSaloonRating() {
-        return saloonRating;
-    }
-
-    public void setSaloonRating(int saloonRating) {
-        this.saloonRating = saloonRating;
-    }
 
     public String getSaloonName() {
         return saloonName;
@@ -157,5 +150,27 @@ public class Saloon implements Serializable {
         this.closingTimeMinute = closingTimeMinute;
     }
 
+    public String getSaloonEmailID() {
+        return saloonEmailID;
+    }
 
+    public void setSaloonEmailID(String saloonEmailID) {
+        this.saloonEmailID = saloonEmailID;
+    }
+
+    public int getSaloonRatingSum() {
+        return saloonRatingSum;
+    }
+
+    public void setSaloonRatingSum(int saloonRatingSum) {
+        this.saloonRatingSum = saloonRatingSum;
+    }
+
+    public int getSaloonTotalRating() {
+        return saloonTotalRating;
+    }
+
+    public void setSaloonTotalRating(int saloonTotalRating) {
+        this.saloonTotalRating = saloonTotalRating;
+    }
 }

@@ -50,6 +50,7 @@ public class UserOrderActivity extends AppCompatActivity {
 
         mUserOrderRecyclerview = (RecyclerView) findViewById(R.id.userOrder_order_recyclerview);
 
+
         // use a linear layout manager
         mLayoutManager = new LinearLayoutManager(this);
         mUserOrderRecyclerview.setLayoutManager(mLayoutManager);
