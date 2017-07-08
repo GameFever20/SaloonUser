@@ -159,9 +159,6 @@ public class Saloon implements Serializable {
     public void setSaloonEmailID(String saloonEmailID) {
         this.saloonEmailID = saloonEmailID;
     }
-    public void setSaloonEmailID(String saloonEmailID) {
-        this.saloonEmailID = saloonEmailID;
-    }
 
     public int getSaloonRatingSum() {
         return saloonRatingSum;
