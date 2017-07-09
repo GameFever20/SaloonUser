@@ -104,6 +104,7 @@ public class MainActivity extends AppCompatActivity
         mRecyclerView.setLayoutManager(mLayoutManager);
 
 
+
         //progress dialog show
         progressDialog = new ProgressDialog(this);
 
