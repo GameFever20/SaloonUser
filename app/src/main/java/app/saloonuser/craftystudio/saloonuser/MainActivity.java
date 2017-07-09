@@ -185,7 +185,7 @@ public class MainActivity extends AppCompatActivity
                         //animation
                        // ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this);
 
-                        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this, android.util.Pair.create(view,"profile_image_shared"));
+                        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this, android.util.Pair.create(view.findViewById(R.id.saloonadapterrow_saloon_profilepic_imageView),"profile_image_shared"));
 
 
                         Intent intent = new Intent(MainActivity.this, SaloonDetailActivity.class);
