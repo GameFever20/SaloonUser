@@ -336,6 +336,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_share) {
             Toast.makeText(this, "Link to share app", Toast.LENGTH_SHORT).show();
 
+
         } else if (id == R.id.nav_send) {
             Toast.makeText(this, "Link to share app", Toast.LENGTH_SHORT).show();
 

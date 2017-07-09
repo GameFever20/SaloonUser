@@ -302,10 +302,13 @@ public class FireBaseHandler {
 
         Map post = new HashMap();
         post.put("rating/" + customRating.getOrderID(), customRating);
+
+/*
         post.put("saloon/" + customRating.getSaloonUID()+"/saloonPoint", customRating.getSaloonPoint()+customRating.getRating());
         post.put("saloon/" + customRating.getSaloonUID()+"/saloonRatingSum", customRating.getSaloonRatingSum()+customRating.getRating());
         post.put("saloon/" + customRating.getSaloonUID()+"/saloonTotalRating", customRating.getSaloonTotalRating()+5);
 
+*/
 
 
         mFirebaseDatabase.getReference().updateChildren(post).addOnCompleteListener(new OnCompleteListener<Void>() {

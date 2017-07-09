@@ -13,25 +13,24 @@ import java.util.Map;
  * Created by bunny on 12/06/17.
  */
 
-public class Order implements Serializable ,Parcelable{
+public class Order implements Serializable {
 
-    private String saloonID ;
+    private String saloonID;
     private String userID;
     private String serviceID;
     private String orderID;
     private int orderStatus;
-    private String saloonName ;
-    private long orderTime = 0 ;
-    private int orderPrice =0 ;
-    private String orderServiceName ="" ;
-    private Map<String,String> orderServiceIDList =new HashMap<String, String>();
+    private String saloonName;
+    private long orderTime = 0;
+    private int orderPrice = 0;
+    private String orderServiceName = "";
+    private Map<String, String> orderServiceIDList = new HashMap<String, String>();
     private int orderTotalServiceCount;
 
-    private long orderBookingTime ;
+    private long orderBookingTime;
 
     private String userPhoneNumber;
-    private String userName ;
-
+    private String userName;
 
 
     public Order() {
@@ -151,21 +150,21 @@ public class Order implements Serializable ,Parcelable{
     }
 
     public String resolveOrderStatus() {
-        if (orderStatus == 1){
+        if (orderStatus == 1) {
             return "Placed";
-        } else if (orderStatus ==2) {
+        } else if (orderStatus == 2) {
             return "Accepted";
-        }else if(orderStatus == 3){
+        } else if (orderStatus == 3) {
             return "completed";
-        }else if(orderStatus==-1){
+        } else if (orderStatus == -1) {
             return "Cancel";
-        } else{
+        } else {
             return "";
         }
     }
 
     public String resolveOrderDate() {
-         String dateFormat = "dd/MM/yyyy  hh:mm";
+        String dateFormat = "dd/MM/yyyy  hh:mm";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat);
 
         Date date = new Date();
@@ -174,12 +173,12 @@ public class Order implements Serializable ,Parcelable{
 
     }
 
-    public String resolveOrderServiceList(){
+    public String resolveOrderServiceList() {
 
-        String serviceList ="";
+        String serviceList = "";
 
-        for (String string : getOrderServiceIDList().values()){
-            serviceList =serviceList+"* "+string+"\n";
+        for (String string : getOrderServiceIDList().values()) {
+            serviceList = serviceList + "* " + string + "\n";
 
         }
 
@@ -188,6 +187,7 @@ public class Order implements Serializable ,Parcelable{
 
     }
 
+/*
 
     //parcell implementation
     @Override
@@ -210,7 +210,6 @@ public class Order implements Serializable ,Parcelable{
         dest.writeString(userID);
 
 
-
     }
 
     public Order(Parcel source) {
@@ -226,6 +225,7 @@ public class Order implements Serializable ,Parcelable{
         userID = source.readString();
 
     }
+
     public static final Creator<Order> CREATOR = new Creator<Order>() {
         @Override
         public Order[] newArray(int size) {
@@ -240,5 +240,6 @@ public class Order implements Serializable ,Parcelable{
 
 
     //parcel imp over
+*/
 
 }

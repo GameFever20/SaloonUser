@@ -84,7 +84,7 @@ public class OrderDetailActivity extends AppCompatActivity {
 
     private void initializeActivity() {
 
-        if (order.getOrderStatus() ==3){
+        if (order.getOrderStatus() >0){
 
             new FireBaseHandler().downloadRating(order, new FireBaseHandler.OnRatingListener() {
                 @Override

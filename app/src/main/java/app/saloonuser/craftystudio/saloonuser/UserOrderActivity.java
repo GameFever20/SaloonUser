@@ -13,6 +13,8 @@ import android.support.v7.widget.RecyclerView;
 import android.transition.Explode;
 import android.transition.Visibility;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,9 +22,11 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import utils.ClickListener;
 import utils.FireBaseHandler;
 import utils.Order;
 import utils.OrderAdapter;
+import utils.RecyclerTouchListener;
 import utils.SaloonAdapter;
 
 public class UserOrderActivity extends AppCompatActivity {
@@ -73,6 +77,20 @@ public class UserOrderActivity extends AppCompatActivity {
         // use a linear layout manager
         mLayoutManager = new LinearLayoutManager(this);
         mUserOrderRecyclerview.setLayoutManager(mLayoutManager);
+
+        mUserOrderRecyclerview.addOnItemTouchListener(new RecyclerTouchListener(this, mUserOrderRecyclerview, new ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                Intent intent =new Intent(UserOrderActivity.this ,OrderDetailActivity.class);
+                intent.putExtra("order" ,mTempOrderArraylist.get(position));
+                startActivity(intent);
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+
+            }
+        }));
 
         progressDialog = new ProgressDialog(this);
         showProgressDialog("Fetching orders");
