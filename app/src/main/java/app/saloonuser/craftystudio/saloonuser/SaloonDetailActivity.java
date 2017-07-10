@@ -21,6 +21,7 @@ import android.view.ViewAnimationUtils;
 import android.view.Window;
 import android.view.animation.GridLayoutAnimationController;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -50,7 +51,7 @@ public class SaloonDetailActivity extends AppCompatActivity {
 
     public double lattitude, longitute;
 
-    public RelativeLayout mSaloonDetailRelativeLayout;
+    public LinearLayout mSaloonDetailRelativeLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,7 +91,7 @@ public class SaloonDetailActivity extends AppCompatActivity {
         SaloonUID = saloon.getSaloonUID();
 
         //views
-        mSaloonDetailRelativeLayout = (RelativeLayout) findViewById(R.id.content_saloon_detail);
+        mSaloonDetailRelativeLayout = (LinearLayout) findViewById(R.id.content_saloon_detail);
 
         mSaloonDetailNameTv = (TextView) findViewById(R.id.saloon_detail_name_textview);
         mSaloonDetailAddressTv = (TextView) findViewById(R.id.saloon_detail_address_textview);
@@ -137,6 +138,24 @@ public class SaloonDetailActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    public void saloonDetailDirection(View view) {
+
+        String uri = "http://maps.google.com/maps?daddr=" + lattitude + "," + longitute + " (" + "Parlour Location" + ")";
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+        intent.setPackage("com.google.android.apps.maps");
+        try {
+            startActivity(intent);
+        } catch (ActivityNotFoundException ex) {
+            try {
+                Intent unrestrictedIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                startActivity(unrestrictedIntent);
+            } catch (ActivityNotFoundException innerEx) {
+                Toast.makeText(SaloonDetailActivity.this, "Please install a maps application", Toast.LENGTH_LONG).show();
+            }
+        }
+
     }
 
     private void setAllValues() {
