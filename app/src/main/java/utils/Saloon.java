@@ -12,13 +12,13 @@ public class Saloon implements Serializable {
     private int saloonPoint;
 
     private String saloonLocation;
-    private int  saloonRatingSum , saloonTotalRating;
+    private int saloonRatingSum, saloonTotalRating;
     private String saloonName;
     private boolean saloonUpdated;
     private boolean saloonHirePhotographer;
     private String saloonUID = "";
 
-    private String saloonEmailID ;
+    private String saloonEmailID;
 
     private String saloonPhoneNumber;//input
     private String saloonAddress;//input
@@ -176,55 +176,58 @@ public class Saloon implements Serializable {
         this.saloonTotalRating = saloonTotalRating;
     }
 
-    public String resolveSaloonRating(){
-
-        return String.valueOf(saloonRatingSum /saloonTotalRating) ;
+    public String resolveSaloonRating() {
+        if (saloonTotalRating > 0) {
+            return String.valueOf(saloonRatingSum / saloonTotalRating);
+        } else {
+            return "0";
+        }
     }
 
-    public String resolveSaloonOpeningTime(){
-        String string ="";
+    public String resolveSaloonOpeningTime() {
+        String string = "";
 
-        if (openingTimeHour <10){
-            string= string.concat("0"+String.valueOf(openingTimeHour)+":");
-        }else{
-            string= string.concat(String.valueOf(openingTimeHour)+":");
+        if (openingTimeHour < 10) {
+            string = string.concat("0" + String.valueOf(openingTimeHour) + ":");
+        } else {
+            string = string.concat(String.valueOf(openingTimeHour) + ":");
         }
 
-        if (openingTimeMinute <10){
-            string= string.concat("0"+String.valueOf(openingTimeMinute));
-        }else{
-            string= string.concat(String.valueOf(openingTimeMinute));
+        if (openingTimeMinute < 10) {
+            string = string.concat("0" + String.valueOf(openingTimeMinute));
+        } else {
+            string = string.concat(String.valueOf(openingTimeMinute));
         }
 
-        if (openingTimeHour >11){
-            string= string.concat("PM");
-        }else{
-            string= string.concat("AM");
+        if (openingTimeHour > 11) {
+            string = string.concat("PM");
+        } else {
+            string = string.concat("AM");
         }
 
         return string;
 
     }
 
-    public String resolveSaloonClosingTime(){
-        String string ="";
+    public String resolveSaloonClosingTime() {
+        String string = "";
 
-        if (closingTimeHour <10){
-            string= string.concat("0"+String.valueOf(getClosingTimeHour())+":");
-        }else{
-            string= string.concat(String.valueOf(closingTimeHour)+":");
+        if (closingTimeHour < 10) {
+            string = string.concat("0" + String.valueOf(getClosingTimeHour()) + ":");
+        } else {
+            string = string.concat(String.valueOf(closingTimeHour) + ":");
         }
 
-        if (closingTimeMinute <10){
-            string= string.concat("0"+String.valueOf(closingTimeMinute));
-        }else{
-            string= string.concat(String.valueOf(closingTimeMinute));
+        if (closingTimeMinute < 10) {
+            string = string.concat("0" + String.valueOf(closingTimeMinute));
+        } else {
+            string = string.concat(String.valueOf(closingTimeMinute));
         }
 
-        if (closingTimeMinute >11){
-            string= string.concat("PM");
-        }else{
-            string= string.concat("AM");
+        if (closingTimeHour > 11) {
+            string = string.concat("PM");
+        } else {
+            string = string.concat("AM");
         }
 
         return string;

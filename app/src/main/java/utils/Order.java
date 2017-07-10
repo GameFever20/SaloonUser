@@ -5,9 +5,11 @@ import android.os.Parcelable;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TimeZone;
 
 /**
  * Created by bunny on 12/06/17.
@@ -186,6 +188,22 @@ public class Order implements Serializable {
 
 
     }
+
+    public String resolveOrderBookingTime(){
+
+
+
+        String dateFormat = "dd/MM/yyyy  hh:mm";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat);
+
+        Date date = new Date();
+        date.setTime(orderTime);
+
+
+
+        return simpleDateFormat.format(date);
+    }
+
 
 /*
 

@@ -168,7 +168,7 @@ public class OrderDetailActivity extends AppCompatActivity {
         if (order != null) {
 
             mOrderPriceTextView.setText(order.getOrderPrice()+"");
-            mOrderTimeTextView.setText(order.getOrderBookingTime() + "");
+            mOrderTimeTextView.setText(order.resolveOrderBookingTime());
             mSaloonNameTextView.setText(order.getSaloonName());
 
         }
