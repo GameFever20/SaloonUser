@@ -12,6 +12,7 @@ import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
 import app.saloonuser.craftystudio.saloonuser.MainActivity;
+import app.saloonuser.craftystudio.saloonuser.OrderDetailActivity;
 import app.saloonuser.craftystudio.saloonuser.R;
 
 /**
@@ -33,11 +34,11 @@ public class FireBasePushNotificationService extends FirebaseMessagingService {
 
 
 
-            intent = new Intent(this, MainActivity.class);
+            intent = new Intent(this, OrderDetailActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
             intent.putExtra("UserUID" ,saloonUID );
-            intent.putExtra("OrderID" , orderID);
+            intent.putExtra("orderID" , orderID);
 
 
             showNotification(remoteMessage.getData().get("notificationT"), remoteMessage.getData().get("notificationB"));

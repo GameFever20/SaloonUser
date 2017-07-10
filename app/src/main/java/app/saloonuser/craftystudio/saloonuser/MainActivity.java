@@ -55,13 +55,15 @@ public class MainActivity extends AppCompatActivity
     ProgressDialog progressDialog;
 
     boolean isLodingMoreSaloon;
+    boolean isMoreSaloonAvailable = true;
+    final int saloonFetchLimit = 30;
 
 
     Saloon saloon;
 
     Toolbar toolbar;
 
-    User user =LoginActivity.USER;
+    User user = LoginActivity.USER;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,7 +106,6 @@ public class MainActivity extends AppCompatActivity
         mRecyclerView.setLayoutManager(mLayoutManager);
 
 
-
         //progress dialog show
         progressDialog = new ProgressDialog(this);
 
@@ -121,15 +122,21 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void subscribeToTopic() {
-        FirebaseMessaging.getInstance().subscribeToTopic("user_"+user.getUserUID());
+        FirebaseMessaging.getInstance().subscribeToTopic("user_" + user.getUserUID());
+        FirebaseMessaging.getInstance().subscribeToTopic("user");
+
     }
 
     private void downloadingSaloonList() {
 
         //calling download saloon list
-        fireBaseHandler.downloadSaloonList(30, new FireBaseHandler.OnSaloonListListner() {
+        fireBaseHandler.downloadSaloonList(saloonFetchLimit, new FireBaseHandler.OnSaloonListListner() {
             @Override
             public void onSaloonList(ArrayList<Saloon> saloonArrayList) {
+
+                if (saloonArrayList.size() != saloonFetchLimit) {
+                    isMoreSaloonAvailable = false;
+                }
 
                 hideProgressDialog();
 
@@ -141,7 +148,6 @@ public class MainActivity extends AppCompatActivity
                 //Reverse a arraylist
                 Collections.reverse(mSaloonArraylist);
                 mAdapter.notifyDataSetChanged();
-
 
 
                 //animate toolbar
@@ -158,16 +164,17 @@ public class MainActivity extends AppCompatActivity
                                                       public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                                                           super.onScrolled(recyclerView, dx, dy);
                                                           if (!recyclerView.canScrollVertically(1)) {
-                                                              if (!isLodingMoreSaloon) {
+                                                              if (isMoreSaloonAvailable) {
+                                                                  if (!isLodingMoreSaloon) {
+                                                                      //get last Saloon ID
+                                                                      int lastSaloonPoint = mSaloonArraylist.get(mSaloonArraylist.size() - 1).getSaloonPoint();
+                                                                      onScrolledSaloonListToBottom(lastSaloonPoint);
+                                                                      //  Toast.makeText(MainActivity.this, "Refreshing", Toast.LENGTH_SHORT).show();
 
-                                                                  //get last Saloon ID
-                                                                  int lastSaloonPoint = mSaloonArraylist.get(mSaloonArraylist.size() - 1).getSaloonPoint();
-                                                                  onScrolledSaloonListToBottom(lastSaloonPoint);
-                                                                  //  Toast.makeText(MainActivity.this, "Refreshing", Toast.LENGTH_SHORT).show();
+                                                                  } else {
+                                                                      // Toast.makeText(MainActivity.this, "Loading", Toast.LENGTH_SHORT).show();
 
-                                                              } else {
-                                                                  // Toast.makeText(MainActivity.this, "Loading", Toast.LENGTH_SHORT).show();
-
+                                                                  }
                                                               }
                                                           }
                                                       }
@@ -183,9 +190,9 @@ public class MainActivity extends AppCompatActivity
 
 
                         //animation
-                       // ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this);
+                        // ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this);
 
-                        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this, android.util.Pair.create(view.findViewById(R.id.saloonadapterrow_saloon_profilepic_imageView),"profile_image_shared"));
+                        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this, android.util.Pair.create(view.findViewById(R.id.saloonadapterrow_saloon_profilepic_imageView), "profile_image_shared"));
 
 
                         Intent intent = new Intent(MainActivity.this, SaloonDetailActivity.class);
@@ -227,17 +234,49 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void onScrolledSaloonListToBottom(int lastSaloonPoint) {
+//store number of saloon with same saloon point in last
+        int repeatedSaloonCount = 0;
+
+
+        for (int i = mSaloonArraylist.size() - 1; i >= 0; i--) {
+
+
+            if (mSaloonArraylist.get(i).getSaloonPoint() == lastSaloonPoint) {
+
+                repeatedSaloonCount++;
+            } else {
+                break;
+            }
+
+        }
+
+        if (repeatedSaloonCount ==saloonFetchLimit){
+            //if all 30 saloon have same saloon point then skip that saloon point
+            lastSaloonPoint--;
+        }
 
         isLodingMoreSaloon = true;
         //Toast.makeText(MainActivity.this, "On Data calling ..", Toast.LENGTH_SHORT).show();
 
-        fireBaseHandler.downloadMoreSaloonList(20, lastSaloonPoint, new FireBaseHandler.OnSaloonListListner() {
+        final int finalRepeatedSaloonCount = repeatedSaloonCount;
+        fireBaseHandler.downloadMoreSaloonList(saloonFetchLimit, lastSaloonPoint, new FireBaseHandler.OnSaloonListListner() {
             @Override
             public void onSaloonList(ArrayList<Saloon> saloonArrayList) {
 
+                if (saloonArrayList.size() != saloonFetchLimit) {
+                    isMoreSaloonAvailable = false;
+                }
+
                 if (saloonArrayList.size() >= 1) {
-                    //remove last item of arraylist due to redundancy
-                    saloonArrayList.remove(saloonArrayList.size() - 1);
+
+                    try {
+                        //remove last item of arraylist due to redundancy
+                        for (int i = finalRepeatedSaloonCount; i >= 0; i--) {
+                            saloonArrayList.remove(saloonArrayList.size() - 1);
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
 
                     if (saloonArrayList != null) {
                         //  String li = saloonArrayList.get(saloonArrayList.size() - 1).getOrderID();
@@ -323,7 +362,7 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_profile) {
             ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this);
             Intent intent = new Intent(MainActivity.this, UserProfileActivity.class);
-            startActivity(intent,options.toBundle());
+            startActivity(intent, options.toBundle());
 
             // Handle the camera action
 
@@ -331,7 +370,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_order) {
             ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this);
             Intent intent = new Intent(MainActivity.this, UserOrderActivity.class);
-            startActivity(intent,options.toBundle());
+            startActivity(intent, options.toBundle());
 
 
         } else if (id == R.id.nav_share) {
