@@ -97,7 +97,6 @@ public class ServiceTypeActivity extends AppCompatActivity {
         appBarLayout = (AppBarLayout) findViewById(R.id.appbar);
 
 
-
         try {
             saloon = (Saloon) getIntent().getSerializableExtra("Saloon");
         } catch (Exception e) {
@@ -175,6 +174,10 @@ public class ServiceTypeActivity extends AppCompatActivity {
 
 
         tabLayout.setupWithViewPager(mViewPager);
+
+        for (int i = 0; i < tabLayout.getTabCount(); i++) {
+            tabLayout.getTabAt(i).setIcon(R.drawable.ic_action_clock);
+        }
 
     }
 
