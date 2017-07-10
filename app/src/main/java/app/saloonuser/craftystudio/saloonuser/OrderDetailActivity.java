@@ -58,12 +58,12 @@ public class OrderDetailActivity extends AppCompatActivity {
 
                     if (isSuccessful) {
                         if (order != null) {
-                            OrderDetailActivity.this.order =order;
+                            OrderDetailActivity.this.order = order;
                             initializeActivity();
-                        }else{
+                        } else {
                             Toast.makeText(OrderDetailActivity.this, "No order Found", Toast.LENGTH_SHORT).show();
                         }
-                    }else{
+                    } else {
                         Toast.makeText(OrderDetailActivity.this, "No order Found", Toast.LENGTH_SHORT).show();
 
                     }
@@ -84,7 +84,7 @@ public class OrderDetailActivity extends AppCompatActivity {
 
     private void initializeActivity() {
 
-        if (order.getOrderStatus() >0){
+        if (order.getOrderStatus() > 0) {
 
             new FireBaseHandler().downloadRating(order, new FireBaseHandler.OnRatingListener() {
                 @Override
@@ -95,12 +95,12 @@ public class OrderDetailActivity extends AppCompatActivity {
                 @Override
                 public void onRatingDownload(CustomRating customRating, boolean isSuccessful) {
 
-                    if (isSuccessful){
-                        if (customRating != null){
+                    if (isSuccessful) {
+                        if (customRating != null) {
                             OrderDetailActivity.this.customRating = customRating;
                             updateOrderRatingUI();
 
-                        }else{
+                        } else {
                             fetchSaloon();
                             openRatingSystem();
                         }
@@ -116,9 +116,9 @@ public class OrderDetailActivity extends AppCompatActivity {
         new FireBaseHandler().downloadSaloon(order.getSaloonID(), new FireBaseHandler.OnSaloonDownload() {
             @Override
             public void onSaloon(Saloon saloon) {
-                if (saloon != null){
-                    OrderDetailActivity.this.saloon =saloon;
-                }else {
+                if (saloon != null) {
+                    OrderDetailActivity.this.saloon = saloon;
+                } else {
 
                 }
             }
@@ -135,26 +135,29 @@ public class OrderDetailActivity extends AppCompatActivity {
     }
 
 
+    public void getSaloonDirection(View view) {
+
+    }
 
     private void openRatingSystem() {
 
-        RatingBar ratingBar = (RatingBar)findViewById(R.id.orderDetail_rating_ratingBar);
+        RatingBar ratingBar = (RatingBar) findViewById(R.id.orderDetail_rating_ratingBar);
 
         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
 
-                customRating =new CustomRating();
+                customRating = new CustomRating();
                 customRating.setSaloonUID(order.getSaloonID());
                 customRating.setOrderID(order.getOrderID());
                 customRating.setUserUID(order.getUserID());
                 customRating.setRating((int) rating);
 
-                if (saloon != null){
+                if (saloon != null) {
                     customRating.setSaloonPoint(saloon.getSaloonPoint());
                     customRating.setSaloonRatingSum(saloon.getSaloonRatingSum());
                     customRating.setSaloonTotalRating(saloon.getSaloonTotalRating());
-                }else {
+                } else {
                     return;
                 }
 
