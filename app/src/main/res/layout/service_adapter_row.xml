@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="8dp"
+        android:elevation="2dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="4dp">
+
+
+        <android.support.v7.widget.CardView
+            android:layout_width="4dp"
+            android:layout_height="match_parent"
+            app:cardElevation="0dp"
+            app:cardCornerRadius="0dp"
+            >
+
+        </android.support.v7.widget.CardView>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="5dp"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/serviceAdapterRow_serviceName_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="7dp"
+                    android:fontFamily="serif"
+                    android:text="Service Name"
+                    android:textAlignment="center"
+                    android:textSize="16sp"
+                    android:textStyle="bold|italic" />
+
+
+                <TextView
+                    android:id="@+id/serviceAdapterRow_serviceTypeName_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="serif"
+                    android:text="Service Type"
+                    android:textColor="@color/blackish"
+                    android:textSize="14dp"
+                    android:textStyle="italic" />
+
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/serviceAdapterRow_servicePrice_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="2dp"
+                android:fontFamily="serif"
+                android:text="200"
+                android:textAlignment="viewEnd"
+                android:textSize="28sp"
+                android:textStyle="normal" />
+
+
+            <TextView
+                android:id="@+id/serviceAdapterRow_serviceSaloonName_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="serviceTypeName"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/serviceAdapterRow_serviceId_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="serviceID"
+                android:textSize="15dp"
+                android:visibility="gone" />
+        </LinearLayout>
+
+
+    </android.support.v7.widget.CardView>
+
+
+</LinearLayout>

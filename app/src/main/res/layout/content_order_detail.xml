@@ -10,7 +10,7 @@
     tools:context="app.saloonuser.craftystudio.saloonuser.OrderDetailActivity"
     tools:showIn="@layout/activity_order_detail">
 
-    <ScrollView
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_marginLeft="4dp"
         android:layout_marginRight="4dp"
@@ -207,6 +207,14 @@
                         android:layout_marginTop="8dp"
                         android:text="* Service Name" />
 
+                    <android.support.v7.widget.RecyclerView
+                        android:layout_width="match_parent"
+                        android:id="@+id/orderDetail_servicesName_recyclerView"
+
+                        android:layout_height="wrap_content">
+
+                    </android.support.v7.widget.RecyclerView>
+
                 </LinearLayout>
 
             </android.support.v7.widget.CardView>
@@ -297,7 +305,7 @@
         </LinearLayout>
 
 
-    </ScrollView>
+    </android.support.v4.widget.NestedScrollView>
 
     <Button
         android:layout_width="match_parent"

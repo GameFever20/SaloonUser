@@ -3,11 +3,18 @@ package app.saloonuser.craftystudio.saloonuser;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.RatingBar;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -15,6 +22,8 @@ import utils.CustomRating;
 import utils.FireBaseHandler;
 import utils.Order;
 import utils.Saloon;
+import utils.Service;
+import utils.ServiceAdapter;
 
 public class OrderDetailActivity extends AppCompatActivity {
 
@@ -22,6 +31,13 @@ public class OrderDetailActivity extends AppCompatActivity {
     String orderUID;
     CustomRating customRating;
     Saloon saloon;
+
+    private TextView mOrderPriceTextView, mOrderTimeTextView, mSaloonNameTextView, mSaloonAddressTextView, mSaloonPhoneNumberTextView, mSaloonTimeTextView, mSaloonRatingTextView, mSaloonMadeOfPaymentTextView;
+
+    ArrayList<Service> serviceArrayList = new ArrayList<>();
+    ServiceAdapter serviceAdapter = new ServiceAdapter(serviceArrayList);
+
+    RecyclerView serviceRecyclerView ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +58,28 @@ public class OrderDetailActivity extends AppCompatActivity {
 
         order = (Order) getIntent().getSerializableExtra("order");
 
+
+        mSaloonNameTextView = (TextView) findViewById(R.id.orderDetail_saloonName_TextView);
+        mSaloonAddressTextView = (TextView) findViewById(R.id.orderDetail_saloonAddress_TextView);
+        mSaloonPhoneNumberTextView = (TextView) findViewById(R.id.orderDetail_saloonPhoneNumber_TextView);
+        mSaloonRatingTextView = (TextView) findViewById(R.id.orderDetail_saloonRating_TextView);
+        mSaloonTimeTextView = (TextView) findViewById(R.id.orderDetail_saloonTiming_TextView);
+        mSaloonMadeOfPaymentTextView = (TextView) findViewById(R.id.orderDetail_saloonModesOfPayment_TextView);
+        mOrderPriceTextView = (TextView) findViewById(R.id.orderDetail_orderPrice_TextView);
+
+        mOrderTimeTextView =(TextView)findViewById(R.id.orderDetail_orderTime_TextView);
+
+        serviceRecyclerView=(RecyclerView)findViewById(R.id.orderDetail_servicesName_recyclerView);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
+        serviceRecyclerView.setLayoutManager(mLayoutManager);
+        serviceRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        //recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
+
+        serviceRecyclerView.setAdapter(serviceAdapter);
+
+
         if (order != null) {
+            fetchSaloon();
             initializeActivity();
         } else {
             orderUID = getIntent().getStringExtra("orderID");
@@ -59,7 +96,9 @@ public class OrderDetailActivity extends AppCompatActivity {
                     if (isSuccessful) {
                         if (order != null) {
                             OrderDetailActivity.this.order = order;
+                            fetchSaloon();
                             initializeActivity();
+
                         } else {
                             Toast.makeText(OrderDetailActivity.this, "No order Found", Toast.LENGTH_SHORT).show();
                         }
@@ -84,6 +123,7 @@ public class OrderDetailActivity extends AppCompatActivity {
 
     private void initializeActivity() {
 
+
         if (order.getOrderStatus() > 0) {
 
             new FireBaseHandler().downloadRating(order, new FireBaseHandler.OnRatingListener() {
@@ -97,11 +137,12 @@ public class OrderDetailActivity extends AppCompatActivity {
 
                     if (isSuccessful) {
                         if (customRating != null) {
+
                             OrderDetailActivity.this.customRating = customRating;
                             updateOrderRatingUI();
 
                         } else {
-                            fetchSaloon();
+
                             openRatingSystem();
                         }
                     }
@@ -109,6 +150,34 @@ public class OrderDetailActivity extends AppCompatActivity {
             });
         }
 
+        if (order!=null){
+            for (Service service : order.getOrderServiceIDList().values()){
+                serviceArrayList.add(service);
+            }
+
+        }
+
+        updateUI();
+    }
+
+    public void updateUI() {
+
+        if (order != null) {
+
+            mOrderPriceTextView.setText(order.getOrderPrice()+"");
+            mOrderTimeTextView.setText(order.getOrderBookingTime() + "");
+            mSaloonNameTextView.setText(order.getSaloonName());
+
+        }
+
+        if (saloon != null) {
+            // mSaloonTimeingTextView.setText();
+            mSaloonRatingTextView.setText((saloon.getSaloonRatingSum() / saloon.getSaloonTotalRating())+"");
+            mSaloonPhoneNumberTextView.setText(saloon.getSaloonPhoneNumber());
+            mSaloonAddressTextView.setText(saloon.getSaloonAddress());
+        }
+
+        serviceAdapter.notifyDataSetChanged();
 
     }
 
@@ -118,6 +187,7 @@ public class OrderDetailActivity extends AppCompatActivity {
             public void onSaloon(Saloon saloon) {
                 if (saloon != null) {
                     OrderDetailActivity.this.saloon = saloon;
+                    updateUI();
                 } else {
 
                 }
