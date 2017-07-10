@@ -293,6 +293,7 @@
                 android:background="@color/colorAccent"
                 android:onClick="getSaloonDirection"
                 android:text="Get Direction "
+                
                 android:textColor="@color/white"
                 android:textSize="17sp"
                 android:textStyle="bold" />
