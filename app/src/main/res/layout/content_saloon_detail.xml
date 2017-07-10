@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/content_saloon_detail"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/light_white"
+    android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="app.saloonuser.craftystudio.saloonuser.SaloonDetailActivity"
     tools:showIn="@layout/activity_saloon_detail">
@@ -15,6 +16,7 @@
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:layout_weight="1"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
@@ -30,6 +32,7 @@
                 android:scaleType="centerCrop"
                 android:src="@drawable/parlourimage"
                 android:transitionName="profile_image_shared"
+                android:visibility="visible"
 
 
                 />
@@ -259,10 +262,20 @@
                 android:textAlignment="center"
                 android:textSize="15sp" />
 
-
         </LinearLayout>
 
 
     </android.support.v4.widget.NestedScrollView>
 
-</RelativeLayout>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
+        android:onClick="saloonDetailDirection"
+        android:text="Get Direction"
+        android:textColor="@color/white"
+        android:textSize="17sp"
+        android:textStyle="bold" />
+
+
+</LinearLayout>
