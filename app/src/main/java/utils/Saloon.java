@@ -175,4 +175,60 @@ public class Saloon implements Serializable {
     public void setSaloonTotalRating(int saloonTotalRating) {
         this.saloonTotalRating = saloonTotalRating;
     }
+
+    public String resolveSaloonRating(){
+
+        return String.valueOf(saloonRatingSum /saloonTotalRating) ;
+    }
+
+    public String resolveSaloonOpeningTime(){
+        String string ="";
+
+        if (openingTimeHour <10){
+            string= string.concat("0"+String.valueOf(openingTimeHour)+":");
+        }else{
+            string= string.concat(String.valueOf(openingTimeHour)+":");
+        }
+
+        if (openingTimeMinute <10){
+            string= string.concat("0"+String.valueOf(openingTimeMinute));
+        }else{
+            string= string.concat(String.valueOf(openingTimeMinute));
+        }
+
+        if (openingTimeHour >11){
+            string= string.concat("PM");
+        }else{
+            string= string.concat("AM");
+        }
+
+        return string;
+
+    }
+
+    public String resolveSaloonClosingTime(){
+        String string ="";
+
+        if (closingTimeHour <10){
+            string= string.concat("0"+String.valueOf(getClosingTimeHour())+":");
+        }else{
+            string= string.concat(String.valueOf(closingTimeHour)+":");
+        }
+
+        if (closingTimeMinute <10){
+            string= string.concat("0"+String.valueOf(closingTimeMinute));
+        }else{
+            string= string.concat(String.valueOf(closingTimeMinute));
+        }
+
+        if (closingTimeMinute >11){
+            string= string.concat("PM");
+        }else{
+            string= string.concat("AM");
+        }
+
+        return string;
+
+    }
+
 }

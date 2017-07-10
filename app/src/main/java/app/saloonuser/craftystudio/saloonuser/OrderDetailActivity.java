@@ -175,9 +175,11 @@ public class OrderDetailActivity extends AppCompatActivity {
 
         if (saloon != null) {
             // mSaloonTimeingTextView.setText();
-            mSaloonRatingTextView.setText((saloon.getSaloonRatingSum() / saloon.getSaloonTotalRating())+"");
+            mSaloonRatingTextView.setText(saloon.resolveSaloonRating());
             mSaloonPhoneNumberTextView.setText(saloon.getSaloonPhoneNumber());
             mSaloonAddressTextView.setText(saloon.getSaloonAddress());
+            mSaloonTimeTextView.setText(saloon.resolveSaloonOpeningTime()+"-"+saloon.resolveSaloonClosingTime());
+
         }
 
         serviceAdapter.notifyDataSetChanged();
