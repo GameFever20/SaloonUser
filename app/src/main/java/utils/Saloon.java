@@ -228,6 +228,7 @@ public class Saloon implements Serializable {
             string = string.concat("PM");
         } else {
             string = string.concat("AM");
+
         }
 
         return string;
