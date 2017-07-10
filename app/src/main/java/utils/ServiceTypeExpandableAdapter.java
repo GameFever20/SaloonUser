@@ -133,7 +133,7 @@ public class ServiceTypeExpandableAdapter extends BaseExpandableListAdapter {
                 //Toast.makeText(mContext, "service" + service.getServiceName() + " , " + service.getServiceType(), Toast.LENGTH_SHORT).show();
 
                 if (isChecked) {
-                    ServiceTypeActivity.CURRENTORDER.getOrderServiceIDList().put(service.getServiceUID(), service.getServiceName());
+                    ServiceTypeActivity.CURRENTORDER.getOrderServiceIDList().put(service.getServiceUID(), service);
 
                     ServiceTypeActivity.CURRENTORDER.setOrderPrice(ServiceTypeActivity.CURRENTORDER.getOrderPrice() + service.getServicePrice());
                     ServiceTypeActivity.CURRENTORDER.setOrderTotalServiceCount(ServiceTypeActivity.CURRENTORDER.getOrderTotalServiceCount() + 1);

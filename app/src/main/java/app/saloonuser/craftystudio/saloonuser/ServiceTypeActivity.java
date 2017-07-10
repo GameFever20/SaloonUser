@@ -284,7 +284,7 @@ public class ServiceTypeActivity extends AppCompatActivity {
 
     public void proceedOrderPlacement(View view) throws InterruptedException {
         boolean isServiceSelected = false;
-        for (String service : CURRENTORDER.getOrderServiceIDList().values()) {
+        for (Service service : CURRENTORDER.getOrderServiceIDList().values()) {
             isServiceSelected = true;
 
            /*

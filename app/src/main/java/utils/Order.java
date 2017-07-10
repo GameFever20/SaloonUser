@@ -24,7 +24,7 @@ public class Order implements Serializable {
     private long orderTime = 0;
     private int orderPrice = 0;
     private String orderServiceName = "";
-    private Map<String, String> orderServiceIDList = new HashMap<String, String>();
+    private Map<String, Service> orderServiceIDList = new HashMap<String, Service>();
     private int orderTotalServiceCount;
 
     private long orderBookingTime;
@@ -109,11 +109,11 @@ public class Order implements Serializable {
         this.orderServiceName = orderServiceName;
     }
 
-    public Map<String, String> getOrderServiceIDList() {
+    public Map<String, Service> getOrderServiceIDList() {
         return orderServiceIDList;
     }
 
-    public void setOrderServiceIDList(Map<String, String> orderServiceIDList) {
+    public void setOrderServiceIDList(Map<String, Service> orderServiceIDList) {
         this.orderServiceIDList = orderServiceIDList;
     }
 
@@ -177,8 +177,8 @@ public class Order implements Serializable {
 
         String serviceList = "";
 
-        for (String string : getOrderServiceIDList().values()) {
-            serviceList = serviceList + "* " + string + "\n";
+        for (Service service : getOrderServiceIDList().values()) {
+            serviceList = serviceList + "* " + service.getServiceName() + "\n";
 
         }
 
