@@ -40,7 +40,7 @@ public class OrderDetailActivity extends AppCompatActivity {
     ArrayList<Service> serviceArrayList = new ArrayList<>();
     ServiceAdapter serviceAdapter = new ServiceAdapter(serviceArrayList);
 
-    RecyclerView serviceRecyclerView ;
+    RecyclerView serviceRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,9 +70,9 @@ public class OrderDetailActivity extends AppCompatActivity {
         mSaloonMadeOfPaymentTextView = (TextView) findViewById(R.id.orderDetail_saloonModesOfPayment_TextView);
         mOrderPriceTextView = (TextView) findViewById(R.id.orderDetail_orderPrice_TextView);
 
-        mOrderTimeTextView =(TextView)findViewById(R.id.orderDetail_orderTime_TextView);
+        mOrderTimeTextView = (TextView) findViewById(R.id.orderDetail_orderTime_TextView);
 
-        serviceRecyclerView=(RecyclerView)findViewById(R.id.orderDetail_servicesName_recyclerView);
+        serviceRecyclerView = (RecyclerView) findViewById(R.id.orderDetail_servicesName_recyclerView);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
         serviceRecyclerView.setLayoutManager(mLayoutManager);
         serviceRecyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -153,8 +153,8 @@ public class OrderDetailActivity extends AppCompatActivity {
             });
         }
 
-        if (order!=null){
-            for (Service service : order.getOrderServiceIDList().values()){
+        if (order != null) {
+            for (Service service : order.getOrderServiceIDList().values()) {
                 serviceArrayList.add(service);
             }
 
@@ -167,7 +167,7 @@ public class OrderDetailActivity extends AppCompatActivity {
 
         if (order != null) {
 
-            mOrderPriceTextView.setText(order.getOrderPrice()+"");
+            mOrderPriceTextView.setText(order.getOrderPrice() + "");
             mOrderTimeTextView.setText(order.resolveOrderBookingTime());
             mSaloonNameTextView.setText(order.getSaloonName());
 
@@ -178,7 +178,9 @@ public class OrderDetailActivity extends AppCompatActivity {
             mSaloonRatingTextView.setText(saloon.resolveSaloonRating());
             mSaloonPhoneNumberTextView.setText(saloon.getSaloonPhoneNumber());
             mSaloonAddressTextView.setText(saloon.getSaloonAddress());
-            mSaloonTimeTextView.setText(saloon.resolveSaloonOpeningTime()+"-"+saloon.resolveSaloonClosingTime());
+
+
+            mSaloonTimeTextView.setText(saloon.resolveSaloonOpeningTime() + "-" + saloon.resolveSaloonClosingTime());
 
         }
 
@@ -258,12 +260,21 @@ public class OrderDetailActivity extends AppCompatActivity {
     public void onBackPressed() {
         if (orderUID == null) {
             super.onBackPressed();
-        }else{
-            Intent intent =new Intent(OrderDetailActivity.this , MainActivity.class);
+        } else {
+           Intent intent = new Intent(OrderDetailActivity.this, MainActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             finish();
+
         }
+    }
+
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        // onBackPressed();
+        return true;
     }
 
 

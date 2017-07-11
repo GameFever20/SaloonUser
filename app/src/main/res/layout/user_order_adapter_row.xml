@@ -115,16 +115,18 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="2dp"
                 android:layout_weight="3"
-                android:background="@color/whitish"
+                android:background="@color/light_white"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/orderAdapter_orderDate_textview"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
                     android:layout_marginLeft="15dp"
                     android:layout_marginTop="5dp"
+                    android:layout_marginRight="10dp"
+                    android:textAlignment="viewEnd"
                     android:fontFamily="serif"
                     android:text="Order Date and Time"
                     android:textColor="@color/grey"
@@ -139,6 +141,7 @@
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
+                    android:visibility="gone"
                     android:fontFamily="serif"
                     android:onClick="openGPSDirection"
                     android:text="Get Direction"
@@ -155,6 +158,7 @@
                     android:layout_marginRight="3dp"
                     android:onClick="openGPSDirection"
                     android:scaleType="centerCrop"
+                    android:visibility="gone"
                     android:src="@drawable/ic_action_locationblack" />
 
             </LinearLayout>

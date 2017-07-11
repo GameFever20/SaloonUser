@@ -64,7 +64,6 @@
                     android:layout_weight="1"
                     android:fontFamily="serif"
                     android:text="900"
-
                     android:textColor="@color/blackish"
                     android:textSize="14sp"
                     android:textStyle="italic" />
@@ -80,8 +79,7 @@
                         android:layout_weight="1"
                         android:fontFamily="serif"
                         android:text="900"
-
-                        android:textColor="@color/blackish"
+                        android:textColor="@color/red"
                         android:textSize="14sp"
                         android:textStyle="italic" />
 

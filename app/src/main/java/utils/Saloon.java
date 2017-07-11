@@ -189,8 +189,12 @@ public class Saloon implements Serializable {
 
         if (openingTimeHour < 10) {
             string = string.concat("0" + String.valueOf(openingTimeHour) + ":");
+        } else if (openingTimeHour > 12) {
+            //  string = string.concat(String.valueOf(openingTimeHour) + ":");
+            string = string.concat((openingTimeHour - 12) + ":");
         } else {
             string = string.concat(String.valueOf(openingTimeHour) + ":");
+
         }
 
         if (openingTimeMinute < 10) {
@@ -199,11 +203,13 @@ public class Saloon implements Serializable {
             string = string.concat(String.valueOf(openingTimeMinute));
         }
 
+
         if (openingTimeHour > 11) {
             string = string.concat("PM");
         } else {
             string = string.concat("AM");
         }
+
 
         return string;
 
@@ -214,8 +220,11 @@ public class Saloon implements Serializable {
 
         if (closingTimeHour < 10) {
             string = string.concat("0" + String.valueOf(getClosingTimeHour()) + ":");
+        } else if (closingTimeHour > 12) {
+            string = string.concat((closingTimeHour - 12) + ":");
         } else {
             string = string.concat(String.valueOf(closingTimeHour) + ":");
+
         }
 
         if (closingTimeMinute < 10) {

@@ -176,7 +176,31 @@ public class ServiceTypeActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(mViewPager);
 
         for (int i = 0; i < tabLayout.getTabCount(); i++) {
-            tabLayout.getTabAt(i).setIcon(R.drawable.ic_action_clock);
+
+            switch (i) {
+                case 0:
+                    tabLayout.getTabAt(i).setIcon(R.drawable.ic_action_clock);
+                    break;
+                case 1:
+                    tabLayout.getTabAt(i).setIcon(R.drawable.ic_action_address);
+                    break;
+                case 2:
+                    tabLayout.getTabAt(i).setIcon(R.drawable.ic_action_booking);
+                    break;
+                case 3:
+                    tabLayout.getTabAt(i).setIcon(R.drawable.ic_action_currency);
+                    break;
+                case 4:
+                    tabLayout.getTabAt(i).setIcon(R.drawable.ic_action_date);
+                    break;
+                case 5:
+                    tabLayout.getTabAt(i).setIcon(R.drawable.ic_action_direction);
+                    break;
+
+
+
+
+            }
         }
 
     }
