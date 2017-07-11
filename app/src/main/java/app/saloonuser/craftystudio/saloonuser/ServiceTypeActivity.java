@@ -66,6 +66,7 @@ public class ServiceTypeActivity extends AppCompatActivity {
     TabLayout tabLayout;
 
 
+
     //static HashMap<String, ArrayList<Service>> mServiceHashMap = new HashMap<>();
     //static ArrayList<String> mServiceSubType = new ArrayList<>();
 
