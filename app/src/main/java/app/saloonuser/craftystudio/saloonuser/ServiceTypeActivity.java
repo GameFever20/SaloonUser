@@ -179,25 +179,23 @@ public class ServiceTypeActivity extends AppCompatActivity {
 
             switch (i) {
                 case 0:
-                    tabLayout.getTabAt(i).setIcon(R.drawable.ic_action_clock);
+                    tabLayout.getTabAt(i).setIcon(R.drawable.ic_action_haircare);
                     break;
                 case 1:
-                    tabLayout.getTabAt(i).setIcon(R.drawable.ic_action_address);
+                    tabLayout.getTabAt(i).setIcon(R.drawable.ic_action_skincare);
                     break;
                 case 2:
-                    tabLayout.getTabAt(i).setIcon(R.drawable.ic_action_booking);
+                    tabLayout.getTabAt(i).setIcon(R.drawable.ic_action_manicure);
                     break;
                 case 3:
-                    tabLayout.getTabAt(i).setIcon(R.drawable.ic_action_currency);
+                    tabLayout.getTabAt(i).setIcon(R.drawable.ic_action_bodyscrub);
                     break;
                 case 4:
-                    tabLayout.getTabAt(i).setIcon(R.drawable.ic_action_date);
+                    tabLayout.getTabAt(i).setIcon(R.drawable.ic_action_massage);
                     break;
                 case 5:
-                    tabLayout.getTabAt(i).setIcon(R.drawable.ic_action_direction);
+                    tabLayout.getTabAt(i).setIcon(R.drawable.ic_action_makeup);
                     break;
-
-
 
 
             }
