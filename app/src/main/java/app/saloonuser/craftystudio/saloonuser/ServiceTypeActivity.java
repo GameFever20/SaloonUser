@@ -144,11 +144,17 @@ public class ServiceTypeActivity extends AppCompatActivity {
             @Override
             public void onServiceList(ArrayList<Service> serviceArrayList, boolean isSuccesful) {
 
-                //animate app bar in service activity
-                YoYo.with(Techniques.StandUp)
-                        .duration(1000)
-                        .repeat(1)
-                        .playOn(appBarLayout);
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                    // Do something for lollipop and above versions
+                    //animate app bar in service activity
+                    YoYo.with(Techniques.StandUp)
+                            .duration(1000)
+                            .repeat(1)
+                            .playOn(appBarLayout);
+
+                } else {
+                    // do something for phones running an SDK before lollipop
+                }
 
 
                 ServiceTypeActivity.this.serviceArrayList = serviceArrayList;
@@ -208,10 +214,16 @@ public class ServiceTypeActivity extends AppCompatActivity {
 
         mPriceNServiceTextview.setText(CURRENTORDER.getOrderPrice() + " and " + CURRENTORDER.getOrderTotalServiceCount());
 
-        YoYo.with(Techniques.Swing)
-                .duration(1000)
-                .repeat(2)
-                .playOn(mPriceNServiceTextview);
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            // Do something for lollipop and above versions
+            YoYo.with(Techniques.Swing)
+                    .duration(1000)
+                    .repeat(2)
+                    .playOn(mPriceNServiceTextview);
+
+        } else {
+            // do something for phones running an SDK before lollipop
+        }
 
     }
 
@@ -326,19 +338,34 @@ public class ServiceTypeActivity extends AppCompatActivity {
         if (!isServiceSelected) {
             Toast.makeText(this, " Add Service to proceed", Toast.LENGTH_SHORT).show();
             //animate toolbar
-            YoYo.with(Techniques.Shake)
-                    .duration(1000)
-                    .repeat(2)
-                    .playOn(view);
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                // Do something for lollipop and above versions
+                YoYo.with(Techniques.Shake)
+                        .duration(1000)
+                        .repeat(2)
+                        .playOn(view);
+
+            } else {
+                // do something for phones running an SDK before lollipop
+            }
 
             return;
         }
 
 
-        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(ServiceTypeActivity.this);
-        Intent intent = new Intent(ServiceTypeActivity.this, UserOrderPlacementActivity.class);
-        intent.putExtra("Saloon", saloon);
-        startActivity(intent, options.toBundle());
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            // Do something for lollipop and above versions
+            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(ServiceTypeActivity.this);
+            Intent intent = new Intent(ServiceTypeActivity.this, UserOrderPlacementActivity.class);
+            intent.putExtra("Saloon", saloon);
+            startActivity(intent, options.toBundle());
+        } else {
+            // do something for phones running an SDK before lollipop
+            Intent intent = new Intent(ServiceTypeActivity.this, UserOrderPlacementActivity.class);
+            intent.putExtra("Saloon", saloon);
+            startActivity(intent);
+        }
+
     }
 
 

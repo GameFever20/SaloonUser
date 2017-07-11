@@ -57,13 +57,19 @@ public class UserOrderActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            // Do something for lollipop and above versions
+            //animation
+            Explode explode = new Explode();
+            explode.setDuration(1000);
+            explode.setMode(Visibility.MODE_IN);
+            getWindow().setEnterTransition(explode);
+            getWindow().setAllowEnterTransitionOverlap(true);
 
-        //animation
-        Explode explode = new Explode();
-        explode.setDuration(1000);
-        explode.setMode(Visibility.MODE_IN);
-        getWindow().setEnterTransition(explode);
-        getWindow().setAllowEnterTransitionOverlap(true);
+
+        } else {
+            // do something for phones running an SDK before lollipop
+        }
 
 
         mTextMessage = (TextView) findViewById(R.id.message);
@@ -81,8 +87,8 @@ public class UserOrderActivity extends AppCompatActivity {
         mUserOrderRecyclerview.addOnItemTouchListener(new RecyclerTouchListener(this, mUserOrderRecyclerview, new ClickListener() {
             @Override
             public void onClick(View view, int position) {
-                Intent intent =new Intent(UserOrderActivity.this ,OrderDetailActivity.class);
-                intent.putExtra("order" ,mTempOrderArraylist.get(position));
+                Intent intent = new Intent(UserOrderActivity.this, OrderDetailActivity.class);
+                intent.putExtra("order", mTempOrderArraylist.get(position));
                 startActivity(intent);
             }
 

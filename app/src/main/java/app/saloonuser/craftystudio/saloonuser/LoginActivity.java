@@ -103,11 +103,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             onRestoreInstanceState(savedInstanceState);
         }
 
-        //animation
-        final Explode explode = new Explode();
-        explode.setDuration(700);
-        explode.setMode(Visibility.MODE_IN);
-        getWindow().setEnterTransition(explode);
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP){
+            // Do something for lollipop and above versions
+            //animation
+            final Explode explode = new Explode();
+            explode.setDuration(700);
+            explode.setMode(Visibility.MODE_IN);
+            getWindow().setEnterTransition(explode);
+
+        } else{
+            // do something for phones running an SDK before lollipop
+        }
+
 
 
         progressDialog = new ProgressDialog(this);
@@ -134,12 +141,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mVerifyButton.setOnClickListener(this);
         mResendTextview.setOnClickListener(this);
 
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP){
+            // Do something for lollipop and above versions
+            //animate shake in LoginBg
+            YoYo.with(Techniques.ZoomIn)
+                    .duration(1000)
+                    .repeat(1)
+                    .playOn(mLoginBG);
 
-        //animate shake in LoginBg
-        YoYo.with(Techniques.ZoomIn)
-                .duration(1000)
-                .repeat(1)
-                .playOn(mLoginBG);
+        } else{
+            // do something for phones running an SDK before lollipop
+        }
+
 
 
         //mSignOutButton.setOnClickListener(this);
@@ -486,11 +499,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         String phoneNumber = mPhoneNumberField.getText().toString();
         if (TextUtils.isEmpty(phoneNumber)) {
 
-            //animate shake in EditText
-            YoYo.with(Techniques.Shake)
-                    .duration(1000)
-                    .repeat(1)
-                    .playOn(mPhoneNumberField);
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP){
+                // Do something for lollipop and above versions
+                //animate shake in EditText
+                YoYo.with(Techniques.Shake)
+                        .duration(1000)
+                        .repeat(1)
+                        .playOn(mPhoneNumberField);
+
+            } else{
+                // do something for phones running an SDK before lollipop
+            }
+
 
             mPhoneNumberField.setError("Invalid phone number.");
             return false;
@@ -526,11 +546,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.button_verify_phone:
                 String code = mVerificationField.getText().toString();
                 if (TextUtils.isEmpty(code)) {
-                    //animate shake in EditText
-                    YoYo.with(Techniques.Shake)
-                            .duration(1000)
-                            .repeat(1)
-                            .playOn(mVerificationField);
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP){
+                        // Do something for lollipop and above versions
+                        //animate shake in EditText
+                        YoYo.with(Techniques.Shake)
+                                .duration(1000)
+                                .repeat(1)
+                                .playOn(mVerificationField);
+
+                    } else{
+                        // do something for phones running an SDK before lollipop
+                    }
 
                     mVerificationField.setError("Cannot be empty.");
                     return;

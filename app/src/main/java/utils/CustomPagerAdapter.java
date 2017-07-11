@@ -61,12 +61,18 @@ public class CustomPagerAdapter extends PagerAdapter {
         ImageView imageView = (ImageView) itemView.findViewById(R.id.slideimageView);
 
 
-        //animate shake in Saloon Name
-        YoYo.with(Techniques.Bounce)
-                .duration(3000)
-                .repeat(ValueAnimator.INFINITE)
-                 .playOn(imageView);
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            // Do something for lollipop and above versions
+            //animate shake in Saloon Name
+            YoYo.with(Techniques.Bounce)
+                    .duration(3000)
+                    .repeat(ValueAnimator.INFINITE)
+                    .playOn(imageView);
 
+
+        } else {
+            // do something for phones running an SDK before lollipop
+        }
 
         /*
         AnimatorSet animationSet = new AnimatorSet();

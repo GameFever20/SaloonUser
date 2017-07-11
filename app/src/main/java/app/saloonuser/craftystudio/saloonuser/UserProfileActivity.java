@@ -42,18 +42,24 @@ public class UserProfileActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-        //animation
-        final Explode explode = new Explode();
-        explode.setDuration(700);
-        explode.setMode(Visibility.MODE_IN);
-        getWindow().setEnterTransition(explode);
-        getWindow().setAllowEnterTransitionOverlap(true);
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            // Do something for lollipop and above versions
+            //animation
+            final Explode explode = new Explode();
+            explode.setDuration(700);
+            explode.setMode(Visibility.MODE_IN);
+            getWindow().setEnterTransition(explode);
+            getWindow().setAllowEnterTransitionOverlap(true);
 
-        //animate shake in ToolBar
-        YoYo.with(Techniques.DropOut)
-                .duration(1000)
-                .repeat(1)
-                .playOn(toolbar);
+            //animate shake in ToolBar
+            YoYo.with(Techniques.DropOut)
+                    .duration(1000)
+                    .repeat(1)
+                    .playOn(toolbar);
+
+        } else {
+            // do something for phones running an SDK before lollipop
+        }
 
 
         //views
@@ -88,20 +94,32 @@ public class UserProfileActivity extends AppCompatActivity {
                             if (user.getUserName().isEmpty()) {
                                 mAddServiceButton.setVisibility(View.VISIBLE);
                                 //animate Button
-                                YoYo.with(Techniques.Shake)
-                                        .duration(1000)
-                                        .repeat(1)
-                                        .playOn(mAddServiceButton);
+                                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                                    // Do something for lollipop and above versions
+                                    YoYo.with(Techniques.Shake)
+                                            .duration(1000)
+                                            .repeat(1)
+                                            .playOn(mAddServiceButton);
+
+                                } else {
+                                    // do something for phones running an SDK before lollipop
+                                }
 
 
                             }
                         } else {
                             mAddServiceButton.setVisibility(View.VISIBLE);
-                            //animate Button
-                            YoYo.with(Techniques.Shake)
-                                    .duration(1000)
-                                    .repeat(1)
-                                    .playOn(mAddServiceButton);
+                            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                                // Do something for lollipop and above versions
+                                YoYo.with(Techniques.Shake)
+                                        .duration(1000)
+                                        .repeat(1)
+                                        .playOn(mAddServiceButton);
+
+                            } else {
+                                // do something for phones running an SDK before lollipop
+                            }
+
 
                         }
                     } else {
@@ -148,11 +166,20 @@ public class UserProfileActivity extends AppCompatActivity {
             } else {
                 mUserProfileImage.setImageResource(R.drawable.female_copy);
             }
-            //animate shake in Saloon Name
-            YoYo.with(Techniques.DropOut)
-                    .duration(1000)
-                    .repeat(1)
-                    .playOn(mUserProfileImage);
+
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP){
+                // Do something for lollipop and above versions
+                //animate shake in Saloon Name
+                YoYo.with(Techniques.DropOut)
+                        .duration(1000)
+                        .repeat(1)
+                        .playOn(mUserProfileImage);
+            } else{
+                // do something for phones running an SDK before lollipop
+            }
+
+
+
 
         }
 

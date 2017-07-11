@@ -99,17 +99,23 @@ public class SaloonAdapter extends RecyclerView.Adapter<SaloonAdapter.SaloonView
             }
         }
 
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP){
+            // Do something for lollipop and above versions
+            //getting position to know about moving up or down
+            if (position > previousPosition) {//we are going Down
 
-        //getting position to know about moving up or down
-        if (position > previousPosition) {//we are going Down
+                AnimationUtil.animate(holder,true);
 
-            AnimationUtil.animate(holder,true);
+            } else { //we are going UP
+                AnimationUtil.animate(holder,false);
 
-        } else { //we are going UP
-            AnimationUtil.animate(holder,false);
+            }
+            previousPosition = position;
 
+        } else{
+            // do something for phones running an SDK before lollipop
         }
-        previousPosition = position;
+
 
 
     }

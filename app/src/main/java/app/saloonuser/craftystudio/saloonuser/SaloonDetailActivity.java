@@ -109,11 +109,17 @@ public class SaloonDetailActivity extends AppCompatActivity {
         //setting all data in views
         setAllValues();
 
-        //animate shake in Saloon Name
-        YoYo.with(Techniques.BounceIn)
-                .duration(1000)
-                .repeat(1)
-                .playOn(mSaloonDetailNameTv);
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP){
+            // Do something for lollipop and above versions
+            //animate shake in Saloon Name
+            YoYo.with(Techniques.BounceIn)
+                    .duration(1000)
+                    .repeat(1)
+                    .playOn(mSaloonDetailNameTv);
+
+        } else{
+            // do something for phones running an SDK before lollipop
+        }
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -315,38 +321,51 @@ public class SaloonDetailActivity extends AppCompatActivity {
         float maxradius = Math.max(fullWidth, fullHeight) * 2.0f;
         Toast.makeText(this, "full width " + fullWidth + " full height " + fullHeight, Toast.LENGTH_SHORT).show();
 
-        Animator reveal = ViewAnimationUtils.createCircularReveal(view, centerX, centerY, 0, maxradius);
-        reveal.addListener(new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator animator) {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP){
+            // Do something for lollipop and above versions
+            Animator reveal = ViewAnimationUtils.createCircularReveal(view, centerX, centerY, 0, maxradius);
+            reveal.addListener(new Animator.AnimatorListener() {
+                @Override
+                public void onAnimationStart(Animator animator) {
 
-                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(SaloonDetailActivity.this);
-                Intent intent = new Intent(SaloonDetailActivity.this, ImageActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("Saloon", saloon);
-                intent.putExtras(bundle);
-                startActivity(intent, options.toBundle());
-
-
-            }
-
-            @Override
-            public void onAnimationEnd(Animator animator) {
+                    ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(SaloonDetailActivity.this);
+                    Intent intent = new Intent(SaloonDetailActivity.this, ImageActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("Saloon", saloon);
+                    intent.putExtras(bundle);
+                    startActivity(intent, options.toBundle());
 
 
-            }
+                }
 
-            @Override
-            public void onAnimationCancel(Animator animator) {
+                @Override
+                public void onAnimationEnd(Animator animator) {
 
-            }
 
-            @Override
-            public void onAnimationRepeat(Animator animator) {
+                }
 
-            }
-        });
-        reveal.start();
+                @Override
+                public void onAnimationCancel(Animator animator) {
+
+                }
+
+                @Override
+                public void onAnimationRepeat(Animator animator) {
+
+                }
+            });
+            reveal.start();
+
+        } else{
+            // do something for phones running an SDK before lollipop
+            Intent intent = new Intent(SaloonDetailActivity.this, ImageActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("Saloon", saloon);
+            intent.putExtras(bundle);
+            startActivity(intent);
+
+        }
+
 
     }
 

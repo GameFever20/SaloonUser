@@ -150,11 +150,17 @@ public class MainActivity extends AppCompatActivity
                 mAdapter.notifyDataSetChanged();
 
 
-                //animate toolbar
-                YoYo.with(Techniques.BounceInDown)
-                        .duration(1000)
-                        .repeat(1)
-                        .playOn(toolbar);
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                    // Do something for lollipop and above versions
+                    //animate toolbar
+                    YoYo.with(Techniques.BounceInDown)
+                            .duration(1000)
+                            .repeat(1)
+                            .playOn(toolbar);
+
+                } else {
+                    // do something for phones running an SDK before lollipop
+                }
 
 
                 //loading more
@@ -189,17 +195,27 @@ public class MainActivity extends AppCompatActivity
                         saloon = mSaloonArraylist.get(position);
 
 
-                        //animation
-                        // ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this);
+                        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                            // Do something for lollipop and above versions
+                            //animation
+                            // ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this);
 
-                        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this, android.util.Pair.create(view.findViewById(R.id.saloonadapterrow_saloon_profilepic_imageView), "profile_image_shared"));
+                            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this, android.util.Pair.create(view.findViewById(R.id.saloonadapterrow_saloon_profilepic_imageView), "profile_image_shared"));
+                            Intent intent = new Intent(MainActivity.this, SaloonDetailActivity.class);
+                            Bundle bundle = new Bundle();
+                            bundle.putSerializable("Saloon_Class", saloon);
+                            intent.putExtras(bundle);
+                            startActivity(intent, options.toBundle());
 
+                        } else {
+                            // do something for phones running an SDK before lollipop
+                            Intent intent = new Intent(MainActivity.this, SaloonDetailActivity.class);
+                            Bundle bundle = new Bundle();
+                            bundle.putSerializable("Saloon_Class", saloon);
+                            intent.putExtras(bundle);
+                            startActivity(intent);
+                        }
 
-                        Intent intent = new Intent(MainActivity.this, SaloonDetailActivity.class);
-                        Bundle bundle = new Bundle();
-                        bundle.putSerializable("Saloon_Class", saloon);
-                        intent.putExtras(bundle);
-                        startActivity(intent, options.toBundle());
 
                         //calling new activity having orders of particular saloon
                        /*
@@ -250,7 +266,7 @@ public class MainActivity extends AppCompatActivity
 
         }
 
-        if (repeatedSaloonCount ==saloonFetchLimit){
+        if (repeatedSaloonCount == saloonFetchLimit) {
             //if all 30 saloon have same saloon point then skip that saloon point
             lastSaloonPoint--;
         }
@@ -360,17 +376,37 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_profile) {
-            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this);
-            Intent intent = new Intent(MainActivity.this, UserProfileActivity.class);
-            startActivity(intent, options.toBundle());
+
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP){
+                // Do something for lollipop and above versions
+                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this);
+                Intent intent = new Intent(MainActivity.this, UserProfileActivity.class);
+                startActivity(intent, options.toBundle());
+
+            } else{
+                // do something for phones running an SDK before lollipop
+
+                Intent intent = new Intent(MainActivity.this, UserProfileActivity.class);
+                startActivity(intent);
+
+            }
 
             // Handle the camera action
 
 
         } else if (id == R.id.nav_order) {
-            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this);
-            Intent intent = new Intent(MainActivity.this, UserOrderActivity.class);
-            startActivity(intent, options.toBundle());
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP){
+                // Do something for lollipop and above versions
+                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this);
+                Intent intent = new Intent(MainActivity.this, UserOrderActivity.class);
+                startActivity(intent, options.toBundle());
+
+            } else{
+                // do something for phones running an SDK before lollipop
+                Intent intent = new Intent(MainActivity.this, UserOrderActivity.class);
+                startActivity(intent);
+
+            }
 
 
         } else if (id == R.id.nav_share) {

@@ -121,11 +121,17 @@ public class UserDetailActivity extends AppCompatActivity {
         GENDER = "Female";
         Toast.makeText(this, "Hey! Beautiful", Toast.LENGTH_SHORT).show();
 
-        //animate Next Button
-        YoYo.with(Techniques.FlipInX)
-                .duration(1000)
-                .repeat(1)
-                .playOn(mNextUploadButton);
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            // Do something for lollipop and above versions
+            //animate Next Button
+            YoYo.with(Techniques.FlipInX)
+                    .duration(1000)
+                    .repeat(1)
+                    .playOn(mNextUploadButton);
+
+        } else {
+            // do something for phones running an SDK before lollipop
+        }
 
     }
 
@@ -135,11 +141,17 @@ public class UserDetailActivity extends AppCompatActivity {
         GENDER = "Male";
         Toast.makeText(this, "Hey! HandSome", Toast.LENGTH_SHORT).show();
 
-        //animate Next Button
-        YoYo.with(Techniques.FlipInX)
-                .duration(1000)
-                .repeat(1)
-                .playOn(mNextUploadButton);
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            // Do something for lollipop and above versions
+            //animate Next Button
+            YoYo.with(Techniques.FlipInX)
+                    .duration(1000)
+                    .repeat(1)
+                    .playOn(mNextUploadButton);
+
+        } else {
+            // do something for phones running an SDK before lollipop
+        }
 
 
     }

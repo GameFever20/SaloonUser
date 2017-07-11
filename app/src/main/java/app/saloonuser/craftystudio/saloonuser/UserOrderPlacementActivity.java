@@ -65,11 +65,17 @@ public class UserOrderPlacementActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
 
-        //animation
-        Explode explode = new Explode();
-        explode.setDuration(1000);
-        explode.setMode(Visibility.MODE_IN);
-        getWindow().setEnterTransition(explode);
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP){
+            // Do something for lollipop and above versions
+            //animation
+            Explode explode = new Explode();
+            explode.setDuration(1000);
+            explode.setMode(Visibility.MODE_IN);
+            getWindow().setEnterTransition(explode);
+
+        } else{
+            // do something for phones running an SDK before lollipop
+        }
 
         try {
             saloon = (Saloon) getIntent().getSerializableExtra("Saloon");

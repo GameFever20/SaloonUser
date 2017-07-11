@@ -23,6 +23,7 @@ public class AnimationUtil {
                 .playOn(holder.itemView);
 */
 
+
         AnimatorSet animatorSet = new AnimatorSet();
 
       //  ObjectAnimator animateScaleX = ObjectAnimator.ofFloat(holder.itemView, "scaleX", 0.5f, 0.8f, 1.0f);
