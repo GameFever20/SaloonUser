@@ -122,6 +122,7 @@ public class MainActivity extends AppCompatActivity
             public void onUserDownLoad(User user, boolean isSuccessful) {
                 LoginActivity.USER =user;
                 MainActivity.this.user =user;
+
             }
 
             @Override
