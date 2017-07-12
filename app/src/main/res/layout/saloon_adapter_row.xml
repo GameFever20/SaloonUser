@@ -89,7 +89,7 @@
                             android:text="Opening Time "
                             android:textAlignment="textEnd"
                             android:textColor="@color/blackish"
-                            android:textSize="14sp"
+                            android:textSize="12sp"
                             android:textStyle="bold" />
                     </LinearLayout>
 

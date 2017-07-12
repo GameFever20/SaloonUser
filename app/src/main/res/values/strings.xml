@@ -90,7 +90,7 @@
 
 
 
-    <string name="title_activity_user_order_placement">Order Detail</string>
-    <string name="title_activity_order_detail">OrderDetailActivity</string>
+    <string name="title_activity_user_order_placement">Order Preview</string>
+    <string name="title_activity_order_detail">Order Detail</string>
 
 </resources>

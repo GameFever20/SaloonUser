@@ -66,7 +66,6 @@ public class SaloonDetailActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         saloon = (Saloon) bundle.getSerializable("Saloon_Class");
@@ -110,7 +109,7 @@ public class SaloonDetailActivity extends AppCompatActivity {
         //setting all data in views
         setAllValues();
 
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP){
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
             // Do something for lollipop and above versions
             //animate shake in Saloon Name
             YoYo.with(Techniques.BounceIn)
@@ -118,7 +117,7 @@ public class SaloonDetailActivity extends AppCompatActivity {
                     .repeat(1)
                     .playOn(mSaloonDetailNameTv);
 
-        } else{
+        } else {
             // do something for phones running an SDK before lollipop
         }
 
@@ -181,8 +180,12 @@ public class SaloonDetailActivity extends AppCompatActivity {
         } else {
             p = "PM";
         }
+        //mSaloonDetailOpeningTimeTv.setText(mSaloonDetailOpeningTimeTv.getText() + " " + saloon.getOpeningTimeHour() + m);
+        //mSaloonDetailClosingTimeTv.setText(mSaloonDetailClosingTimeTv.getText() + " " + saloon.getClosingTimeHour() + p);
+
         mSaloonDetailOpeningTimeTv.setText(mSaloonDetailOpeningTimeTv.getText() + " " + saloon.getOpeningTimeHour() + m);
-        mSaloonDetailClosingTimeTv.setText(mSaloonDetailClosingTimeTv.getText() + " " + saloon.getClosingTimeHour() + p);
+        mSaloonDetailClosingTimeTv.setText(mSaloonDetailClosingTimeTv.getText() + " " + saloon.resolveSaloonClosingTime());
+
         mSaloonDetailRatingTv.setText(saloon.getSaloonTotalRating() + "");
         lattitude = saloon.getSaloonLocationLatitude();
         longitute = saloon.getSaloonLocationLongitude();
@@ -317,12 +320,12 @@ public class SaloonDetailActivity extends AppCompatActivity {
 
         float radius = Math.max(view.getWidth(), view.getHeight()) * 2.0f;
 
-        Toast.makeText(this, " width " + view.getWidth() + "  height " + view.getHeight(), Toast.LENGTH_SHORT).show();
+       // Toast.makeText(this, " width " + view.getWidth() + "  height " + view.getHeight(), Toast.LENGTH_SHORT).show();
 
         float maxradius = Math.max(fullWidth, fullHeight) * 2.0f;
-        Toast.makeText(this, "full width " + fullWidth + " full height " + fullHeight, Toast.LENGTH_SHORT).show();
+       // Toast.makeText(this, "full width " + fullWidth + " full height " + fullHeight, Toast.LENGTH_SHORT).show();
 
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP){
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
             // Do something for lollipop and above versions
             Animator reveal = ViewAnimationUtils.createCircularReveal(view, centerX, centerY, 0, maxradius);
             reveal.addListener(new Animator.AnimatorListener() {
@@ -336,7 +339,7 @@ public class SaloonDetailActivity extends AppCompatActivity {
                         bundle.putSerializable("Saloon", saloon);
                         intent.putExtras(bundle);
                         startActivity(intent, options.toBundle());
-                    }else{
+                    } else {
 
                         Intent intent = new Intent(SaloonDetailActivity.this, ImageActivity.class);
                         Bundle bundle = new Bundle();
@@ -365,7 +368,7 @@ public class SaloonDetailActivity extends AppCompatActivity {
             });
             reveal.start();
 
-        } else{
+        } else {
             // do something for phones running an SDK before lollipop
             Intent intent = new Intent(SaloonDetailActivity.this, ImageActivity.class);
             Bundle bundle = new Bundle();
@@ -384,7 +387,7 @@ public class SaloonDetailActivity extends AppCompatActivity {
         super.onBackPressed();
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
             finishAfterTransition();
-        }else{
+        } else {
             finish();
         }
     }
@@ -393,7 +396,7 @@ public class SaloonDetailActivity extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
             finishAfterTransition();
-        }else{
+        } else {
             finish();
         }
         // onBackPressed();
