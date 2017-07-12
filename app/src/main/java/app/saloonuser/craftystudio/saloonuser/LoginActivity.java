@@ -254,6 +254,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
     // [END on_start_check_user]
 
+    public static void  authenticateUser(){
+        USER = new User();
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser != null) {
+            USER.setUserUID(currentUser.getUid());
+            USER.setUserPhoneNumber(currentUser.getPhoneNumber());
+        }
+
+    }
+
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
 

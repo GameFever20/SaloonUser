@@ -40,17 +40,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.UserViewHold
         holder.orderDateTimeTextView.setText(order.resolveOrderDate());
         holder.orderPiceTextView.setText(order.getOrderPrice()+"");
 
-        if (order.getOrderStatus()==3) {
-            holder.saloonRatingBar.setVisibility(View.VISIBLE);
-            holder.saloonRatingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-                @Override
-                public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
 
-                }
-            });
-        }else{
-            holder.saloonRatingBar.setVisibility(View.GONE);
-        }
         //changes to be continued
         holder.allServiceListTextView.setText(order.resolveOrderServiceList());
 
@@ -69,7 +59,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.UserViewHold
 
         public TextView saloonNameTextView, orderDateTimeTextView, orderPiceTextView, allServiceListTextView;
         public Button saloonServiceBtn;
-        RatingBar saloonRatingBar;
+
 
         public UserViewHolder(View view) {
             super(view);
@@ -78,7 +68,6 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.UserViewHold
             orderPiceTextView = (TextView) view.findViewById(R.id.orderAdapter_orderPrice_textview);
             allServiceListTextView = (TextView) view.findViewById(R.id.orderAdapter_allServiceName_textview);
            // saloonServiceBtn = (Button) view.findViewById(R.id.saloonadapterrow_saloon_servicebtn_textview);
-            saloonRatingBar=(RatingBar)view.findViewById(R.id.orderAdapter_saloonRating_ratingBar);
         }
     }
 }

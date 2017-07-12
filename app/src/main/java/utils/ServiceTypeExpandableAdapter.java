@@ -139,7 +139,7 @@ public class ServiceTypeExpandableAdapter extends BaseExpandableListAdapter {
                 if (isChecked) {
                     ServiceTypeActivity.CURRENTORDER.getOrderServiceIDList().put(service.getServiceUID(), service);
 
-                    ServiceTypeActivity.CURRENTORDER.setOrderPrice(ServiceTypeActivity.CURRENTORDER.getOrderPrice() + service.getServicePrice());
+                    ServiceTypeActivity.CURRENTORDER.setOrderPrice(ServiceTypeActivity.CURRENTORDER.getOrderPrice() + service.getServiceOfferPrice());
                     ServiceTypeActivity.CURRENTORDER.setOrderTotalServiceCount(ServiceTypeActivity.CURRENTORDER.getOrderTotalServiceCount() + 1);
 
                     service.setSelected(true);
@@ -149,7 +149,7 @@ public class ServiceTypeExpandableAdapter extends BaseExpandableListAdapter {
 
                 } else {
                     ServiceTypeActivity.CURRENTORDER.getOrderServiceIDList().remove(service.getServiceUID());
-                    ServiceTypeActivity.CURRENTORDER.setOrderPrice(ServiceTypeActivity.CURRENTORDER.getOrderPrice() - service.getServicePrice());
+                    ServiceTypeActivity.CURRENTORDER.setOrderPrice(ServiceTypeActivity.CURRENTORDER.getOrderPrice() - service.getServiceOfferPrice());
                     ServiceTypeActivity.CURRENTORDER.setOrderTotalServiceCount(ServiceTypeActivity.CURRENTORDER.getOrderTotalServiceCount() - 1);
 
                     service.setSelected(false);

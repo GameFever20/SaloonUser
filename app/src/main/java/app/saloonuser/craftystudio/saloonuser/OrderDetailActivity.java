@@ -1,6 +1,8 @@
 package app.saloonuser.craftystudio.saloonuser;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -8,6 +10,7 @@ import android.support.design.widget.TextInputEditText;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -85,6 +88,7 @@ public class OrderDetailActivity extends AppCompatActivity {
             fetchSaloon();
             initializeActivity();
         } else {
+            LoginActivity.authenticateUser();
             orderUID = getIntent().getStringExtra("orderID");
 
             new FireBaseHandler().downloadOrder(LoginActivity.USER.getUserUID(), orderUID, new FireBaseHandler.OnOrderListener() {
@@ -127,7 +131,7 @@ public class OrderDetailActivity extends AppCompatActivity {
     private void initializeActivity() {
 
 
-        if (order.getOrderStatus() > 0) {
+        if (order.getOrderStatus() ==3) {
 
             new FireBaseHandler().downloadRating(order, new FireBaseHandler.OnRatingListener() {
                 @Override
@@ -142,11 +146,11 @@ public class OrderDetailActivity extends AppCompatActivity {
                         if (customRating != null) {
 
                             OrderDetailActivity.this.customRating = customRating;
-                            updateOrderRatingUI();
+                            updateOrderRatingUI(customRating);
 
                         } else {
 
-                            openRatingSystem();
+                            openRatingSystem(customRating);
                         }
                     }
                 }
@@ -207,16 +211,41 @@ public class OrderDetailActivity extends AppCompatActivity {
         });
     }
 
-    private void updateOrderRatingUI() {
+    private void updateOrderRatingUI(CustomRating customRating) {
+        CardView cardView =(CardView)findViewById(R.id.orderDetail_rating_cardView);
+        cardView.setVisibility(View.VISIBLE);
+
+        RatingBar ratingBar = (RatingBar) findViewById(R.id.orderDetail_rating_ratingBar);
+        ratingBar.setRating(customRating.getRating());
+        ratingBar.setIsIndicator(true);
+
 
     }
 
 
     public void getSaloonDirection(View view) {
 
+        if (saloon!= null) {
+            String uri = "http://maps.google.com/maps?daddr=" + saloon.getSaloonLocationLatitude() + "," + saloon.getSaloonLocationLongitude() + " (" + "Parlour Location" + ")";
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+            intent.setPackage("com.google.android.apps.maps");
+            try {
+                startActivity(intent);
+            } catch (ActivityNotFoundException ex) {
+                try {
+                    Intent unrestrictedIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                    startActivity(unrestrictedIntent);
+                } catch (ActivityNotFoundException innerEx) {
+                    Toast.makeText(OrderDetailActivity.this, "Please install a maps application", Toast.LENGTH_LONG).show();
+                }
+            }
+        }
     }
 
-    private void openRatingSystem() {
+    private void openRatingSystem(CustomRating customRating) {
+
+        CardView cardView =(CardView)findViewById(R.id.orderDetail_rating_cardView);
+        cardView.setVisibility(View.VISIBLE);
 
         RatingBar ratingBar = (RatingBar) findViewById(R.id.orderDetail_rating_ratingBar);
 
@@ -224,21 +253,21 @@ public class OrderDetailActivity extends AppCompatActivity {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
 
-                customRating = new CustomRating();
-                customRating.setSaloonUID(order.getSaloonID());
-                customRating.setOrderID(order.getOrderID());
-                customRating.setUserUID(order.getUserID());
-                customRating.setRating((int) rating);
+                OrderDetailActivity.this.customRating = new CustomRating();
+                OrderDetailActivity.this.customRating.setSaloonUID(order.getSaloonID());
+                OrderDetailActivity.this.customRating.setOrderID(order.getOrderID());
+                OrderDetailActivity.this.customRating.setUserUID(order.getUserID());
+                OrderDetailActivity.this.customRating.setRating((int) rating);
 
                 if (saloon != null) {
-                    customRating.setSaloonPoint(saloon.getSaloonPoint());
-                    customRating.setSaloonRatingSum(saloon.getSaloonRatingSum());
-                    customRating.setSaloonTotalRating(saloon.getSaloonTotalRating());
+                    OrderDetailActivity.this.customRating.setSaloonPoint(saloon.getSaloonPoint());
+                    OrderDetailActivity.this.customRating.setSaloonRatingSum(saloon.getSaloonRatingSum());
+                    OrderDetailActivity.this.customRating.setSaloonTotalRating(saloon.getSaloonTotalRating());
                 } else {
                     return;
                 }
 
-                new FireBaseHandler().uploadRating(customRating, new FireBaseHandler.OnRatingListener() {
+                new FireBaseHandler().uploadRating(OrderDetailActivity.this.customRating, new FireBaseHandler.OnRatingListener() {
                     @Override
                     public void onRatingUploaded(CustomRating customRating, boolean isSuccessful) {
                         Toast.makeText(OrderDetailActivity.this, "Rating uploaded", Toast.LENGTH_SHORT).show();

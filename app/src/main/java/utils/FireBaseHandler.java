@@ -337,9 +337,10 @@ public class FireBaseHandler {
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                CustomRating customRating = (CustomRating) dataSnapshot.getValue();
 
+                CustomRating customRating = dataSnapshot.getValue(CustomRating.class);
                 onRatingListener.onRatingDownload(customRating, true);
+
             }
 
             @Override

@@ -21,6 +21,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.widget.DatePicker;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -171,7 +172,7 @@ public class UserOrderPlacementActivity extends AppCompatActivity {
             datePicker.setOnCancelListener(new DialogInterface.OnCancelListener() {
                 @Override
                 public void onCancel(DialogInterface dialog) {
-                    showDateDialog();
+                    finish();
                 }
             });
             datePicker.show();
@@ -221,11 +222,11 @@ public class UserOrderPlacementActivity extends AppCompatActivity {
         }, calendar.HOUR, calendar.MINUTE, false);
 
         timePickerDialog.setCanceledOnTouchOutside(false);
-        timePickerDialog.setCancelable(false);
+
         timePickerDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
             @Override
             public void onCancel(DialogInterface dialog) {
-                showTimeDialog();
+                finish();
             }
         });
         timePickerDialog.setTitle("Select appoinment time");
@@ -234,6 +235,9 @@ public class UserOrderPlacementActivity extends AppCompatActivity {
     }
 
     private void placeOrder() {
+
+
+
         final Order order = ServiceTypeActivity.CURRENTORDER;
         order.setUserID(LoginActivity.USER.getUserUID());
         order.setUserPhoneNumber(LoginActivity.USER.getUserPhoneNumber());
@@ -298,8 +302,8 @@ public class UserOrderPlacementActivity extends AppCompatActivity {
 
     }
 
-    private long calculateBookingTime() {
-
+    private void calculateBookingTime() {
+/*
         DatePicker datePicker = (DatePicker) findViewById(R.id.orderPlacement_bookingDate_datePicker);
         TimePicker timePicker = (TimePicker) findViewById(R.id.orderPlacement_bookingTime_timePicker);
 
@@ -317,7 +321,7 @@ public class UserOrderPlacementActivity extends AppCompatActivity {
 
 
         long startTime = calendar.getTimeInMillis();
-        return startTime;
+        return startTime;*/
     }
 
 
