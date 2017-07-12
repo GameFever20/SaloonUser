@@ -75,7 +75,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="7dp"
                             android:layout_marginTop="2dp"
-                            android:text="Opening Time : "
+                            android:text="Timing: "
                             android:textColor="@color/blackish"
                             android:textSize="14sp"
                             android:textStyle="normal" />
@@ -89,7 +89,7 @@
                             android:text="Opening Time "
                             android:textAlignment="textEnd"
                             android:textColor="@color/blackish"
-                            android:textSize="15sp"
+                            android:textSize="14sp"
                             android:textStyle="bold" />
                     </LinearLayout>
 
@@ -98,6 +98,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="3dp"
+                        android:visibility="gone"
                         android:layout_marginRight="3dp"
                         android:layout_marginTop="1dp">
 

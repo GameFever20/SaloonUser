@@ -17,6 +17,7 @@ public class Saloon implements Serializable {
     private boolean saloonUpdated;
     private boolean saloonHirePhotographer;
     private String saloonUID = "";
+    private String saloonPaymentMode;
 
     private String saloonEmailID;
 
@@ -176,9 +177,17 @@ public class Saloon implements Serializable {
         this.saloonTotalRating = saloonTotalRating;
     }
 
+    public String getSaloonPaymentMode() {
+        return saloonPaymentMode;
+    }
+
+    public void setSaloonPaymentMode(String saloonPaymentMode) {
+        this.saloonPaymentMode = saloonPaymentMode;
+    }
+
     public String resolveSaloonRating() {
         if (saloonTotalRating > 0) {
-            return String.valueOf(saloonRatingSum / saloonTotalRating);
+            return String.valueOf(saloonRatingSum / (saloonTotalRating / 5));
         } else {
             return "0";
         }
@@ -217,10 +226,16 @@ public class Saloon implements Serializable {
 
     public String resolveSaloonClosingTime() {
         String string = "";
+        int closingtimetemp;
+        if (closingTimeHour > 12) {
+            closingtimetemp = closingTimeHour - 12;
+        } else {
+            closingtimetemp = closingTimeHour;
+        }
 
-        if (closingTimeHour < 10) {
-            string = string.concat("0" + String.valueOf(getClosingTimeHour()) + ":");
-        } else if (closingTimeHour > 12) {
+        if (closingtimetemp < 10) {
+            string = string.concat("0" + String.valueOf(closingtimetemp) + ":");
+        } else if (closingtimetemp > 12) {
             string = string.concat((closingTimeHour - 12) + ":");
         } else {
             string = string.concat(String.valueOf(closingTimeHour) + ":");
@@ -233,7 +248,7 @@ public class Saloon implements Serializable {
             string = string.concat(String.valueOf(closingTimeMinute));
         }
 
-        if (closingTimeHour > 11) {
+        if (this.closingTimeHour > 11) {
             string = string.concat("PM");
         } else {
             string = string.concat("AM");

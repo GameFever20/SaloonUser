@@ -38,7 +38,7 @@ public class OrderDetailActivity extends AppCompatActivity {
     CustomRating customRating;
     Saloon saloon;
 
-    private TextView mOrderPriceTextView, mOrderTimeTextView, mSaloonNameTextView, mSaloonAddressTextView, mSaloonPhoneNumberTextView, mSaloonTimeTextView, mSaloonRatingTextView, mSaloonMadeOfPaymentTextView;
+    private TextView mOrderStatusTextView,mOrderPriceTextView, mOrderTimeTextView, mSaloonNameTextView, mSaloonAddressTextView, mSaloonPhoneNumberTextView, mSaloonTimeTextView, mSaloonRatingTextView, mSaloonMadeOfPaymentTextView;
 
     ArrayList<Service> serviceArrayList = new ArrayList<>();
     ServiceAdapter serviceAdapter = new ServiceAdapter(serviceArrayList);
@@ -74,6 +74,7 @@ public class OrderDetailActivity extends AppCompatActivity {
         mOrderPriceTextView = (TextView) findViewById(R.id.orderDetail_orderPrice_TextView);
 
         mOrderTimeTextView = (TextView) findViewById(R.id.orderDetail_orderTime_TextView);
+        mOrderStatusTextView =(TextView)findViewById(R.id.orderDetail_orderStatus_TextView);
 
         serviceRecyclerView = (RecyclerView) findViewById(R.id.orderDetail_servicesName_recyclerView);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
@@ -174,6 +175,7 @@ public class OrderDetailActivity extends AppCompatActivity {
             mOrderPriceTextView.setText(order.getOrderPrice() + "");
             mOrderTimeTextView.setText(order.resolveOrderBookingTime());
             mSaloonNameTextView.setText(order.getSaloonName());
+            mOrderStatusTextView.setText(order.resolveOrderStatus());
 
         }
 

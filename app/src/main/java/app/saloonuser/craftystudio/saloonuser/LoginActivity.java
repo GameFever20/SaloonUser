@@ -21,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.crashlytics.android.Crashlytics;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -34,6 +35,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 
+import io.fabric.sdk.android.Fabric;
 import java.util.concurrent.TimeUnit;
 
 import utils.FireBaseHandler;
@@ -96,6 +98,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
 
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_login);
 
         // Restore instance state

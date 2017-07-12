@@ -23,13 +23,17 @@ import android.view.MenuItem;
 import android.view.Window;
 import android.widget.Toast;
 
+import com.crashlytics.android.Crashlytics;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
+import io.fabric.sdk.android.Fabric;
 import utils.ClickListener;
 import utils.FireBaseHandler;
 import utils.RecyclerTouchListener;
@@ -70,6 +74,7 @@ public class MainActivity extends AppCompatActivity
 
 
         super.onCreate(savedInstanceState);
+        Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_main);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -112,6 +117,19 @@ public class MainActivity extends AppCompatActivity
         // instantiating firebasehandler class
         fireBaseHandler = new FireBaseHandler();
 
+        fireBaseHandler.downloadUser(LoginActivity.USER.getUserUID(), new FireBaseHandler.OnUserlistener() {
+            @Override
+            public void onUserDownLoad(User user, boolean isSuccessful) {
+                LoginActivity.USER =user;
+                MainActivity.this.user =user;
+            }
+
+            @Override
+            public void onUserUpload(boolean isSuccessful) {
+
+            }
+        });
+
         //Downloading saloon list from firebase
         showProgressDialog();
         downloadingSaloonList();
@@ -123,7 +141,7 @@ public class MainActivity extends AppCompatActivity
 
     private void subscribeToTopic() {
         FirebaseMessaging.getInstance().subscribeToTopic("user_" + user.getUserUID());
-        FirebaseMessaging.getInstance().subscribeToTopic("user");
+        FirebaseMessaging.getInstance().subscribeToTopic("user_common");
 
     }
 
@@ -377,13 +395,13 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_profile) {
 
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP){
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
                 // Do something for lollipop and above versions
                 ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this);
                 Intent intent = new Intent(MainActivity.this, UserProfileActivity.class);
                 startActivity(intent, options.toBundle());
 
-            } else{
+            } else {
                 // do something for phones running an SDK before lollipop
 
                 Intent intent = new Intent(MainActivity.this, UserProfileActivity.class);
@@ -395,13 +413,13 @@ public class MainActivity extends AppCompatActivity
 
 
         } else if (id == R.id.nav_order) {
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP){
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
                 // Do something for lollipop and above versions
                 ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this);
                 Intent intent = new Intent(MainActivity.this, UserOrderActivity.class);
                 startActivity(intent, options.toBundle());
 
-            } else{
+            } else {
                 // do something for phones running an SDK before lollipop
                 Intent intent = new Intent(MainActivity.this, UserOrderActivity.class);
                 startActivity(intent);
@@ -416,10 +434,29 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_send) {
             Toast.makeText(this, "Link to share app", Toast.LENGTH_SHORT).show();
 
+        } else if (id == R.id.nav_logout) {
+            signout();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void signout() {
+
+
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+
+        FirebaseMessaging.getInstance().unsubscribeFromTopic("user_" + user.getUserUID());
+
+        mAuth.signOut();
+
+        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        finish();
+
+
     }
 }

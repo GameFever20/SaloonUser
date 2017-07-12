@@ -9,6 +9,5 @@
         android:id="@+id/slideimageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="15dp"
-        android:scaleType="centerCrop" />
+         />
 </LinearLayout>
