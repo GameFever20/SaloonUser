@@ -1,14 +1,14 @@
 <resources>
-    <string name="app_name">SaloonUser</string>
+    <string name="app_name">Look Deals</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
-    <string name="title_activity_login">Looks Deal</string>
+    <string name="title_activity_login">Look Deals</string>
     <string name="title_activity_saloon_detail">Saloon</string>
 
-    <string name="title_activity_user_detail">Looks Deal</string>
+    <string name="title_activity_user_detail">Look Deals</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->
@@ -87,6 +87,8 @@
     <string-array name="massage_service_sub_type">
         <item>Massage</item>
     </string-array>
+
+
 
     <string name="title_activity_user_order_placement">Order Detail</string>
     <string name="title_activity_order_detail">OrderDetailActivity</string>

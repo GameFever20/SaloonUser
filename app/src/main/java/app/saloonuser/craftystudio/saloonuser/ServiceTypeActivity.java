@@ -300,7 +300,7 @@ public class ServiceTypeActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_service_type, menu);
+        //getMenuInflater().inflate(R.menu.menu_service_type, menu);
         return true;
     }
 
@@ -471,6 +471,7 @@ public class ServiceTypeActivity extends AppCompatActivity {
                     break;
                 case 6:
                     serviceTypeName = getResources().getStringArray(R.array.makeup_service_sub_type);
+                    break;
                 default:
                     serviceTypeName = getResources().getStringArray(R.array.haircare_service_sub_type);
                     break;

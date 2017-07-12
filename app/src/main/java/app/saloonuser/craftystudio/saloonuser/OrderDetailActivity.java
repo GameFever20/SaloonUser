@@ -184,6 +184,7 @@ public class OrderDetailActivity extends AppCompatActivity {
             mSaloonRatingTextView.setText(saloon.resolveSaloonRating());
             mSaloonPhoneNumberTextView.setText(saloon.getSaloonPhoneNumber());
             mSaloonAddressTextView.setText(saloon.getSaloonAddress());
+            mSaloonMadeOfPaymentTextView.setText(saloon.getSaloonPaymentMode());
 
 
             mSaloonTimeTextView.setText(saloon.resolveSaloonOpeningTime() + "-" + saloon.resolveSaloonClosingTime());

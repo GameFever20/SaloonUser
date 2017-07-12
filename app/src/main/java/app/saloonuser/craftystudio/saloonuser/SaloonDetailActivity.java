@@ -66,6 +66,7 @@ public class SaloonDetailActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
+
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         saloon = (Saloon) bundle.getSerializable("Saloon_Class");

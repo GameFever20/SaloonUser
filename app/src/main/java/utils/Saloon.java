@@ -18,6 +18,7 @@ public class Saloon implements Serializable {
     private boolean saloonHirePhotographer;
     private String saloonUID = "";
     private String saloonPaymentMode;
+    private String saloonYearOfEstablishment ;
 
     private String saloonEmailID;
 
@@ -183,6 +184,14 @@ public class Saloon implements Serializable {
 
     public void setSaloonPaymentMode(String saloonPaymentMode) {
         this.saloonPaymentMode = saloonPaymentMode;
+    }
+
+    public String getSaloonYearOfEstablishment() {
+        return saloonYearOfEstablishment;
+    }
+
+    public void setSaloonYearOfEstablishment(String saloonYearOfEstablishment) {
+        this.saloonYearOfEstablishment = saloonYearOfEstablishment;
     }
 
     public String resolveSaloonRating() {
