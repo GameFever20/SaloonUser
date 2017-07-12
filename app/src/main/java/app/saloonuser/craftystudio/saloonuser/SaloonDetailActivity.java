@@ -183,7 +183,7 @@ public class SaloonDetailActivity extends AppCompatActivity {
         //mSaloonDetailOpeningTimeTv.setText(mSaloonDetailOpeningTimeTv.getText() + " " + saloon.getOpeningTimeHour() + m);
         //mSaloonDetailClosingTimeTv.setText(mSaloonDetailClosingTimeTv.getText() + " " + saloon.getClosingTimeHour() + p);
 
-        mSaloonDetailOpeningTimeTv.setText(mSaloonDetailOpeningTimeTv.getText() + " " + saloon.getOpeningTimeHour() + m);
+        mSaloonDetailOpeningTimeTv.setText(mSaloonDetailOpeningTimeTv.getText() + " " + saloon.resolveSaloonOpeningTime());
         mSaloonDetailClosingTimeTv.setText(mSaloonDetailClosingTimeTv.getText() + " " + saloon.resolveSaloonClosingTime());
 
         mSaloonDetailRatingTv.setText(saloon.getSaloonTotalRating() + "");
