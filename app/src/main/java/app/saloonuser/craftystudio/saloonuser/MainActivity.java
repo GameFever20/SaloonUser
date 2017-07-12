@@ -123,6 +123,7 @@ public class MainActivity extends AppCompatActivity
                 LoginActivity.USER =user;
                 MainActivity.this.user =user;
 
+
             }
 
             @Override

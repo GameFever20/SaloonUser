@@ -328,13 +328,21 @@ public class SaloonDetailActivity extends AppCompatActivity {
                 @Override
                 public void onAnimationStart(Animator animator) {
 
-                    ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(SaloonDetailActivity.this);
-                    Intent intent = new Intent(SaloonDetailActivity.this, ImageActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("Saloon", saloon);
-                    intent.putExtras(bundle);
-                    startActivity(intent, options.toBundle());
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(SaloonDetailActivity.this);
+                        Intent intent = new Intent(SaloonDetailActivity.this, ImageActivity.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("Saloon", saloon);
+                        intent.putExtras(bundle);
+                        startActivity(intent, options.toBundle());
+                    }else{
 
+                        Intent intent = new Intent(SaloonDetailActivity.this, ImageActivity.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("Saloon", saloon);
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+                    }
 
                 }
 
@@ -373,12 +381,20 @@ public class SaloonDetailActivity extends AppCompatActivity {
     public void onBackPressed() {
 
         super.onBackPressed();
-        finishAfterTransition();
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            finishAfterTransition();
+        }else{
+            finish();
+        }
     }
 
     @Override
     public boolean onSupportNavigateUp() {
-        finishAfterTransition();
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            finishAfterTransition();
+        }else{
+            finish();
+        }
         // onBackPressed();
         return true;
     }

@@ -238,7 +238,11 @@ public class UserOrderActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        finishAfterTransition();
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            finishAfterTransition();
+        }else{
+            finish();
+        }
         super.onBackPressed();
 
     }
