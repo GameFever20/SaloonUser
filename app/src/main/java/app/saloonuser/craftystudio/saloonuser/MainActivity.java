@@ -123,6 +123,7 @@ public class MainActivity extends AppCompatActivity
                 if (isSuccessful && user != null) {
                     LoginActivity.USER = user;
                     MainActivity.this.user = user;
+                    downloadingSaloonList();
                 }
 
             }
@@ -135,7 +136,7 @@ public class MainActivity extends AppCompatActivity
 
         //Downloading saloon list from firebase
         showProgressDialog();
-        downloadingSaloonList();
+        //downloadingSaloonList();
 
 
         subscribeToTopic();
@@ -151,7 +152,7 @@ public class MainActivity extends AppCompatActivity
     private void downloadingSaloonList() {
 
         //calling download saloon list
-        fireBaseHandler.downloadSaloonList(saloonFetchLimit, new FireBaseHandler.OnSaloonListListner() {
+        fireBaseHandler.downloadSaloonList(saloonFetchLimit ,user.getUserCityIndex(), new FireBaseHandler.OnSaloonListListner() {
             @Override
             public void onSaloonList(ArrayList<Saloon> saloonArrayList) {
 
@@ -296,7 +297,7 @@ public class MainActivity extends AppCompatActivity
         //Toast.makeText(MainActivity.this, "On Data calling ..", Toast.LENGTH_SHORT).show();
 
         final int finalRepeatedSaloonCount = repeatedSaloonCount;
-        fireBaseHandler.downloadMoreSaloonList(saloonFetchLimit, lastSaloonPoint, new FireBaseHandler.OnSaloonListListner() {
+        fireBaseHandler.downloadMoreSaloonList(saloonFetchLimit, lastSaloonPoint, user.getUserCityIndex(), new FireBaseHandler.OnSaloonListListner() {
             @Override
             public void onSaloonList(ArrayList<Saloon> saloonArrayList) {
 

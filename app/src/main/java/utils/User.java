@@ -10,6 +10,9 @@ public class User {
 
     int userAge;
 
+    private String userCity ;
+    private int userCityIndex ;
+
 
     public User() {
     }
@@ -61,5 +64,21 @@ public class User {
 
     public void setUserEmailID(String userEmailID) {
         this.userEmailID = userEmailID;
+    }
+
+    public String getUserCity() {
+        return userCity;
+    }
+
+    public void setUserCity(String userCity) {
+        this.userCity = userCity;
+    }
+
+    public int getUserCityIndex() {
+        return userCityIndex;
+    }
+
+    public void setUserCityIndex(int userCityIndex) {
+        this.userCityIndex = userCityIndex;
     }
 }

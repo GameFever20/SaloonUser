@@ -21,7 +21,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="10dp"
                 android:text="Tell Us More"
                 android:textAlignment="center"
                 android:textColor="@color/white"
@@ -34,7 +34,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:visibility="visible">
+
+                android:visibility="gone">
 
 
                 <LinearLayout
@@ -121,80 +122,115 @@
             </LinearLayout>
 
 
-            <EditText
-                android:id="@+id/userDetail_userGender_edittext"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="user gender"
-                android:visibility="gone" />
+                android:orientation="vertical"
+                android:visibility="visible"
+                android:id="@+id/userDetail_userDetail_linearLayout"
+
+                android:layout_height="match_parent">
 
 
-            <ImageView
-                android:id="@+id/userdetail_userprofile_imageview"
-                android:layout_width="100dp"
-                android:layout_height="130dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:scaleType="centerInside"
-                 android:visibility="gone" />
+
+                <ImageView
+                    android:id="@+id/userdetail_userprofile_imageview"
+                    android:layout_width="100dp"
+                    android:layout_height="130dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:scaleType="centerInside"
+                    />
 
 
-            <TextView
-                android:id="@+id/userDetail_userGender_textview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                android:layout_marginTop="20dp"
-                android:text="User Gender "
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:visibility="gone"
+                <TextView
+                    android:id="@+id/userDetail_userGender_textview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginTop="20dp"
+                    android:text="User Gender "
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
 
-                />
+                    />
 
-            <EditText
-                android:id="@+id/userDetail_userName_edittext"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                android:layout_marginTop="20dp"
-                android:hint="user name "
-                android:textColor="@color/white"
-                android:textColorHint="@color/whitish"
-                android:visibility="gone"
+                <EditText
+                    android:id="@+id/userDetail_userName_edittext"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginTop="20dp"
+                    android:hint="user name "
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/whitish"
 
-                />
+                    />
 
-            <EditText
-                android:id="@+id/userDetail_userAge_edittext"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                android:layout_marginTop="20dp"
-                android:hint="user age"
-                android:inputType="number"
-                android:textColor="@color/white"
-                android:textColorHint="@color/whitish"
-                android:visibility="gone"
+                <EditText
+                    android:id="@+id/userDetail_userAge_edittext"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginTop="20dp"
+                    android:hint="user age"
+                    android:inputType="number"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/whitish"
 
-                />
+                    />
 
-            <Button
-                android:id="@+id/user_detail_upload_button"
-                android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                android:layout_marginTop="30dp"
-                android:background="@color/whitish"
-                android:onClick="uploadUserDetailButtonClick"
-                android:text="upload"
-                android:visibility="gone" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/imageviewbordercustomize"
+                    android:onClick="selectCity"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Select City"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/userDetail_userCity_textView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+
+
+                </LinearLayout>
+
+
+                <Button
+                    android:id="@+id/user_detail_upload_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginTop="30dp"
+                    android:background="@color/whitish"
+                    android:onClick="uploadUserDetailButtonClick"
+                    android:text="upload"
+                    />
+
+            </LinearLayout>
+
+
 
         </LinearLayout>
 

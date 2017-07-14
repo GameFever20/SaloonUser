@@ -33,6 +33,9 @@ public class Saloon implements Serializable {
     //timing
     private int openingTimeHour, openingTimeMinute, closingTimeHour, closingTimeMinute;
 
+    private String saloonCity ;
+    private int saloonCityIndex ;
+
     public String getSaloonLocation() {
         return saloonLocation;
     }
@@ -192,6 +195,22 @@ public class Saloon implements Serializable {
 
     public void setSaloonYearOfEstablishment(String saloonYearOfEstablishment) {
         this.saloonYearOfEstablishment = saloonYearOfEstablishment;
+    }
+
+    public String getSaloonCity() {
+        return saloonCity;
+    }
+
+    public void setSaloonCity(String saloonCity) {
+        this.saloonCity = saloonCity;
+    }
+
+    public int getSaloonCityIndex() {
+        return saloonCityIndex;
+    }
+
+    public void setSaloonCityIndex(int saloonCityIndex) {
+        this.saloonCityIndex = saloonCityIndex;
     }
 
     public String resolveSaloonRating() {

@@ -88,7 +88,10 @@
         <item>Massage</item>
     </string-array>
 
+    <string-array name="city">
+        <item>kolkata</item>
 
+    </string-array>
 
     <string name="title_activity_user_order_placement">Order Preview</string>
     <string name="title_activity_order_detail">Order Detail</string>

@@ -58,11 +58,11 @@ public class FireBaseHandler {
 
     }
 
-    public void downloadSaloonList(int limit, final OnSaloonListListner onSaloonListListner) {
+    public void downloadSaloonList(int limit,int cityIndex, final OnSaloonListListner onSaloonListListner) {
 
         DatabaseReference myRef = mFirebaseDatabase.getReference().child("saloon");
 
-        Query myref2 = myRef.orderByChild("saloonPoint").limitToLast(limit).startAt(1);
+        Query myref2 = myRef.orderByChild("saloonPoint").limitToLast(limit).startAt((1+(cityIndex*1000000l))).endAt((cityIndex+1)*1000000l);
 
         myref2.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -94,13 +94,13 @@ public class FireBaseHandler {
 
 
 
-    public void downloadMoreSaloonList(int limit, long lastSaloonPoint, final OnSaloonListListner onSaloonListListner) {
+    public void downloadMoreSaloonList(int limit, long lastSaloonPoint,int cityIndex, final OnSaloonListListner onSaloonListListner) {
 
         DatabaseReference myRef = mFirebaseDatabase.getReference().child("saloon");
 
         //Query myref2 = myRef.limitToLast(limit).endAt(lastOrderID);
 
-        Query myref2 = myRef.orderByChild("saloonPoint").endAt(lastSaloonPoint).limitToLast(limit).startAt(1);
+        Query myref2 = myRef.orderByChild("saloonPoint").endAt(lastSaloonPoint).limitToLast(limit).startAt((1+(cityIndex*1000000l)));
 
 
         myref2.addListenerForSingleValueEvent(new ValueEventListener() {

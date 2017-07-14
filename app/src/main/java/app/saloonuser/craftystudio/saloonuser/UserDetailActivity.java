@@ -1,11 +1,13 @@
 package app.saloonuser.craftystudio.saloonuser;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.media.Image;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -36,11 +38,18 @@ public class UserDetailActivity extends AppCompatActivity {
 
     TextView mUserGenderTextview;
 
+
+
+
      String GENDER;
 
+    LinearLayout mUserGenderDetailLinearLayout;
     LinearLayout mUserDetailLinearlayout;
+
     Button mUploadBtn, mNextUploadButton;
     private ProgressDialog progressDialog;
+    private String mCitySelected;
+    private int mCitySelectedIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,19 +61,21 @@ public class UserDetailActivity extends AppCompatActivity {
 
         //detail filling layout
         mUserNameEdittext = (EditText) findViewById(R.id.userDetail_userName_edittext);
-        mUserGenderEdittext = (EditText) findViewById(R.id.userDetail_userGender_edittext);
+        //mUserGenderEdittext = (EditText) findViewById(R.id.userDetail_userGender_edittext);
         mUserAgeEdittext = (EditText) findViewById(R.id.userDetail_userAge_edittext);
         mUserGenderTextview = (TextView) findViewById(R.id.userDetail_userGender_textview);
         mUserprofile = (ImageView) findViewById(R.id.userdetail_userprofile_imageview);
 
 
         //male female selection layout
-        mUserDetailLinearlayout = (LinearLayout) findViewById(R.id.user_genderdetail_linearlayout);
+        mUserGenderDetailLinearLayout = (LinearLayout) findViewById(R.id.user_genderdetail_linearlayout);
         mMaleImage = (ImageView) findViewById(R.id.user_detail_male_imageview);
         mFemaleImage = (ImageView) findViewById(R.id.user_detail_female_imageview);
         mUploadBtn = (Button) findViewById(R.id.user_detail_upload_button);
 
         mNextUploadButton = (Button) findViewById(R.id.nextUserDetailButton);
+
+        mUserDetailLinearlayout = (LinearLayout)findViewById(R.id.userDetail_userDetail_linearLayout);
 
 
     }
@@ -113,6 +124,9 @@ LoginActivity.USER =USER;
         USER.setUserGender(GENDER);
         USER.setUserAge(Integer.valueOf(mUserAgeEdittext.getText().toString().trim()));
 
+        USER.setUserCity(mCitySelected);
+        USER.setUserCityIndex(mCitySelectedIndex);
+
     }
 
     public void femaleSelection(View view) {
@@ -159,14 +173,17 @@ LoginActivity.USER =USER;
 
     public void userDetailNext(View view) {
 
-        mUserDetailLinearlayout.setVisibility(View.GONE);
+        mUserGenderDetailLinearLayout.setVisibility(View.GONE);
 
-        mUserNameEdittext.setVisibility(View.VISIBLE);
+        /*mUserNameEdittext.setVisibility(View.VISIBLE);
         mUserAgeEdittext.setVisibility(View.VISIBLE);
         mUploadBtn.setVisibility(View.VISIBLE);
         //mUserGenderTextview.setText(GENDER);
         //  mUserGenderTextview.setVisibility(View.VISIBLE);
-        mUserprofile.setVisibility(View.VISIBLE);
+        mUserprofile.setVisibility(View.VISIBLE);*/
+
+        mUserDetailLinearlayout.setVisibility(View.VISIBLE);
+
         if (GENDER.equalsIgnoreCase("Male")) {
             mUserprofile.setImageResource(R.drawable.malefinal);
         } else {
@@ -185,4 +202,27 @@ LoginActivity.USER =USER;
     }
 
 
+    public void selectCity(View view) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Select your city")
+                .setItems(R.array.city, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // The 'which' argument contains the index position
+                        // of the selected item
+
+
+                        mCitySelected  = getResources().getStringArray(R.array.city)[which];
+                        mCitySelectedIndex =which;
+
+
+
+                        TextView textView = (TextView) findViewById(R.id.userDetail_userCity_textView);
+                        textView.setText(mCitySelected);
+
+
+                    }
+                });
+        builder.create();
+        builder.show();
+    }
 }
