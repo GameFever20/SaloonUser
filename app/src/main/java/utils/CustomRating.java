@@ -8,8 +8,8 @@ public class CustomRating {
 
     private int rating ;
     private String orderID ,saloonUID ,userUID ;
-    private int saloonPoint , saloonRatingSum , saloonTotalRating;
-
+    private int  saloonRatingSum , saloonTotalRating;
+    private long saloonPoint ;
     public int getRating() {
         return rating;
     }
@@ -42,11 +42,11 @@ public class CustomRating {
         this.userUID = userUID;
     }
 
-    public int getSaloonPoint() {
+    public long getSaloonPoint() {
         return saloonPoint;
     }
 
-    public void setSaloonPoint(int saloonPoint) {
+    public void setSaloonPoint(long saloonPoint) {
         this.saloonPoint = saloonPoint;
     }
 

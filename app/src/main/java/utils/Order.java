@@ -197,7 +197,7 @@ public class Order implements Serializable {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat);
 
         Date date = new Date();
-        date.setTime(orderTime);
+        date.setTime(orderBookingTime);
 
 
 

@@ -120,9 +120,10 @@ public class MainActivity extends AppCompatActivity
         fireBaseHandler.downloadUser(LoginActivity.USER.getUserUID(), new FireBaseHandler.OnUserlistener() {
             @Override
             public void onUserDownLoad(User user, boolean isSuccessful) {
-                LoginActivity.USER =user;
-                MainActivity.this.user =user;
-
+                if (isSuccessful && user != null) {
+                    LoginActivity.USER = user;
+                    MainActivity.this.user = user;
+                }
 
             }
 
@@ -193,7 +194,7 @@ public class MainActivity extends AppCompatActivity
                                                               if (isMoreSaloonAvailable) {
                                                                   if (!isLodingMoreSaloon) {
                                                                       //get last Saloon ID
-                                                                      int lastSaloonPoint = mSaloonArraylist.get(mSaloonArraylist.size() - 1).getSaloonPoint();
+                                                                      long lastSaloonPoint = mSaloonArraylist.get(mSaloonArraylist.size() - 1).getSaloonPoint();
                                                                       onScrolledSaloonListToBottom(lastSaloonPoint);
                                                                       //  Toast.makeText(MainActivity.this, "Refreshing", Toast.LENGTH_SHORT).show();
 
@@ -269,7 +270,7 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    public void onScrolledSaloonListToBottom(int lastSaloonPoint) {
+    public void onScrolledSaloonListToBottom(long lastSaloonPoint) {
 //store number of saloon with same saloon point in last
         int repeatedSaloonCount = 0;
 

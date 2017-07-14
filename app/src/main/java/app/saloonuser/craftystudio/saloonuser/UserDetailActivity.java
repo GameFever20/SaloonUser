@@ -28,7 +28,7 @@ import utils.User;
 
 public class UserDetailActivity extends AppCompatActivity {
 
-    public static User USER;
+    public  User USER;
 
     EditText mUserNameEdittext, mUserAgeEdittext, mUserGenderEdittext;
 
@@ -36,7 +36,7 @@ public class UserDetailActivity extends AppCompatActivity {
 
     TextView mUserGenderTextview;
 
-    static String GENDER;
+     String GENDER;
 
     LinearLayout mUserDetailLinearlayout;
     Button mUploadBtn, mNextUploadButton;
@@ -88,7 +88,7 @@ public class UserDetailActivity extends AppCompatActivity {
                 closeProgressDialog();
                 if (isSuccessful) {
                     Toast.makeText(UserDetailActivity.this, "User uploaded", Toast.LENGTH_SHORT).show();
-
+LoginActivity.USER =USER;
                     openMainActivity();
 
                 } else {

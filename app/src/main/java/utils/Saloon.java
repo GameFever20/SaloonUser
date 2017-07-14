@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class Saloon implements Serializable {
 
-    private int saloonPoint;
+    private long saloonPoint;
 
     private String saloonLocation;
     private int saloonRatingSum, saloonTotalRating;
@@ -41,11 +41,11 @@ public class Saloon implements Serializable {
         this.saloonLocation = saloonLocation;
     }
 
-    public int getSaloonPoint() {
+    public long getSaloonPoint() {
         return saloonPoint;
     }
 
-    public void setSaloonPoint(int saloonPoint) {
+    public void setSaloonPoint(long saloonPoint) {
         this.saloonPoint = saloonPoint;
     }
 

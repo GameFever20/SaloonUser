@@ -94,7 +94,7 @@ public class FireBaseHandler {
 
 
 
-    public void downloadMoreSaloonList(int limit, int lastSaloonPoint, final OnSaloonListListner onSaloonListListner) {
+    public void downloadMoreSaloonList(int limit, long lastSaloonPoint, final OnSaloonListListner onSaloonListListner) {
 
         DatabaseReference myRef = mFirebaseDatabase.getReference().child("saloon");
 
