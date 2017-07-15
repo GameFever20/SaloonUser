@@ -97,6 +97,7 @@ public class UserOrderActivity extends AppCompatActivity {
             public void onClick(View view, int position) {
                 Intent intent = new Intent(UserOrderActivity.this, OrderDetailActivity.class);
                 intent.putExtra("order", mTempOrderArraylist.get(position));
+                OrderDetailActivity.order=mTempOrderArraylist.get(position);
                 startActivity(intent);
             }
 
@@ -164,6 +165,15 @@ public class UserOrderActivity extends AppCompatActivity {
         */
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (mAdapter != null) {
+            mAdapter.notifyDataSetChanged();
+
+        }
+
+    }
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 

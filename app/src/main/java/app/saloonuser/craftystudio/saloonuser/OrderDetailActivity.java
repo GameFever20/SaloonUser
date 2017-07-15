@@ -33,7 +33,7 @@ import utils.ServiceAdapter;
 
 public class OrderDetailActivity extends AppCompatActivity {
 
-    Order order;
+    static Order order;
     String orderUID;
     CustomRating customRating;
     Saloon saloon;
@@ -62,7 +62,7 @@ public class OrderDetailActivity extends AppCompatActivity {
         });
 
 
-        order = (Order) getIntent().getSerializableExtra("order");
+        //order = (Order) getIntent().getSerializableExtra("order");
 
 
         mSaloonNameTextView = (TextView) findViewById(R.id.orderDetail_saloonName_TextView);

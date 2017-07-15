@@ -554,7 +554,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     return;
                 }
 
-                startPhoneNumberVerification(mPhoneNumberField.getText().toString());
+                startPhoneNumberVerification("+91"+mPhoneNumberField.getText().toString());
                 changeViewValue();
                 break;
             case R.id.button_verify_phone:
