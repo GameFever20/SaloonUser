@@ -356,6 +356,7 @@ public class MainActivity extends AppCompatActivity
 
     public void showProgressDialog() {
         progressDialog.setMessage("Getting Data..");
+        progressDialog.setCancelable(false);
         progressDialog.show();
     }
 
