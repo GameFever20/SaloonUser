@@ -10,6 +10,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.transition.Explode;
 import android.transition.Visibility;
 import android.view.MenuItem;
@@ -52,10 +53,17 @@ public class UserOrderActivity extends AppCompatActivity {
         //getting window component
         getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
 
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_order);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        try {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        }catch (Exception e){
+
+        }
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
             // Do something for lollipop and above versions

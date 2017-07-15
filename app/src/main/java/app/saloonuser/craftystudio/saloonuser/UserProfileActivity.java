@@ -31,16 +31,22 @@ public class UserProfileActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-        //getting window component
-        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
-
+        try {
+            //getting window component
+            getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        try {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
             // Do something for lollipop and above versions
@@ -167,18 +173,16 @@ public class UserProfileActivity extends AppCompatActivity {
                 mUserProfileImage.setImageResource(R.drawable.female_copy);
             }
 
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP){
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
                 // Do something for lollipop and above versions
                 //animate shake in Saloon Name
                 YoYo.with(Techniques.DropOut)
                         .duration(1000)
                         .repeat(1)
                         .playOn(mUserProfileImage);
-            } else{
+            } else {
                 // do something for phones running an SDK before lollipop
             }
-
-
 
 
         }
@@ -191,7 +195,7 @@ public class UserProfileActivity extends AppCompatActivity {
     public void onBackPressed() {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
             finishAfterTransition();
-        }else{
+        } else {
             finish();
         }
         super.onBackPressed();
