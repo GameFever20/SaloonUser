@@ -38,7 +38,7 @@ public class OrderDetailActivity extends AppCompatActivity {
     CustomRating customRating;
     Saloon saloon;
 
-    private TextView mOrderStatusTextView,mOrderPriceTextView, mOrderTimeTextView, mSaloonNameTextView, mSaloonAddressTextView, mSaloonPhoneNumberTextView, mSaloonTimeTextView, mSaloonRatingTextView, mSaloonMadeOfPaymentTextView;
+    private TextView mOrderStatusTextView,mOrderPriceTextView, mOrderTimeTextView, mSaloonNameTextView, mSaloonAddressTextView, mSaloonPhoneNumberTextView, mSaloonTimeTextView, mSaloonRatingTextView, mSaloonMadeOfPaymentTextView ,mSaloonCityTextView;
 
     ArrayList<Service> serviceArrayList = new ArrayList<>();
     ServiceAdapter serviceAdapter = new ServiceAdapter(serviceArrayList);
@@ -72,6 +72,7 @@ public class OrderDetailActivity extends AppCompatActivity {
         mSaloonTimeTextView = (TextView) findViewById(R.id.orderDetail_saloonTiming_TextView);
         mSaloonMadeOfPaymentTextView = (TextView) findViewById(R.id.orderDetail_saloonModesOfPayment_TextView);
         mOrderPriceTextView = (TextView) findViewById(R.id.orderDetail_orderPrice_TextView);
+        mSaloonCityTextView = (TextView)findViewById(R.id.orderDetail_saloonCity_TextView);
 
         mOrderTimeTextView = (TextView) findViewById(R.id.orderDetail_orderTime_TextView);
         mOrderStatusTextView =(TextView)findViewById(R.id.orderDetail_orderStatus_TextView);
@@ -156,6 +157,9 @@ public class OrderDetailActivity extends AppCompatActivity {
                     }
                 }
             });
+        }else if(order.getOrderStatus() == 1){
+            CardView cardView =(CardView)findViewById(R.id.orderDetail_orderCancel_cardView);
+            cardView.setVisibility(View.VISIBLE);
         }
 
         if (order != null) {
@@ -185,6 +189,7 @@ public class OrderDetailActivity extends AppCompatActivity {
             mSaloonPhoneNumberTextView.setText(saloon.getSaloonPhoneNumber());
             mSaloonAddressTextView.setText(saloon.getSaloonAddress());
             mSaloonMadeOfPaymentTextView.setText(saloon.getSaloonPaymentMode());
+            mSaloonCityTextView.setText(saloon.getSaloonCity());
 
 
             mSaloonTimeTextView.setText(saloon.resolveSaloonOpeningTime() + "-" + saloon.resolveSaloonClosingTime());
@@ -310,4 +315,29 @@ public class OrderDetailActivity extends AppCompatActivity {
     }
 
 
+    public void cancelOrder(View view) {
+
+        new FireBaseHandler().updateOrderstatus(order, -1, new FireBaseHandler.OnOrderListener() {
+            @Override
+            public void onOrderUpload(boolean isSuccessful) {
+                if (isSuccessful){
+                    order.setOrderStatus(-1);
+                    updateUI();
+                    CardView cardView =(CardView)findViewById(R.id.orderDetail_orderCancel_cardView);
+                    cardView.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onOrderDownload(Order order, boolean isSuccessful) {
+
+            }
+
+            @Override
+            public void onOrderListDownload(ArrayList<Order> orderArrayList, boolean isSuccessful) {
+
+            }
+        });
+
+    }
 }

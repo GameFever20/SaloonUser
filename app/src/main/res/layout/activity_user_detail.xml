@@ -163,7 +163,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="30dp"
                     android:layout_marginRight="30dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="10dp"
                     android:hint="user name "
                     android:textColor="@color/white"
                     android:textColorHint="@color/whitish"
@@ -176,7 +176,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="30dp"
                     android:layout_marginRight="30dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="10dp"
                     android:hint="user age"
                     android:inputType="number"
                     android:textColor="@color/white"
@@ -188,9 +188,9 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginTop="10dp"
                     android:background="@drawable/imageviewbordercustomize"
                     android:onClick="selectCity"
                     android:orientation="vertical">
@@ -225,7 +225,7 @@
                     android:layout_marginTop="30dp"
                     android:background="@color/whitish"
                     android:onClick="uploadUserDetailButtonClick"
-                    android:text="upload"
+                    android:text="Save"
                     />
 
             </LinearLayout>

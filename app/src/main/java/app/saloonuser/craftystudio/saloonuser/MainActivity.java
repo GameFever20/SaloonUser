@@ -124,7 +124,13 @@ public class MainActivity extends AppCompatActivity
                     LoginActivity.USER = user;
                     MainActivity.this.user = user;
                     downloadingSaloonList();
+                }else if(user == null){
+                    Intent intent =new Intent(MainActivity.this , UserDetailActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                    finish();
                 }
+
 
             }
 
@@ -195,7 +201,7 @@ public class MainActivity extends AppCompatActivity
                                                               if (isMoreSaloonAvailable) {
                                                                   if (!isLodingMoreSaloon) {
                                                                       //get last Saloon ID
-                                                                      long lastSaloonPoint = mSaloonArraylist.get(mSaloonArraylist.size() - 1).getSaloonPoint();
+                                                                      int lastSaloonPoint = mSaloonArraylist.get(mSaloonArraylist.size() - 1).getSaloonPoint();
                                                                       onScrolledSaloonListToBottom(lastSaloonPoint);
                                                                       //  Toast.makeText(MainActivity.this, "Refreshing", Toast.LENGTH_SHORT).show();
 
@@ -271,7 +277,7 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    public void onScrolledSaloonListToBottom(long lastSaloonPoint) {
+    public void onScrolledSaloonListToBottom(int lastSaloonPoint) {
 //store number of saloon with same saloon point in last
         int repeatedSaloonCount = 0;
 

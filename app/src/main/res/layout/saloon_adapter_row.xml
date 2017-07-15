@@ -84,7 +84,7 @@
                             android:id="@+id/saloonadapterrow_saloonopening_textview"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="7dp"
+                            android:layout_marginLeft="6dp"
                             android:layout_marginTop="2dp"
                             android:text="Opening Time "
                             android:textAlignment="textEnd"

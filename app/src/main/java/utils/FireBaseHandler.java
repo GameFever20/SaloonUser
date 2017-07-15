@@ -62,7 +62,7 @@ public class FireBaseHandler {
 
         DatabaseReference myRef = mFirebaseDatabase.getReference().child("saloon");
 
-        Query myref2 = myRef.orderByChild("saloonPoint").limitToLast(limit).startAt((1+(cityIndex*1000000l))).endAt((cityIndex+1)*1000000l);
+        Query myref2 = myRef.orderByChild("saloonPoint").limitToLast(limit).startAt((1+(cityIndex*1000000))).endAt((cityIndex+1)*1000000);
 
         myref2.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -94,7 +94,7 @@ public class FireBaseHandler {
 
 
 
-    public void downloadMoreSaloonList(int limit, long lastSaloonPoint,int cityIndex, final OnSaloonListListner onSaloonListListner) {
+    public void downloadMoreSaloonList(int limit, int lastSaloonPoint,int cityIndex, final OnSaloonListListner onSaloonListListner) {
 
         DatabaseReference myRef = mFirebaseDatabase.getReference().child("saloon");
 
@@ -193,6 +193,34 @@ public class FireBaseHandler {
 
 
                 onOrderListener.onOrderUpload(false);
+
+            }
+        });
+    }
+
+    public void updateOrderstatus(Order order , final int orderStatus, final OnOrderListener onOrderListener) {
+
+        DatabaseReference ref = mFirebaseDatabase.getReference();
+
+
+// Create the data we want to update
+        Map post = new HashMap();
+        post.put("Orders/" + order.getSaloonID() + "/" + order.getOrderID() + "/" + "orderStatus", orderStatus);
+        post.put("userOrders/" + order.getUserID() + "/" + order.getOrderID() + "/" + "orderStatus", orderStatus);
+
+
+
+// Do a deep-path update
+        ref.updateChildren(post).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                onOrderListener.onOrderUpload(true);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+                onOrderListener.onOrderUpload(true);
 
             }
         });

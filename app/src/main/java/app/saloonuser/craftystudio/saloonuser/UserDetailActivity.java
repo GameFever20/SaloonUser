@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,7 +31,7 @@ import utils.User;
 
 public class UserDetailActivity extends AppCompatActivity {
 
-    public  User USER;
+    public User USER;
 
     EditText mUserNameEdittext, mUserAgeEdittext, mUserGenderEdittext;
 
@@ -39,9 +40,7 @@ public class UserDetailActivity extends AppCompatActivity {
     TextView mUserGenderTextview;
 
 
-
-
-     String GENDER;
+    String GENDER;
 
     LinearLayout mUserGenderDetailLinearLayout;
     LinearLayout mUserDetailLinearlayout;
@@ -75,7 +74,7 @@ public class UserDetailActivity extends AppCompatActivity {
 
         mNextUploadButton = (Button) findViewById(R.id.nextUserDetailButton);
 
-        mUserDetailLinearlayout = (LinearLayout)findViewById(R.id.userDetail_userDetail_linearLayout);
+        mUserDetailLinearlayout = (LinearLayout) findViewById(R.id.userDetail_userDetail_linearLayout);
 
 
     }
@@ -83,8 +82,11 @@ public class UserDetailActivity extends AppCompatActivity {
 
     public void uploadUserDetailButtonClick(View view) {
 
-        creteUser();
-
+        if (validateForm()) {
+            creteUser();
+        }else{
+            return;
+        }
         showProgressDialog("Uploading");
 
         new FireBaseHandler().uploadUser(USER, new FireBaseHandler.OnUserlistener() {
@@ -99,7 +101,7 @@ public class UserDetailActivity extends AppCompatActivity {
                 closeProgressDialog();
                 if (isSuccessful) {
                     Toast.makeText(UserDetailActivity.this, "User uploaded", Toast.LENGTH_SHORT).show();
-LoginActivity.USER =USER;
+                    LoginActivity.USER = USER;
                     openMainActivity();
 
                 } else {
@@ -108,6 +110,35 @@ LoginActivity.USER =USER;
             }
         });
 
+    }
+
+    private boolean validateForm() {
+
+        boolean valid =true ;
+
+        String userName =mUserNameEdittext.getText().toString().trim();
+        if(TextUtils.isEmpty(userName)){
+            valid =false ;
+            mUserNameEdittext.setError("Required");
+        }
+
+        String userAge = mUserAgeEdittext.getText().toString().trim();
+
+        if (TextUtils.isEmpty(userAge)){
+            valid =false ;
+            mUserAgeEdittext.setError("Required");
+        }
+
+        if (TextUtils.isEmpty(mCitySelected)){
+            valid =false;
+            TextView textView = (TextView) findViewById(R.id.userDetail_userCity_textView);
+            textView.setText("Not selected");
+            Toast.makeText(this, "Select a city", Toast.LENGTH_SHORT).show();
+        }
+
+
+
+        return valid;
     }
 
     private void openMainActivity() {
@@ -211,9 +242,8 @@ LoginActivity.USER =USER;
                         // of the selected item
 
 
-                        mCitySelected  = getResources().getStringArray(R.array.city)[which];
-                        mCitySelectedIndex =which;
-
+                        mCitySelected = getResources().getStringArray(R.array.city)[which];
+                        mCitySelectedIndex = which;
 
 
                         TextView textView = (TextView) findViewById(R.id.userDetail_userCity_textView);

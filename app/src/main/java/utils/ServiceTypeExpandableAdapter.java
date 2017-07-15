@@ -1,6 +1,7 @@
 package utils;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -118,6 +119,8 @@ public class ServiceTypeExpandableAdapter extends BaseExpandableListAdapter {
 
 
         serviceSubTypePriceTextview.setText(service.getServicePrice()+"");
+        serviceSubTypePriceTextview.setPaintFlags(serviceSubTypePriceTextview.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+
 
         serviceNameTextview.setText(service.getServiceName());
 

@@ -40,7 +40,7 @@ import utils.Saloon;
 public class SaloonDetailActivity extends AppCompatActivity {
 
     TextView mSaloonDetailNameTv, mSaloonDetailAddressTv, mSaloonDetailRatingTv, mSaloonDetailOpeningTimeTv,
-            mSaloonDetailClosingTimeTv;
+            mSaloonDetailClosingTimeTv ,mSaloonCityTextView;
 
     ImageView mSaloonDetailProfileIv, mSaloonDetailShow1Iv, mSaloonDetailShow2Iv, mSaloonDetailShow3Iv,
             mSaloonDetailShow4Iv, mSaloonDetailShow5Iv;
@@ -98,6 +98,7 @@ public class SaloonDetailActivity extends AppCompatActivity {
         mSaloonDetailRatingTv = (TextView) findViewById(R.id.saloon_detail_rating_textview);
         mSaloonDetailOpeningTimeTv = (TextView) findViewById(R.id.saloon_detail_openingtime_textview);
         mSaloonDetailClosingTimeTv = (TextView) findViewById(R.id.saloon_detail_closingtime_textview);
+        mSaloonCityTextView =(TextView)findViewById(R.id.saloon_detail_city_textview);
 
         mSaloonDetailProfileIv = (ImageView) findViewById(R.id.saloon_detail_profileimage_imageview);
         mSaloonDetailShow1Iv = (ImageView) findViewById(R.id.saloon_detail_showcase1_imageview);
@@ -107,7 +108,13 @@ public class SaloonDetailActivity extends AppCompatActivity {
         mSaloonDetailShow5Iv = (ImageView) findViewById(R.id.saloon_detail_showcase5_imageview);
 
         //setting all data in views
-        setAllValues();
+        if (saloon!= null) {
+            setAllValues();
+        }else{
+            Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show();
+            finish();
+        }
+
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
             // Do something for lollipop and above versions
@@ -189,6 +196,9 @@ public class SaloonDetailActivity extends AppCompatActivity {
         mSaloonDetailRatingTv.setText(saloon.getSaloonTotalRating() + "");
         lattitude = saloon.getSaloonLocationLatitude();
         longitute = saloon.getSaloonLocationLongitude();
+
+        mSaloonCityTextView.setText(saloon.getSaloonCity());
+
         setSaloonImages();
     }
 
