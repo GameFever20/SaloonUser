@@ -18,6 +18,7 @@ import android.view.animation.Interpolator;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -592,6 +593,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mHeadingText.setText("Validate Your Number");
         mPhoneNumberField.setVisibility(View.GONE);
         mStartButton.setVisibility(View.GONE);
+
+        LinearLayout linearLayout =(LinearLayout)findViewById(R.id.field_phone_number_layout);
+        linearLayout.setVisibility(View.GONE);
 
         mVerificationField.setVisibility(View.VISIBLE);
         mVerifyButton.setVisibility(View.VISIBLE);

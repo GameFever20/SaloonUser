@@ -44,6 +44,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_marginTop="15dp"
+                android:id="@+id/field_phone_number_layout"
 
                 android:layout_height="wrap_content">
 
