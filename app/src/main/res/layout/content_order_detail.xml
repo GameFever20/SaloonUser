@@ -265,8 +265,8 @@
                         android:fontFamily="sans-serif"
                         android:text="Placed"
                         android:textColor="@color/black"
-                        android:textSize="16sp"
-                        android:textStyle="normal" />
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/orderDetail_orderTime_TextView"
@@ -349,7 +349,7 @@
                 android:visibility="gone"
                 android:id="@+id/orderDetail_orderCancel_cardView"
                 android:onClick="cancelOrder"
-                app:cardBackgroundColor="@color/colorAccent"
+                app:cardBackgroundColor="@color/colorPrimary"
                 app:cardElevation="3dp">
 
 

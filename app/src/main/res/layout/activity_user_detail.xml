@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
 
-                android:visibility="gone">
+                android:visibility="visible">
 
 
                 <LinearLayout
@@ -125,7 +125,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:orientation="vertical"
-                android:visibility="visible"
+                android:visibility="gone"
                 android:id="@+id/userDetail_userDetail_linearLayout"
 
                 android:layout_height="match_parent">

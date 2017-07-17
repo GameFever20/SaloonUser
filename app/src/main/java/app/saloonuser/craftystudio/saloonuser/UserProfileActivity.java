@@ -52,7 +52,7 @@ public class UserProfileActivity extends AppCompatActivity {
             // Do something for lollipop and above versions
             //animation
             final Explode explode = new Explode();
-            explode.setDuration(700);
+            explode.setDuration(500);
             explode.setMode(Visibility.MODE_IN);
             getWindow().setEnterTransition(explode);
             getWindow().setAllowEnterTransitionOverlap(true);

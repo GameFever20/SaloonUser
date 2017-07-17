@@ -50,9 +50,12 @@ public class UserOrderActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        //getting window component
-        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
-
+        try {
+            //getting window component
+            getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_order);
@@ -61,7 +64,7 @@ public class UserOrderActivity extends AppCompatActivity {
         try {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
 
@@ -69,7 +72,7 @@ public class UserOrderActivity extends AppCompatActivity {
             // Do something for lollipop and above versions
             //animation
             Explode explode = new Explode();
-            explode.setDuration(1000);
+            explode.setDuration(500);
             explode.setMode(Visibility.MODE_IN);
             getWindow().setEnterTransition(explode);
             getWindow().setAllowEnterTransitionOverlap(true);
@@ -97,7 +100,7 @@ public class UserOrderActivity extends AppCompatActivity {
             public void onClick(View view, int position) {
                 Intent intent = new Intent(UserOrderActivity.this, OrderDetailActivity.class);
                 intent.putExtra("order", mTempOrderArraylist.get(position));
-                OrderDetailActivity.order=mTempOrderArraylist.get(position);
+                OrderDetailActivity.order = mTempOrderArraylist.get(position);
                 startActivity(intent);
             }
 
@@ -174,6 +177,7 @@ public class UserOrderActivity extends AppCompatActivity {
         }
 
     }
+
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -258,7 +262,7 @@ public class UserOrderActivity extends AppCompatActivity {
     public void onBackPressed() {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
             finishAfterTransition();
-        }else{
+        } else {
             finish();
         }
         super.onBackPressed();

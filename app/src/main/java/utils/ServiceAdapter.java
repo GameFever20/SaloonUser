@@ -58,7 +58,7 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ServiceV
         Service service = serviceArrayList.get(position);
         holder.serviceIDTextView.setText(service.getServiceUID());
         holder.serviceTypeNameTextView.setText(service.getServiceTypeName());
-        holder.servicePriceTextView.setText(service.getServicePrice() +"");
+        holder.servicePriceTextView.setText(service.getServiceOfferPrice() +"");
         holder.serviceSaloonNameTextView.setText(service.getSaloonName());
         holder.serviceNameTextView.setText(service.getServiceName());
 
